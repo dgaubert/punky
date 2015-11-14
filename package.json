@@ -1,0 +1,18 @@
+{
+  "name": "node-api-bootstrap",
+  "version": "1.0.0",
+  "description": "Bootstrap your APIs taking advantage of Node.js, Express.js, ES6 and so on.",
+  "main": "index.js",
+  "engines": {
+    "node": "4.2.1"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Daniel García Aubert <@dgaubert>",
+  "license": "MIT"
+}
