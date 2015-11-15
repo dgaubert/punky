@@ -10,9 +10,13 @@
     "test": "tests"
   },
   "scripts": {
+    "start": "node --use_strict .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Daniel García Aubert <@dgaubert>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "4.13.3"
+  }
 }
