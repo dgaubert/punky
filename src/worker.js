@@ -5,21 +5,6 @@ class Worker extends Runnable {
     super();
     this.app = app;
     this.logger = logger || console;
-    
-    process.on('SIGINT', () => {
-      this.logger.warn('SIGINT received, stopping...');
-      this.exit();
-    });
-
-    process.on('SIGTERM', () => {
-      this.logger.warn('SIGTERM received, stopping...');
-      this.exit();
-    });
-
-    process.on('uncaughtException', (err) => {
-      this.logger.error('Uncaught Exception', err);
-      this.exit(1);
-    });
   }
   
   run() {

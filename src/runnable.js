@@ -1,7 +1,9 @@
 class Runnable {
-  constructor() {}
-  
   run() {
+    throw new Error('Unimplemented method');
+  }
+  
+  exit() {
     throw new Error('Unimplemented method');
   }
 }

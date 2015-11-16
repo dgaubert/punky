@@ -18,6 +18,11 @@ class Master extends Runnable {
       this.logger.error('Worker %s disconnected', worker.process.pid);
     });
   }
+  
+  exit(failure) {
+    this.logger.warn('Master %s out!', process.pid);
+    process.exit(failure || 0);
+  }
 }
 
 module.exports = Master;
