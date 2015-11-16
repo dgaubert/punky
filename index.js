@@ -4,7 +4,7 @@ const Master = require('./src/master');
 const Worker = require('./src/worker');
 const App = require('./src/app/app');
 
-const target = isMaster ? new Master(1) : new Worker(new App());
+const target = isMaster ? new Master() : new Worker(new App());
 const launcher = new Launcher(target);
 
 // here we go!
