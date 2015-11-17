@@ -1,14 +1,14 @@
 const Runnable = require('./runnable');
 
 class Worker extends Runnable {
-  constructor(app, logger) {
+  constructor(server, logger) {
     super();
-    this.app = app;
+    this.server = server;
     this.logger = logger || console;
   }
   
   run() {
-    return this.app.start()
+    return this.server.run()
       .then(() => {
         this.logger.info('Worker %s ready!', process.pid);
       })
@@ -19,7 +19,7 @@ class Worker extends Runnable {
   }
   
   exit(failure) {
-    return this.app.stop()
+    return this.server.exit()
       .then(() => {
         this.logger.warn('Worker %s out!', process.pid);
         process.exit(failure || 0);
