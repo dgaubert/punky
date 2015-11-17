@@ -7,6 +7,7 @@ class App {
     this.routers = routers;
     this.errorMiddleware = errorMiddleware;
     this.logger = logger || console;
+    this.server = null;
   }
   
   start() {
@@ -35,12 +36,15 @@ class App {
       this.server.once('error', (err) => {
         reject(err);
       });
-      
     });
   }
   
   close() {
     return new Promise((resolve, reject) => {
+      if (!this.server) {
+        return reject(new Error('Application is already closed'));
+      }
+
       this.server.once('close', () => {
         resolve();
       });
