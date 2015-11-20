@@ -13,7 +13,7 @@ class Worker extends Runnable {
         this.logger.info('Worker %s ready!', process.pid);
       })
       .catch((err) => {
-        this.logger.error('Worker %s failed on initializing', process.pid, err);
+        this.logger.error('Worker %s failed on initializing', process.pid, err.stack);
         this.exit(1);
       });
   }
