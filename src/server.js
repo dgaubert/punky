@@ -14,7 +14,7 @@ class Server extends Runnable {
       this.httpServer = this.app.listen(this.port);
       
       if (!this.httpServer) {
-        return reject(new Error('There is not application ready yet'));
+        return reject(new Error('Application in not ready'));
       }
       
       this.httpServer.once('listening', () => {
