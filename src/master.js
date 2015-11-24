@@ -15,19 +15,12 @@ class Master extends Runnable {
       cluster.fork();
     }
 
-    cluster.on('disconnect', (worker) => {
-      this.logger.error('Worker %s disconnected', worker.process.pid);
-    });
-
     cluster.on('exit', (worker, code) => {
-      if(code !== 0 && !worker.suicide) {
-        this.logger.info('Worker %s crashed. Starting a new worker', worker.process.pid);
-        cluster.fork();
-      }
+      this.forkWorker(worker, code);
     });
 
     process.on('SIGUSR2', () => {
-      this.reload();
+      this.reloadAllWorkers();
     });
     
     this.logger.info('Master %s ready', process.pid);
@@ -38,7 +31,7 @@ class Master extends Runnable {
     process.exit(failure || 0);
   }
   
-  reload() {
+  reloadAllWorkers() {
     this.logger.info('Reloading workers');
     
     var workers = Object.keys(cluster.workers);
@@ -81,6 +74,13 @@ class Master extends Runnable {
         });
       });
     });
+  }
+  
+  forkWorker(worker, code) {
+    if (code !== 0 && !worker.suicide) {
+      this.logger.info('Worker %s crashed. Starting a new worker', worker.process.pid);
+      cluster.fork();
+    }
   }
 }
 
