@@ -44,7 +44,7 @@ class Launcher extends Runnable {
       this.logger.error('Uncaught Exception on %s', process.pid, err);
       this.exit(1);
     };
-    process.removeListener('SIGTERM', uncaughtExceptionListener);
+    process.removeListener('uncaughtException', uncaughtExceptionListener);
     process.on('uncaughtException', uncaughtExceptionListener);
   }
 
