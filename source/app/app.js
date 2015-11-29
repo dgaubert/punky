@@ -1,3 +1,5 @@
+'use strict';
+
 const express = require('express');
 
 class App {
@@ -7,7 +9,7 @@ class App {
     this.errorMiddleware = errorMiddleware;
     this.logger = logger || console;
   }
-  
+
   listen(port) {
     return this.application.listen(port);
   }

@@ -1,3 +1,5 @@
+'use strict';
+
 const Runnable = require('./runnable');
 
 class Worker extends Runnable {
@@ -6,7 +8,7 @@ class Worker extends Runnable {
     this.server = server;
     this.logger = logger || console;
   }
-  
+
   run() {
     return this.server.run()
       .then(() => {
@@ -17,7 +19,7 @@ class Worker extends Runnable {
         this.exit(1);
       });
   }
-  
+
   exit(failure) {
     return this.server.exit()
       .then(() => {

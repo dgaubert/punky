@@ -1,3 +1,5 @@
+'use strict';
+
 const Runnable = require('./runnable');
 
 class Server extends Runnable {
@@ -8,26 +10,26 @@ class Server extends Runnable {
     this.logger = logger || console;
     this.httpServer = null;
   }
-  
+
   run() {
     return new Promise((resolve, reject) => {
       this.httpServer = this.app.listen(this.port);
-      
+
       if (!this.httpServer) {
         return reject(new Error('Application in not ready'));
       }
-      
+
       this.httpServer.once('listening', () => {
         this.logger.info('Application started on port', this.port);
         resolve();
       });
-      
+
       this.httpServer.once('error', (err) => {
         reject(err);
       });
     });
   }
-  
+
   exit() {
     return new Promise((resolve, reject) => {
       if (!this.httpServer) {
@@ -38,11 +40,11 @@ class Server extends Runnable {
         this.logger.info('Application stopped');
         resolve();
       });
-      
+
       this.httpServer.once('error', (err) => {
         reject(err);
       });
-      
+
       this.httpServer.close();
     });
   }
