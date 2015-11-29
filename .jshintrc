@@ -1,0 +1,11 @@
+{
+  "node": true,
+  "esnext": true,
+  "globals": {
+    "describe": false,
+    "it": false,
+    "beforeEach": false,
+    "afterEach": false,
+    "__source": false
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "node-api-bootstrap",
+  "version": "1.0.0",
+  "description": "Bootstrap your APIs taking advantage of Node.js, Express.js, ES6 and so on.",
+  "main": "index.js",
+  "engines": {
+    "node": "4.2.1"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "lint": "node_modules/.bin/jshint test/**.js",
+    "pretest": "npm run lint",
+    "test": "node_modules/.bin/mocha -r should -r scripts/test-bootstrap test/**/*-test.js",
+    "test:watch": "npm run test -- -w",
+    "coverage": "node_modules/.bin/istanbul test/**/*-test.js",
+    "start": "node ."
+  },
+  "keywords": [],
+  "author": "Daniel García Aubert <@dgaubert>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "4.13.3"
+  },
+  "devDependencies": {
+    "istanbul": "0.4.1",
+    "jshint": "2.8.0",
+    "mocha": "2.3.4",
+    "should": "7.1.1",
+    "sinon": "^1.17.2"
+  }
+}
