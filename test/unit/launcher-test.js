@@ -28,7 +28,7 @@ describe('launcher module', () => {
     runStub.calledOnce.should.be.equal(true);
   });
 
-  it('.exit() should call target\'s run method', () => {
+  it('.exit() should call target\'s exit method', () => {
     var master = new Master();
     var exitStub = sinon.stub(master, 'exit');
     var launcher = new Launcher(master);
@@ -38,7 +38,7 @@ describe('launcher module', () => {
     exitStub.calledOnce.should.be.equal(true);
   });
 
-  it('.exit(1) should call target\'s run method', () => {
+  it('.exit(1) should call target\'s exit method', () => {
     var master = new Master();
     var exitStub = sinon.stub(master, 'exit');
     var launcher = new Launcher(master);

@@ -22,30 +22,27 @@ class Launcher extends Runnable {
   }
 
   _addSigintListener() {
-    var sigintListener = () => {
+    process.removeAllListeners('SIGINT');
+    process.on('SIGINT', () => {
       this.logger.warn('SIGINT received on %s', process.pid);
       this.exit();
-    };
-    process.removeListener('SIGINT', sigintListener);
-    process.on('SIGINT', sigintListener);
+    });
   }
 
   _addSigtermListener() {
-    var sigtermListener = () => {
+    process.removeAllListeners('SIGTERM');
+    process.on('SIGTERM', () => {
        this.logger.warn('SIGTERM received on %s', process.pid);
        this.exit();
-    };
-    process.removeListener('SIGTERM', sigtermListener);
-    process.on('SIGTERM', sigtermListener);
+    });
   }
 
   _addUncaughtExceptionListener() {
-    var uncaughtExceptionListener =  (err) => {
+    process.removeAllListeners('uncaughtException');
+    process.on('uncaughtException', (err) => {
       this.logger.error('Uncaught Exception on %s', process.pid, err);
       this.exit(1);
-    };
-    process.removeListener('uncaughtException', uncaughtExceptionListener);
-    process.on('uncaughtException', uncaughtExceptionListener);
+    });
   }
 
   run() {
