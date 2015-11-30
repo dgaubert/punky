@@ -4,10 +4,6 @@ const Runnable = require('./runnable');
 
 class Launcher extends Runnable {
   constructor(target, logger) {
-    if (!target || !(target instanceof Runnable)) {
-      throw new Error('Target is not a Runnable');
-    }
-
     super();
     this.target = target;
     this.logger = logger || console;
