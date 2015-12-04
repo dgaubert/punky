@@ -2,26 +2,26 @@
 
 const sinon = require('sinon');
 const Runnable = require(__source + 'runnable');
+const Listener = require(__source + 'listeners/listener');
 const Launcher = require(__source + 'launcher');
 const Master = require(__source + 'master');
 
 describe('launcher module', () => {
   it('should be a runnable command', () => {
     var master = new Master();
-
-    var launcher = new Launcher(master);
+    var listener = new Listener();
+    var listenStub = sinon.stub(listener, 'listen');
+    var launcher = new Launcher(master, listener);
 
     launcher.should.instanceof(Runnable);
-  });
-
-  it('should throw an exception when target is not injected', () => {
-    Launcher.should.throw();
   });
 
   it('.run() should call target\'s run method', () => {
     var master = new Master();
     var runStub = sinon.stub(master, 'run');
-    var launcher = new Launcher(master);
+    var listener = new Listener();
+    var listenStub = sinon.stub(listener, 'listen');
+    var launcher = new Launcher(master, listener);
 
     launcher.run();
 
@@ -31,7 +31,9 @@ describe('launcher module', () => {
   it('.exit() should call target\'s exit method', () => {
     var master = new Master();
     var exitStub = sinon.stub(master, 'exit');
-    var launcher = new Launcher(master);
+    var listener = new Listener();
+    var listenStub = sinon.stub(listener, 'listen');
+    var launcher = new Launcher(master, listener);
 
     launcher.exit();
 
@@ -41,7 +43,9 @@ describe('launcher module', () => {
   it('.exit(1) should call target\'s exit method', () => {
     var master = new Master();
     var exitStub = sinon.stub(master, 'exit');
-    var launcher = new Launcher(master);
+    var listener = new Listener();
+    var listenStub = sinon.stub(listener, 'listen');
+    var launcher = new Launcher(master, listener);
 
     launcher.exit(1);
 

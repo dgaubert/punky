@@ -5,10 +5,18 @@ const os = require('os');
 const Runnable = require('./runnable');
 
 class Master extends Runnable {
-  constructor(numberOfWorkers, reloader, logger) {
+  constructor(sigusr2Listener, exitListener, logger) {
     super();
-    this.numberOfWorkers = numberOfWorkers || process.env.WORKERS || os.cpus().length;
-    this.reloader = reloader;
+    this.numberOfWorkers = process.env.WORKERS || os.cpus().length;
+
+    if (sigusr2Listener) {
+      sigusr2Listener.listen(() => this.reloadAllWorkers());
+    }
+
+    if (exitListener) {
+      exitListener.listen((worker, code) => this.forkWorker());
+    }
+
     this.logger = logger || console;
   }
 
@@ -16,14 +24,6 @@ class Master extends Runnable {
     for (var i = 0; i < this.numberOfWorkers; i++) {
       cluster.fork();
     }
-
-    cluster.on('exit', (worker, code) => {
-      this.forkWorker(worker, code);
-    });
-
-    process.on('SIGUSR2', () => {
-      this.reloadAllWorkers();
-    });
 
     this.logger.info('Master %s ready', process.pid);
   }

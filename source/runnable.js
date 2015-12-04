@@ -1,6 +1,7 @@
 'use strict';
 
 class Runnable {
+
   run() {
     throw new Error('Unimplemented method');
   }
