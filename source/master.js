@@ -7,6 +7,7 @@ const Runnable = require('./runnable');
 class Master extends Runnable {
   constructor(sigusr2Listener, exitListener, logger) {
     super();
+    this.logger = logger || console;
     this.numberOfWorkers = process.env.WORKERS || os.cpus().length;
 
     if (sigusr2Listener) {
@@ -16,8 +17,6 @@ class Master extends Runnable {
     if (exitListener) {
       exitListener.listen((worker, code) => this.forkWorker());
     }
-
-    this.logger = logger || console;
   }
 
   run() {

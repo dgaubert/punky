@@ -7,7 +7,9 @@ class Launcher extends Runnable {
     super();
     this.target = target;
 
-    listeners.listen(failure => this.exit(failure));
+    if (listeners) {
+      listeners.listen(failure => this.exit(failure));
+    }
   }
 
   run() {

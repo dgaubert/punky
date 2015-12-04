@@ -9,9 +9,7 @@ const Master = require(__source + 'master');
 describe('launcher module', () => {
   it('should be a runnable command', () => {
     var master = new Master();
-    var listener = new Listener();
-    var listenStub = sinon.stub(listener, 'listen');
-    var launcher = new Launcher(master, listener);
+    var launcher = new Launcher(master);
 
     launcher.should.instanceof(Runnable);
   });
@@ -19,9 +17,7 @@ describe('launcher module', () => {
   it('.run() should call target\'s run method', () => {
     var master = new Master();
     var runStub = sinon.stub(master, 'run');
-    var listener = new Listener();
-    var listenStub = sinon.stub(listener, 'listen');
-    var launcher = new Launcher(master, listener);
+    var launcher = new Launcher(master);
 
     launcher.run();
 
@@ -31,9 +27,7 @@ describe('launcher module', () => {
   it('.exit() should call target\'s exit method', () => {
     var master = new Master();
     var exitStub = sinon.stub(master, 'exit');
-    var listener = new Listener();
-    var listenStub = sinon.stub(listener, 'listen');
-    var launcher = new Launcher(master, listener);
+    var launcher = new Launcher(master);
 
     launcher.exit();
 
@@ -43,9 +37,7 @@ describe('launcher module', () => {
   it('.exit(1) should call target\'s exit method', () => {
     var master = new Master();
     var exitStub = sinon.stub(master, 'exit');
-    var listener = new Listener();
-    var listenStub = sinon.stub(listener, 'listen');
-    var launcher = new Launcher(master, listener);
+    var launcher = new Launcher(master);
 
     launcher.exit(1);
 
