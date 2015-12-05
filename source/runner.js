@@ -1,6 +1,6 @@
 'use strict';
 
-class Runnable {
+class Runner {
   run() {
     throw new Error('Unimplemented method');
   }
@@ -10,4 +10,4 @@ class Runnable {
   }
 }
 
-module.exports = Runnable;
+module.exports = Runner;

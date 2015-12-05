@@ -1,8 +1,8 @@
 'use strict';
 
-const Runnable = require('./runnable');
+const Runner = require('./runner');
 
-class Launcher extends Runnable {
+class Launcher extends Runner {
   constructor(target, listeners) {
     super();
     this.target = target;

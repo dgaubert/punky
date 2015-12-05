@@ -1,18 +1,18 @@
 const isMaster = require('cluster').isMaster;
-const ProcessListenerIterator = require('./source/listeners/process');
-const SigintListener = require('./source/listeners/sigint');
-const SigtermListener = require('./source/listeners/sigterm');
-const UncaughtExceptionListener = require('./source/listeners/uncaught-exception');
+const ProcessListenerIterator = require('./source/listeners/process-listener-iterator');
+const SigintListener = require('./source/listeners/sigint-listener');
+const SigtermListener = require('./source/listeners/sigterm-listener');
+const UncaughtExceptionListener = require('./source/listeners/uncaught-exception-listener');
 const Launcher = require('./source/launcher');
-const Sigusr2Listener = require('./source/listeners/sigusr2');
-const ExitListener = require('./source/listeners/exit');
+const Sigusr2Listener = require('./source/listeners/sigusr2-listener');
+const WorkerExitListener = require('./source/listeners/worker-exit-listener');
 const Master = require('./source/master');
 const Worker = require('./source/worker');
 const Server = require('./source/server');
 const App = require('./source/app/app');
 
 var target = isMaster ?
-  new Master(new Sigusr2Listener(), new ExitListener()) :
+  new Master(new Sigusr2Listener(), new WorkerExitListener()) :
   new Worker(new Server(new App()));
 
 var processListenerIterator = new ProcessListenerIterator()

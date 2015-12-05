@@ -2,9 +2,9 @@
 
 const cluster = require('cluster');
 const os = require('os');
-const Runnable = require('./runnable');
+const Runner = require('./runner');
 
-class Master extends Runnable {
+class Master extends Runner {
   constructor(sigusr2Listener, exitListener, logger) {
     super();
     this.logger = logger || console;
