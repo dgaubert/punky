@@ -5,6 +5,8 @@ const Runnable = require(__source + 'runnable');
 const Server = require(__source + 'server');
 const Logger = require(__source + 'logging/logger');
 const Worker = require(__source + 'worker');
+const UncaughtExceptionListener = require(__source + 'listeners/uncaught-exception');
+const ProcessListenerIterator = require(__source + 'listeners/process');
 const Launcher = require(__source + 'launcher');
 
 describe('launcher', () => {
@@ -15,7 +17,10 @@ describe('launcher', () => {
     this.master = new Server();
     this.logger = new Logger();
     this.worker = new Worker(this.server, this.logger);
-    this.launcher = new Launcher(this.worker);
+    this.processListenerIterator = new ProcessListenerIterator()
+      .add(new UncaughtExceptionListener());
+
+    this.launcher = new Launcher(this.worker, this.processListenerIterator);
   });
 
   afterEach(() => {
@@ -24,6 +29,9 @@ describe('launcher', () => {
 
   it('should be a runnable instance', () => {
     this.launcher.should.instanceof(Runnable);
+  });
+
+  it('should bind process listeners to exit gracefully of the process', () => {
   });
 
   it('.run() should launch worker successfully', () => {

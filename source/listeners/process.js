@@ -2,14 +2,13 @@
 
 const Listener = require('./listener');
 
-class ProcessListener extends Listener {
-  constructor(logger) {
+class ProcessListenerIterator extends Listener {
+  constructor() {
     super();
-    this.logger = logger || console;
     this._listeners = [];
   }
 
-  addListener(listener) {
+  add(listener) {
     this._listeners.push(listener);
 
     return this;
@@ -22,4 +21,4 @@ class ProcessListener extends Listener {
   }
 }
 
-module.exports = ProcessListener;
+module.exports = ProcessListenerIterator;
