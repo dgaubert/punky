@@ -25,9 +25,6 @@ describe('launcher', () => {
     this.launcher.should.instanceof(Runner);
   });
 
-  it('should bind process listeners to exit gracefully of the process', () => {
-  });
-
   it('.run() should launch worker successfully', () => {
     var targetRunStub = this.sandbox.stub(this.runner, 'run').returns(Promise.resolve());
 
