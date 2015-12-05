@@ -2,8 +2,7 @@
 
 const sinon = require('sinon');
 const Runner = require(__source + 'runner');
-const UncaughtExceptionListener = require(__source + 'listeners/uncaught-exception-listener');
-const ProcessListenerIterator = require(__source + 'listeners/process-listener-iterator');
+const Listener = require(__source + 'listeners/listener');
 const Launcher = require(__source + 'launcher');
 
 describe('launcher', () => {
@@ -12,10 +11,10 @@ describe('launcher', () => {
     this.sandbox = sinon.sandbox.create();
 
     this.runner = new Runner();
-    this.processListenerIterator = new ProcessListenerIterator()
-      .add(new UncaughtExceptionListener());
+    this.listener = new Listener();
+    this.sandbox.stub(this.listener, 'listen');
 
-    this.launcher = new Launcher(this.runner, this.processListenerIterator);
+    this.launcher = new Launcher(this.runner, this.listener);
   });
 
   afterEach(() => {
