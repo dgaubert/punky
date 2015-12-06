@@ -12,13 +12,13 @@ const Server = require('./source/server');
 const App = require('./source/app/app');
 
 var target = isMaster ?
-  new Master(new Sigusr2Listener(), new WorkerExitListener()) :
-  new Worker(new Server(new App()));
+  new Master(new Sigusr2Listener(), new WorkerExitListener(), console) :
+  new Worker(new Server(new App(), console), console);
 
 var processListenerIterator = new ProcessListenerIterator()
-  .add(new SigintListener())
-  .add(new SigtermListener())
-  .add(new UncaughtExceptionListener());
+  .add(new SigintListener(console))
+  .add(new SigtermListener(console))
+  .add(new UncaughtExceptionListener(console));
 
 var launcher = new Launcher(target, processListenerIterator);
 

@@ -9,7 +9,7 @@ class Master extends Runner {
     super();
     this.sigusr2Listener = sigusr2Listener;
     this.exitListener = exitListener;
-    this.logger = logger || console;
+    this.logger = logger;
     this.numberOfWorkers = process.env.WORKERS || os.cpus().length;
   }
 

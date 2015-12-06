@@ -5,7 +5,7 @@ const Listener = require('./listener');
 class Sigusr2Listener extends Listener {
   constructor(logger) {
     super();
-    this.logger = logger || console;
+    this.logger = logger;
   }
 
   listen(run) {
