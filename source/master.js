@@ -1,28 +1,25 @@
 'use strict';
 
-const cluster = require('cluster');
 const os = require('os');
+const cluster = require('cluster');
 const Runner = require('./runner');
 
 class Master extends Runner {
   constructor(sigusr2Listener, exitListener, logger) {
     super();
+    this.sigusr2Listener = sigusr2Listener;
+    this.exitListener = exitListener;
     this.logger = logger || console;
     this.numberOfWorkers = process.env.WORKERS || os.cpus().length;
-
-    if (sigusr2Listener) {
-      sigusr2Listener.listen(() => this.reloadAllWorkers());
-    }
-
-    if (exitListener) {
-      exitListener.listen((worker, code) => this.forkWorker());
-    }
   }
 
   run() {
     for (var i = 0; i < this.numberOfWorkers; i++) {
-      cluster.fork();
+      this._forkWorker();
     }
+
+    this.sigusr2Listener.listen(() => this._reloadAllWorkers());
+    this.exitListener.listen((worker, code) => this._reforkWorker());
 
     this.logger.info('Master %s ready', process.pid);
   }
@@ -32,28 +29,40 @@ class Master extends Runner {
     process.exit(failure || 0);
   }
 
-  reloadAllWorkers() {
+  _reloadAllWorkers() {
     this.logger.info('Reloading workers');
 
     var workers = Object.keys(cluster.workers);
 
-    return this.workerIterator(workers, 0)
+    return this._workerIterator(workers, 0)
       .then(() => {
         this.logger.info('Workers reloaded');
       });
   }
 
-  workerIterator(workers, index) {
-    return this.restartWorker(workers[index])
+
+  _reforkWorker(worker, code) {
+    if (code !== 0 && !worker.suicide) {
+      this.logger.info('Worker %s crashed. Starting a new worker', worker.process.pid);
+      this._forkWorker();
+    }
+  }
+
+  _forkWorker() {
+    cluster.fork();
+  }
+
+  _workerIterator(workers, index) {
+    return this._restartWorker(workers[index])
       .then(() => {
         index += 1;
         if(index < workers.length) {
-          return this.workerIterator(workers, index);
+          return this._workerIterator(workers, index);
         }
       });
   }
 
-  restartWorker(workerId) {
+  _restartWorker(workerId) {
     return new Promise((resolve, reject) => {
       var worker = cluster.workers[workerId];
 
@@ -77,12 +86,6 @@ class Master extends Runner {
     });
   }
 
-  forkWorker(worker, code) {
-    if (code !== 0 && !worker.suicide) {
-      this.logger.info('Worker %s crashed. Starting a new worker', worker.process.pid);
-      cluster.fork();
-    }
-  }
 }
 
 module.exports = Master;
