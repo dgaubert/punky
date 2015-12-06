@@ -1,8 +1,8 @@
 'use strict';
 
-const Runnable = require('./runnable');
+const Runner = require('./runner');
 
-class Worker extends Runnable {
+class Worker extends Runner {
   constructor(server, logger) {
     super();
     this.server = server;
@@ -12,7 +12,7 @@ class Worker extends Runnable {
   run() {
     return this.server.run()
       .then(() => {
-        this.logger.info('Worker %s ready!', process.pid);
+        this.logger.info('Worker %s ready', process.pid);
       })
       .catch((err) => {
         this.logger.error('Worker %s failed on initializing', process.pid, err.stack);

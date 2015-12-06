@@ -1,50 +1,54 @@
 'use strict';
 
 const sinon = require('sinon');
-const Runnable = require(__source + 'runnable');
+const Runner = require(__source + 'runner');
+const Listener = require(__source + 'listeners/listener');
 const Launcher = require(__source + 'launcher');
-const Master = require(__source + 'master');
 
-describe('launcher module', () => {
-  it('should be a runnable command', () => {
-    var master = new Master();
+describe('launcher', () => {
 
-    var launcher = new Launcher(master);
+  beforeEach(() => {
+    this.sandbox = sinon.sandbox.create();
 
-    launcher.should.instanceof(Runnable);
+    this.runner = new Runner();
+    this.listener = new Listener();
+    this.sandbox.stub(this.listener, 'listen');
+
+    this.launcher = new Launcher(this.runner, this.listener);
   });
 
-  it('should throw an exception when target is not injected', () => {
-    Launcher.should.throw();
+  afterEach(() => {
+    this.sandbox.restore();
   });
 
-  it('.run() should call target\'s run method', () => {
-    var master = new Master();
-    var runStub = sinon.stub(master, 'run');
-    var launcher = new Launcher(master);
-
-    launcher.run();
-
-    runStub.calledOnce.should.be.equal(true);
+  it('should be a runner instance', () => {
+    this.launcher.should.instanceof(Runner);
   });
 
-  it('.exit() should call target\'s run method', () => {
-    var master = new Master();
-    var exitStub = sinon.stub(master, 'exit');
-    var launcher = new Launcher(master);
+  it('.run() should launch worker successfully', () => {
+    var targetRunStub = this.sandbox.stub(this.runner, 'run').returns(Promise.resolve());
 
-    launcher.exit();
-
-    exitStub.calledOnce.should.be.equal(true);
+    return this.launcher.run()
+      .then(() => {
+        targetRunStub.calledOnce.should.be.equal(true);
+      });
   });
 
-  it('.exit(1) should call target\'s run method', () => {
-    var master = new Master();
-    var exitStub = sinon.stub(master, 'exit');
-    var launcher = new Launcher(master);
+  it('.exit() should exit worker successfully', () => {
+    var targetExitStub = this.sandbox.stub(this.runner, 'exit').returns(Promise.resolve());
 
-    launcher.exit(1);
+    return this.launcher.exit()
+      .then(() => {
+        targetExitStub.calledWithExactly(undefined).should.be.equal(true);
+      });
+  });
 
-    exitStub.calledWithExactly(1).should.be.equal(true);
+  it('.exit(1) should exit worker with error', () => {
+    var targetExitStub = this.sandbox.stub(this.runner, 'exit').returns(Promise.resolve());
+
+    return this.launcher.exit(1)
+      .then(() => {
+        targetExitStub.calledWithExactly(1).should.be.equal(true);
+      });
   });
 });

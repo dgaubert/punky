@@ -1,8 +1,8 @@
 'use strict';
 
-const Runnable = require('./runnable');
+const Runner = require('./runner');
 
-class Server extends Runnable {
+class Server extends Runner {
   constructor(app, logger) {
     super();
     this.app = app;
