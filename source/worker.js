@@ -6,7 +6,7 @@ class Worker extends Runner {
   constructor(server, logger) {
     super();
     this.server = server;
-    this.logger = logger || console;
+    this.logger = logger;
   }
 
   run() {

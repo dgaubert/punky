@@ -7,7 +7,7 @@ class Server extends Runner {
     super();
     this.app = app;
     this.port = process.env.PORT || 3000;
-    this.logger = logger || console;
+    this.logger = logger;
     this.httpServer = null;
   }
 

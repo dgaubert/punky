@@ -6,7 +6,7 @@ const Listener = require('./listener');
 class WorkerExitListener extends Listener {
   constructor(logger) {
     super();
-    this.logger = logger || console;
+    this.logger = logger;
   }
 
   listen(run) {

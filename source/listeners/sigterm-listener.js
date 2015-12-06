@@ -5,7 +5,7 @@ const Listener = require('./listener');
 class SigtermListener extends Listener {
   constructor(logger) {
     super();
-    this.logger = logger || console;
+    this.logger = logger;
   }
 
   listen(exit) {

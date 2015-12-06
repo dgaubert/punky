@@ -7,7 +7,7 @@ class App {
     this.application = express();
     this.routers = routers;
     this.errorMiddleware = errorMiddleware;
-    this.logger = logger || console;
+    this.logger = logger;
   }
 
   listen(port) {
