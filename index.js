@@ -16,7 +16,7 @@ const App = require('./source/app/app');
 var logger = new Logger();
 
 var target = isMaster ?
-  new Master(new Sigusr2Listener(), new WorkerExitListener(), logger) :
+  new Master(new Sigusr2Listener(logger), new WorkerExitListener(logger), logger) :
   new Worker(new Server(new App(), logger), logger);
 
 var processListenerIterator = new ProcessListenerIterator()

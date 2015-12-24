@@ -20,7 +20,7 @@ class Master extends Runner {
     }
 
     this.sigusr2Listener.listen(() => this._reloadAllWorkers());
-    this.exitListener.listen((worker, code) => this._reforkWorker());
+    this.exitListener.listen((worker, code) => this._reforkWorker(worker, code));
 
     this.logger.info('Ready');
   }
@@ -44,7 +44,7 @@ class Master extends Runner {
 
   _reforkWorker(worker, code) {
     if (code !== 0 && !worker.suicide) {
-      this.logger.info('Crashed. Reforking a new one');
+      this.logger.info('Worker %s exited. Reforking a new one', worker.process.pid);
       this._forkWorker();
     }
   }

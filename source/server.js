@@ -33,7 +33,7 @@ class Server extends Runner {
   exit() {
     return new Promise((resolve, reject) => {
       if (!this.httpServer) {
-        return reject(new Error('Server is already closed'));
+        return resolve();
       }
 
       this.httpServer.once('close', () => {
