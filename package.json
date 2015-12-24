@@ -21,7 +21,8 @@
   "author": "Daniel García Aubert <@dgaubert>",
   "license": "MIT",
   "dependencies": {
-    "express": "4.13.3"
+    "express": "4.13.3",
+    "winston": "2.1.1"
   },
   "devDependencies": {
     "istanbul": "0.4.1",

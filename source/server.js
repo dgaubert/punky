@@ -16,11 +16,11 @@ class Server extends Runner {
       this.httpServer = this.app.listen(this.port);
 
       if (!this.httpServer) {
-        return reject(new Error('Application in not ready'));
+        return reject(new Error('Server is not ready'));
       }
 
       this.httpServer.once('listening', () => {
-        this.logger.info('Application started on port', this.port);
+        this.logger.info('Server started on port', this.port);
         resolve();
       });
 
@@ -33,11 +33,11 @@ class Server extends Runner {
   exit() {
     return new Promise((resolve, reject) => {
       if (!this.httpServer) {
-        return reject(new Error('Application is already closed'));
+        return reject(new Error('Server is already closed'));
       }
 
       this.httpServer.once('close', () => {
-        this.logger.info('Application stopped');
+        this.logger.info('Server stopped');
         resolve();
       });
 

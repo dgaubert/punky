@@ -10,7 +10,7 @@ class UncaughtExceptionListener extends Listener {
 
   listen(exit) {
     this._listener = (err) => {
-      this.logger.error('Uncaught Exception on %s', process.pid, err);
+      this.logger.error('Uncaught Exception', err.stack);
       process.removeListener('uncaughtException', this._listener);
       exit(1);
     };

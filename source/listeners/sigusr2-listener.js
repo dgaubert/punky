@@ -10,7 +10,7 @@ class Sigusr2Listener extends Listener {
 
   listen(run) {
     this._listener = () => {
-      this.logger.warn('SIGUSR2 received on %s', process.pid);
+      this.logger.warn('SIGUSR2 received');
       process.removeListener('SIGUSR2', this._listener);
       run();
     };

@@ -7,6 +7,7 @@ const Runner = require('./runner');
 class Master extends Runner {
   constructor(sigusr2Listener, exitListener, logger) {
     super();
+    process.title = 'Master';
     this.sigusr2Listener = sigusr2Listener;
     this.exitListener = exitListener;
     this.logger = logger;
@@ -21,11 +22,11 @@ class Master extends Runner {
     this.sigusr2Listener.listen(() => this._reloadAllWorkers());
     this.exitListener.listen((worker, code) => this._reforkWorker());
 
-    this.logger.info('Master %s ready', process.pid);
+    this.logger.info('Ready');
   }
 
   exit(failure) {
-    this.logger.warn('Master %s out!', process.pid);
+    this.logger.warn('Exit');
     process.exit(failure || 0);
   }
 
@@ -43,7 +44,7 @@ class Master extends Runner {
 
   _reforkWorker(worker, code) {
     if (code !== 0 && !worker.suicide) {
-      this.logger.info('Worker %s crashed. Starting a new worker', worker.process.pid);
+      this.logger.info('Crashed. Reforking a new one');
       this._forkWorker();
     }
   }

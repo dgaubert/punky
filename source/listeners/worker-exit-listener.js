@@ -11,7 +11,7 @@ class WorkerExitListener extends Listener {
 
   listen(run) {
     cluster.on('exit', (worker, code) => {
-      this.logger.warn('EXIT received on %s', process.pid);
+      this.logger.warn('EXIT received');
       run(worker, code);
     });
   }

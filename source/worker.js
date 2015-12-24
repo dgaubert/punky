@@ -5,6 +5,7 @@ const Runner = require('./runner');
 class Worker extends Runner {
   constructor(server, logger) {
     super();
+    process.title = 'Worker';
     this.server = server;
     this.logger = logger;
   }
@@ -12,10 +13,10 @@ class Worker extends Runner {
   run() {
     return this.server.run()
       .then(() => {
-        this.logger.info('Worker %s ready', process.pid);
+        this.logger.info('Ready');
       })
       .catch((err) => {
-        this.logger.error('Worker %s failed on initializing', process.pid, err.stack);
+        this.logger.error('Failed on initializing', err.stack);
         this.exit(1);
       });
   }
@@ -23,11 +24,11 @@ class Worker extends Runner {
   exit(failure) {
     return this.server.exit()
       .then(() => {
-        this.logger.warn('Worker %s out!', process.pid);
+        this.logger.warn('Exit');
         process.exit(failure || 0);
       })
       .catch((err) => {
-        this.logger.error('Worker %s failed on exit', process.pid, err);
+        this.logger.error('Failed on exit', err.stack);
         process.exit(1);
       });
   }

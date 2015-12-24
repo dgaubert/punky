@@ -10,7 +10,7 @@ class SigintListener extends Listener {
 
   listen(exit) {
     this._listener = () => {
-      this.logger.warn('SIGINT received on %s', process.pid);
+      this.logger.warn('SIGINT received');
       process.removeListener('SIGINT', this._listener);
       exit();
     };
