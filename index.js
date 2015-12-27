@@ -1,4 +1,6 @@
 const isMaster = require('cluster').isMaster;
+const ConsoleTransport = require('./source/logging/winston-console-transport');
+const FileTransport = require('./source/logging/winston-file-transport');
 const Logger = require('./source/logging/winston-logger');
 const ProcessListenerIterator = require('./source/listeners/process-listener-iterator');
 const SigintListener = require('./source/listeners/sigint-listener');
@@ -13,7 +15,10 @@ const Worker = require('./source/worker');
 const Server = require('./source/server');
 const App = require('./source/app/app');
 
-var logger = new Logger();
+var logger = new Logger([
+  ConsoleTransport.create(),
+  FileTransport.create()
+]);
 
 var target = isMaster ?
   new Master(new Sigusr2Listener(logger), new WorkerExitListener(logger), logger) :

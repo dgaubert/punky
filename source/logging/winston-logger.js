@@ -1,23 +1,21 @@
 'use strict';
 
 const Logger = require('./logger');
-const winston =  require('winston');
 const cluster = require('cluster');
+const Winston =  require('winston').Logger;
 
 class WinstonLogger extends Logger {
-  constructor() {
+  constructor(transports) {
     super();
-    this.logger = new (winston.Logger)({
-      transports: [
-        new (winston.transports.Console)({
-          timestamp: true,
-          colorize: true
-        })
-      ]
+    this.logger = new Winston({
+      transports: transports
     });
 
-    this.logger.filters.push((level, message, meta) => {
-      return '[ ' + process.title + ': ' + process.pid + ' ] ' + message;
+    this.logger.rewriters.push((level, message, meta) => {
+      meta.role = process.title;
+      meta.pid = process.pid;
+
+      return meta;
     });
   }
 
