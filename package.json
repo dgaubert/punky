@@ -4,7 +4,7 @@
   "description": "Bootstrap your APIs taking advantage of Node.js, Express.js, ES6 and so on.",
   "main": "index.js",
   "engines": {
-    "node": "4.2.1"
+    "node": "4.2.4"
   },
   "directories": {
     "test": "test"
@@ -29,6 +29,6 @@
     "jshint": "2.8.0",
     "mocha": "2.3.4",
     "should": "7.1.1",
-    "sinon": "^1.17.2"
+    "sinon": "1.17.2"
   }
 }
