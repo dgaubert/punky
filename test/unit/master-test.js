@@ -3,12 +3,10 @@
 const sinon = require('sinon')
 const os = require('os')
 const Listener = require(__source + 'listeners/listener')
-const WorkerManager = require(__source + 'listeners/listener')
 const Logger = require(__source + 'logging/logger')
 const Master = require(__source + 'master')
 
 describe('Master', () => {
-
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
@@ -43,6 +41,7 @@ describe('Master', () => {
 
     this.master.exit()
 
+    loggerInfoStub.calledOnce.should.be.equal(true)
     processExitStub.calledWithExactly(0).should.equal(true)
   })
 
@@ -52,6 +51,7 @@ describe('Master', () => {
 
     this.master.exit(1)
 
+    loggerInfoStub.calledOnce.should.be.equal(true)
     processExitStub.calledWithExactly(1).should.equal(true)
   })
 })

@@ -5,10 +5,10 @@ const path = require('path')
 const filename = path.join(__dirname, '.log')
 
 class WinstonFile {
-  static create() {
+  static create () {
     return new FileTransport({
       filename: filename,
-      timestamp: true,
+      timestamp: true
     })
   }
 }

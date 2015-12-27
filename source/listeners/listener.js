@@ -1,7 +1,7 @@
 'use strict'
 
 class Listener {
-  listen() {
+  listen () {
     throw new Error('Unimplemented method')
   }
 }

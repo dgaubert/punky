@@ -3,12 +3,12 @@
 const Listener = require('./listener')
 
 class UnhandledRejectionListener extends Listener {
-  constructor(logger) {
+  constructor (logger) {
     super()
     this.logger = logger
   }
 
-  listen() {
+  listen () {
     this._listener = (reason, promise) => {
       promise
         .catch((err) => {

@@ -1,11 +1,10 @@
 'use strict'
 
 const Logger = require('./logger')
-const cluster = require('cluster')
 const Winston = require('winston').Logger
 
 class WinstonLogger extends Logger {
-  constructor(transports) {
+  constructor (transports) {
     super()
     this.logger = new Winston({
       transports: transports
@@ -19,19 +18,19 @@ class WinstonLogger extends Logger {
     })
   }
 
-  log() {
+  log () {
     this.logger.log.apply(this.logger, arguments)
   }
 
-  info() {
+  info () {
     this.logger.info.apply(this.logger, arguments)
   }
 
-  warn() {
+  warn () {
     this.logger.warn.apply(this.logger, arguments)
   }
 
-  error() {
+  error () {
     this.logger.error.apply(this.logger, arguments)
   }
 }

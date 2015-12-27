@@ -6,7 +6,6 @@ const Listener = require(__source + 'listeners/listener')
 const Launcher = require(__source + 'launcher')
 
 describe('launcher', () => {
-
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 

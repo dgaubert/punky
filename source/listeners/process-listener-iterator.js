@@ -3,18 +3,18 @@
 const Listener = require('./listener')
 
 class ProcessListenerIterator extends Listener {
-  constructor() {
+  constructor () {
     super()
     this._listeners = []
   }
 
-  add(listener) {
+  add (listener) {
     this._listeners.push(listener)
 
     return this
   }
 
-  listen(exit) {
+  listen (exit) {
     for (var listener of this._listeners) {
       listener.listen(exit)
     }

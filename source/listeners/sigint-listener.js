@@ -3,12 +3,12 @@
 const Listener = require('./listener')
 
 class SigintListener extends Listener {
-  constructor(logger) {
+  constructor (logger) {
     super()
     this.logger = logger
   }
 
-  listen(exit) {
+  listen (exit) {
     this._listener = () => {
       this.logger.warn('SIGINT received')
       process.removeListener('SIGINT', this._listener)

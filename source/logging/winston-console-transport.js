@@ -1,11 +1,10 @@
 'use strict'
 
-const winston = require('winston')
 const colorize = require('winston').config.colorize
 const ConsoleTransport = require('winston').transports.Console
 
 class WinstonConsole {
-  static create() {
+  static create () {
     return new ConsoleTransport({
       formatter: function (options) {
         var level = colorize(options.level, options.level.toUpperCase())

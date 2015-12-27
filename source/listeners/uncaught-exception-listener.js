@@ -3,12 +3,12 @@
 const Listener = require('./listener')
 
 class UncaughtExceptionListener extends Listener {
-  constructor(logger) {
+  constructor (logger) {
     super()
     this.logger = logger
   }
 
-  listen(exit) {
+  listen (exit) {
     this._listener = (err) => {
       this.logger.error('Uncaught Exception', err.stack)
       process.removeListener('uncaughtException', this._listener)

@@ -56,6 +56,7 @@ describe('worker', function () {
       .then(() => {
         loggerWarnStub.calledOnce.should.equal(true)
         processExitStub.calledWithExactly(0).should.equal(true)
+        serverRunStub.calledOnce.should.equal(true)
       })
   })
 
@@ -68,6 +69,7 @@ describe('worker', function () {
       .then(() => {
         loggerWarnStub.calledOnce.should.equal(true)
         processExitStub.calledWithExactly(1).should.equal(true)
+        serverRunStub.calledOnce.should.equal(true)
       })
   })
 
@@ -80,7 +82,7 @@ describe('worker', function () {
       .then(() => {
         loggerErrorStub.calledOnce.should.equal(true)
         processExitStub.calledWithExactly(1).should.equal(true)
+        serverRunStub.calledOnce.should.equal(true)
       })
   })
-
 })

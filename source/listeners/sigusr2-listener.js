@@ -3,12 +3,12 @@
 const Listener = require('./listener')
 
 class Sigusr2Listener extends Listener {
-  constructor(logger) {
+  constructor (logger) {
     super()
     this.logger = logger
   }
 
-  listen(run) {
+  listen (run) {
     this._listener = () => {
       this.logger.warn('SIGUSR2 received')
       process.removeListener('SIGUSR2', this._listener)

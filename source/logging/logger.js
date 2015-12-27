@@ -1,19 +1,19 @@
 'use strict'
 
 class Logger {
-  log() {
+  log () {
     throw new Error('Unimplemented method')
   }
 
-  info() {
+  info () {
     throw new Error('Unimplemented method')
   }
 
-  warn() {
+  warn () {
     throw new Error('Unimplemented method')
   }
 
-  error() {
+  error () {
     throw new Error('Unimplemented method')
   }
 }
