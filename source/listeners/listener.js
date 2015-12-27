@@ -1,9 +1,9 @@
-'use strict';
+'use strict'
 
 class Listener {
   listen() {
-    throw new Error('Unimplemented method');
+    throw new Error('Unimplemented method')
   }
 }
 
-module.exports = Listener;
+module.exports = Listener

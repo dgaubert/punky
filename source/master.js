@@ -1,92 +1,91 @@
-'use strict';
+'use strict'
 
-const os = require('os');
-const cluster = require('cluster');
-const Runner = require('./runner');
+const os = require('os')
+const cluster = require('cluster')
+const Runner = require('./runner')
 
 class Master extends Runner {
-  constructor(sigusr2Listener, exitListener, logger) {
-    super();
-    process.title = 'Master';
-    this.sigusr2Listener = sigusr2Listener;
-    this.exitListener = exitListener;
-    this.logger = logger;
-    this.numberOfWorkers = process.env.WORKERS || os.cpus().length;
+  constructor (sigusr2Listener, exitListener, logger) {
+    super()
+    process.title = 'Master'
+    this.sigusr2Listener = sigusr2Listener
+    this.exitListener = exitListener
+    this.logger = logger
+    this.numberOfWorkers = process.env.WORKERS || os.cpus().length
   }
 
-  run() {
+  run () {
     for (var i = 0; i < this.numberOfWorkers; i++) {
-      this._forkWorker();
+      this._forkWorker()
     }
 
-    this.sigusr2Listener.listen(() => this._reloadAllWorkers());
-    this.exitListener.listen((worker, code) => this._reforkWorker(worker, code));
+    this.sigusr2Listener.listen(() => this._reloadAllWorkers())
+    this.exitListener.listen((worker, code) => this._reforkWorker(worker, code))
 
-    this.logger.info('Ready');
+    this.logger.info('Ready')
   }
 
-  exit(failure) {
-    this.logger.warn('Exit');
-    process.exit(failure || 0);
+  exit (failure) {
+    this.logger.warn('Exit')
+    process.exit(failure || 0)
   }
 
-  _reloadAllWorkers() {
-    this.logger.info('Reloading workers');
+  _reloadAllWorkers () {
+    this.logger.info('Reloading workers')
 
-    var workers = Object.keys(cluster.workers);
+    var workers = Object.keys(cluster.workers)
 
     return this._workerIterator(workers, 0)
       .then(() => {
-        this.logger.info('Workers reloaded');
-      });
+        this.logger.info('Workers reloaded')
+      })
   }
 
-
-  _reforkWorker(worker, code) {
+  _reforkWorker (worker, code) {
     if (code !== 0 && !worker.suicide) {
-      this.logger.info('Worker %s exited. Reforking a new one', worker.process.pid);
-      this._forkWorker();
+      this.logger.info('Worker %s exited. Reforking a new one', worker.process.pid)
+      this._forkWorker()
     }
   }
 
-  _forkWorker() {
-    cluster.fork();
+  _forkWorker () {
+    cluster.fork()
   }
 
-  _workerIterator(workers, index) {
+  _workerIterator (workers, index) {
     return this._restartWorker(workers[index])
       .then(() => {
-        index += 1;
-        if(index < workers.length) {
-          return this._workerIterator(workers, index);
+        index += 1
+        if (index < workers.length) {
+          return this._workerIterator(workers, index)
         }
-      });
+      })
   }
 
-  _restartWorker(workerId) {
+  _restartWorker (workerId) {
     return new Promise((resolve, reject) => {
-      var worker = cluster.workers[workerId];
+      var worker = cluster.workers[workerId]
 
-      worker.disconnect();
+      worker.disconnect()
 
       worker.once('exit', () => {
-        if(!worker.suicide) {
-          return reject(new Error('Worker exited accidentaly'));
+        if (!worker.suicide) {
+          return reject(new Error('Worker exited accidentaly'))
         }
 
-        var newWorker = cluster.fork();
+        var newWorker = cluster.fork()
 
         newWorker.once('listening', () => {
-          resolve();
-        });
+          resolve()
+        })
 
         newWorker.once('error', (err) => {
-          reject(err);
-        });
-      });
-    });
+          reject(err)
+        })
+      })
+    })
   }
 
 }
 
-module.exports = Master;
+module.exports = Master

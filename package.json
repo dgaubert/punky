@@ -10,7 +10,7 @@
     "test": "test"
   },
   "scripts": {
-    "lint": "node_modules/.bin/jshint test/**/*.js",
+    "lint": "node_modules/.bin/standard **/*.js",
     "pretest": "npm run lint",
     "test": "node_modules/.bin/mocha -r should -r scripts/test-bootstrap test/**/*-test.js",
     "test:watch": "npm run test -- -w",
@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "istanbul": "0.4.1",
-    "jshint": "2.8.0",
+    "standard": "5.4.1",
     "mocha": "2.3.4",
     "should": "7.1.1",
     "sinon": "1.17.2"

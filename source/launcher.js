@@ -1,25 +1,25 @@
-'use strict';
+'use strict'
 
-const Runner = require('./runner');
+const Runner = require('./runner')
 
 class Launcher extends Runner {
-  constructor(target, listeners) {
-    super();
-    this.target = target;
+  constructor (target, listeners) {
+    super()
+    this.target = target
 
     if (listeners) {
-      listeners.listen(failure => this.exit(failure));
+      listeners.listen(failure => this.exit(failure))
     }
   }
 
-  run() {
-    return this.target.run();
+  run () {
+    return this.target.run()
   }
 
-  exit(failure) {
-    return this.target.exit(failure);
+  exit (failure) {
+    return this.target.exit(failure)
   }
 
 }
 
-module.exports = Launcher;
+module.exports = Launcher
