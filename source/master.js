@@ -33,7 +33,7 @@ class Master extends Runner {
   _reloadAllWorkers () {
     this.logger.info('Reloading workers')
 
-    var workers = Object.keys(cluster.workers)
+    const workers = Object.keys(cluster.workers)
 
     return this._workerIterator(workers, 0)
       .then(() => {

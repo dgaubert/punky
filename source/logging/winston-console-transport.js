@@ -7,13 +7,13 @@ class WinstonConsole {
   static create () {
     return new ConsoleTransport({
       formatter: function (options) {
-        var level = colorize(options.level, options.level.toUpperCase())
+        const level = colorize(options.level, options.level.toUpperCase())
 
         return level + ': ' +
-        new Date().toISOString() + ' - ' +
-        options.meta.role + ' ' +
-        options.meta.pid + ' - ' +
-        options.message
+          new Date().toISOString() + ' - ' +
+          options.meta.role + ' ' +
+          options.meta.pid + ' - ' +
+          options.message
       }
     })
   }

@@ -15,22 +15,22 @@ const Worker = require('./source/worker')
 const Server = require('./source/server')
 const App = require('./source/app/app')
 
-var logger = new Logger([
+const logger = new Logger([
   ConsoleTransport.create(),
   FileTransport.create()
 ])
 
-var target = isMaster
+const target = isMaster
   ? new Master(new Sigusr2Listener(logger), new WorkerExitListener(logger), logger)
   : new Worker(new Server(new App(), logger), logger)
 
-var processListenerIterator = new ProcessListenerIterator()
+const processListenerIterator = new ProcessListenerIterator()
   .add(new SigintListener(logger))
   .add(new SigtermListener(logger))
   .add(new UncaughtExceptionListener(logger))
   .add(new UnhandledRejectionListener(logger))
 
-var launcher = new Launcher(target, processListenerIterator)
+const launcher = new Launcher(target, processListenerIterator)
 
 // here we go!
 launcher.run()
