@@ -20,9 +20,9 @@ var logger = new Logger([
   FileTransport.create()
 ])
 
-var target = isMaster ?
-  new Master(new Sigusr2Listener(logger), new WorkerExitListener(logger), logger) :
-  new Worker(new Server(new App(), logger), logger)
+var target = isMaster
+  ? new Master(new Sigusr2Listener(logger), new WorkerExitListener(logger), logger)
+  : new Worker(new Server(new App(), logger), logger)
 
 var processListenerIterator = new ProcessListenerIterator()
   .add(new SigintListener(logger))
