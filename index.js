@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const isMaster = require('cluster').isMaster
 const ConsoleTransport = require('./source/logging/winston-console-transport')
 const FileTransport = require('./source/logging/winston-file-transport')
@@ -16,8 +18,8 @@ const Server = require('./source/server')
 const App = require('./source/app/app')
 
 const logger = new Logger([
-  ConsoleTransport.create(),
-  FileTransport.create()
+  new ConsoleTransport(),
+  new FileTransport()
 ])
 
 const target = isMaster

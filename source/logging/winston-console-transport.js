@@ -3,9 +3,9 @@
 const colorize = require('winston').config.colorize
 const ConsoleTransport = require('winston').transports.Console
 
-class WinstonConsole {
-  static create () {
-    return new ConsoleTransport({
+class WinstonConsoleTransport extends ConsoleTransport {
+  constructor () {
+    super({
       formatter: function (options) {
         const level = colorize(options.level, options.level.toUpperCase())
 
@@ -19,4 +19,4 @@ class WinstonConsole {
   }
 }
 
-module.exports = WinstonConsole
+module.exports = WinstonConsoleTransport
