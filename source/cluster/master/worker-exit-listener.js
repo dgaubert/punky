@@ -1,7 +1,7 @@
 'use strict'
 
 const cluster = require('cluster')
-const Listener = require('./listener')
+const Listener = require('../../listener')
 
 class WorkerExitListener extends Listener {
   constructor (logger) {

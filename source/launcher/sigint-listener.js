@@ -1,6 +1,6 @@
 'use strict'
 
-const Listener = require('./listener')
+const Listener = require('../listener')
 
 class SigintListener extends Listener {
   constructor (logger) {

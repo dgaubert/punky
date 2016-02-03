@@ -3,7 +3,7 @@
 const colorize = require('winston').config.colorize
 const ConsoleTransport = require('winston').transports.Console
 
-class WinstonConsoleTransport extends ConsoleTransport {
+class ConsoleOutput extends ConsoleTransport {
   constructor () {
     super({
       formatter: function (options) {
@@ -19,4 +19,4 @@ class WinstonConsoleTransport extends ConsoleTransport {
   }
 }
 
-module.exports = WinstonConsoleTransport
+module.exports = ConsoleOutput

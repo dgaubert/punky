@@ -1,14 +1,11 @@
 'use strict'
 
-const Logger = require('./logger')
-const Winston = require('winston').Logger
+const Logger = require('../logger')
 
 class WinstonLogger extends Logger {
-  constructor (transports) {
+  constructor (logger) {
     super()
-    this.logger = new Winston({
-      transports: transports
-    })
+    this.logger = logger
 
     this.logger.rewriters.push((level, message, meta) => {
       meta.role = process.title

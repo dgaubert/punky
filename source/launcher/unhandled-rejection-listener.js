@@ -1,6 +1,6 @@
 'use strict'
 
-const Listener = require('./listener')
+const Listener = require('../listener')
 
 class UnhandledRejectionListener extends Listener {
   constructor (logger) {

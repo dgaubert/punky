@@ -1,6 +1,6 @@
 'use strict'
 
-const Runner = require('./runner')
+const Runner = require('../../runner')
 
 class Server extends Runner {
   constructor (app, logger) {

@@ -1,6 +1,6 @@
 'use strict'
 
-const Listener = require('./listener')
+const Listener = require('../../listener')
 
 class Sigusr2Listener extends Listener {
   constructor (logger) {
@@ -9,13 +9,10 @@ class Sigusr2Listener extends Listener {
   }
 
   listen (run) {
-    this._listener = () => {
+    process.on('SIGUSR2', () => {
       this.logger.warn('SIGUSR2 received')
-      process.removeListener('SIGUSR2', this._listener)
       run()
-    }
-
-    process.on('SIGUSR2', this._listener)
+    })
   }
 }
 
