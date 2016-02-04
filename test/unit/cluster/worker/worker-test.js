@@ -2,9 +2,9 @@
 
 const sinon = require('sinon')
 const Runner = require(__source + 'runner')
-const Logger = require(__source + 'logging/logger')
-const Server = require(__source + 'server')
-const Worker = require(__source + 'worker')
+const Logger = require(__source + 'logger')
+const Server = require(__source + 'cluster/worker/server')
+const Worker = require(__source + 'cluster/worker/worker')
 
 describe('worker', function () {
   beforeEach(() => {

@@ -2,8 +2,8 @@
 
 const sinon = require('sinon')
 const Runner = require(__source + 'runner')
-const Listener = require(__source + 'listeners/listener')
-const Launcher = require(__source + 'launcher')
+const Listener = require(__source + 'listener')
+const Launcher = require(__source + 'launcher/launcher')
 
 describe('launcher', () => {
   beforeEach(() => {

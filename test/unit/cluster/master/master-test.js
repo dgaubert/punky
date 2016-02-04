@@ -2,19 +2,18 @@
 
 const sinon = require('sinon')
 const os = require('os')
-const Listener = require(__source + 'listeners/listener')
-const Logger = require(__source + 'logging/logger')
-const Master = require(__source + 'master')
+const Logger = require(__source + 'logger')
+const WorkerManager = require(__source + 'cluster/master/worker-manager')
+const Master = require(__source + 'cluster/master/master')
 
 describe('Master', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
-    this.sigusr2Listener = new Listener()
-    this.existListener = new Listener()
     this.logger = new Logger()
+    this.workerManager = new WorkerManager(this.logger)
 
-    this.master = new Master(this.sigusr2Listener, this.existListener, this.logger)
+    this.master = new Master(this.workerManager, this.logger)
   })
 
   afterEach(() => {
@@ -23,16 +22,12 @@ describe('Master', () => {
 
   it('.run() should create as many workers as CPUs there are in the machine', () => {
     var loggerInfoStub = this.sandbox.stub(this.logger, 'info')
-    var masterForkWorkerStub = this.sandbox.stub(this.master, '_forkWorker')
-    var sigusr2ListenerListenStub = this.sandbox.stub(this.sigusr2Listener, 'listen')
-    var exitListenerListenStub = this.sandbox.stub(this.existListener, 'listen')
+    var workerManagerForkStub = this.sandbox.stub(this.workerManager, 'fork')
 
     this.master.run()
 
     loggerInfoStub.calledOnce.should.be.equal(true)
-    masterForkWorkerStub.callCount.should.be.equal(os.cpus().length)
-    sigusr2ListenerListenStub.calledOnce.should.be.equal(true)
-    exitListenerListenStub.calledOnce.should.be.equal(true)
+    workerManagerForkStub.callCount.should.be.equal(os.cpus().length)
   })
 
   it('.exit() should exit successfully', () => {
