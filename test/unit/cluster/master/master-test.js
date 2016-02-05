@@ -6,7 +6,7 @@ const Logger = require(__source + 'logger')
 const WorkerManager = require(__source + 'cluster/master/worker-manager')
 const Master = require(__source + 'cluster/master/master')
 
-describe('Master', () => {
+describe('master', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
