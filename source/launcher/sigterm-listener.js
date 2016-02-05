@@ -9,13 +9,10 @@ class SigtermListener extends Listener {
   }
 
   listen (exit) {
-    this._listener = () => {
+    process.once('SIGTERM', () => {
       this.logger.warn('SIGTERM received')
-      process.removeListener('SIGTERM', this._listener)
       exit()
-    }
-
-    process.on('SIGTERM', this._listener)
+    })
   }
 }
 

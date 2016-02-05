@@ -9,13 +9,11 @@ class SigintListener extends Listener {
   }
 
   listen (exit) {
-    this._listener = () => {
+    process.once('SIGINT', () => {
       this.logger.warn('SIGINT received')
       process.removeListener('SIGINT', this._listener)
       exit()
-    }
-
-    process.on('SIGINT', this._listener)
+    })
   }
 }
 

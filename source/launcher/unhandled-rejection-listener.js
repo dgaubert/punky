@@ -9,14 +9,12 @@ class UnhandledRejectionListener extends Listener {
   }
 
   listen () {
-    this._listener = (reason, promise) => {
+    process.on('unhandledRejection', (reason, promise) => {
       promise
         .catch((err) => {
           this.logger.error('Unhandled promise rejection:', err.stack)
         })
-    }
-
-    process.on('unhandledRejection', this._listener)
+    })
   }
 
 }
