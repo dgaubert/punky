@@ -7,10 +7,6 @@ const ConsoleOutput = require('./console-output')
 const FileOutput = require('./file-output')
 
 class LoggerFactory extends Factory {
-  constructor () {
-    super()
-  }
-
   create () {
     const wiston = new Winston({
       transports: [

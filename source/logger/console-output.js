@@ -6,7 +6,7 @@ const ConsoleTransport = require('winston').transports.Console
 class ConsoleOutput extends ConsoleTransport {
   constructor () {
     super({
-      formatter: options => {
+      formatter: (options) => {
         const level = colorize(options.level, options.level.toUpperCase())
 
         return level + ': ' +

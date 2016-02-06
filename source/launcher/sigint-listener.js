@@ -11,7 +11,6 @@ class SigintListener extends Listener {
   listen (exit) {
     process.once('SIGINT', () => {
       this.logger.warn('SIGINT received')
-      process.removeListener('SIGINT', this._listener)
       exit()
     })
   }

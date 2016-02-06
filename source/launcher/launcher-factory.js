@@ -9,10 +9,6 @@ const UnhandledRejectionListener = require('./unhandled-rejection-listener')
 const Launcher = require('./launcher')
 
 class LauncherFactory extends Factory {
-  constructor () {
-    super()
-  }
-
   create (target, logger) {
     const launcher = new Launcher(target)
 
@@ -22,7 +18,7 @@ class LauncherFactory extends Factory {
       .add(new UncaughtExceptionListener(logger))
       .add(new UnhandledRejectionListener(logger))
 
-    processExitListeners.listenAll(failure => launcher.exit(failure))
+    processExitListeners.listenAll((failure) => launcher.exit(failure))
 
     return launcher
   }
