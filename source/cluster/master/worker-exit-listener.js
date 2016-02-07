@@ -1,16 +1,16 @@
 'use strict'
 
-const cluster = require('cluster')
 const Listener = require('../../listener')
 
 class WorkerExitListener extends Listener {
-  constructor (logger) {
+  constructor (emitter, logger) {
     super()
+    this.emitter = emitter
     this.logger = logger
   }
 
   listen (run) {
-    cluster.on('exit', (worker, code) => {
+    this.emitter.on('exit', (worker, code) => {
       this.logger.warn('EXIT received')
       run(worker, code)
     })

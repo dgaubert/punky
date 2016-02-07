@@ -1,5 +1,6 @@
 'use strict'
 
+const cluster = require('cluster')
 const Factory = require('../../factory')
 const WorkerManager = require('./worker-manager')
 const Sigusr2Listener = require('./sigusr2-listener')
@@ -12,12 +13,12 @@ class MasterFactory extends Factory {
   }
 
   create (logger) {
-    const workerManager = new WorkerManager(logger)
+    const workerManager = new WorkerManager(cluster, logger)
 
-    const sigusr2Listener = new Sigusr2Listener(logger)
+    const sigusr2Listener = new Sigusr2Listener(process, logger)
     sigusr2Listener.listen(() => workerManager.reloadAll())
 
-    const workerExitListener = new WorkerExitListener(logger)
+    const workerExitListener = new WorkerExitListener(cluster, logger)
     workerExitListener.listen((worker, code) => workerManager.refork(worker, code))
 
     return new Master(workerManager, logger)

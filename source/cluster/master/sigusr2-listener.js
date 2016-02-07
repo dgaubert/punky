@@ -3,13 +3,14 @@
 const Listener = require('../../listener')
 
 class Sigusr2Listener extends Listener {
-  constructor (logger) {
+  constructor (emitter, logger) {
     super()
+    this.emitter = emitter
     this.logger = logger
   }
 
   listen (run) {
-    process.on('SIGUSR2', () => {
+    this.emitter.on('SIGUSR2', () => {
       this.logger.warn('SIGUSR2 received')
       run()
     })

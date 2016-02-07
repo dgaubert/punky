@@ -1,6 +1,7 @@
 'use strict'
 
 const sinon = require('sinon')
+const EventEmitter = require('events')
 const Logger = require(__source + 'logger')
 const Sigusr2Listener = require(__source + 'cluster/master/sigusr2-listener')
 
@@ -8,8 +9,9 @@ describe('sigusr2-listener', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
+    this.emitter = new EventEmitter()
     this.logger = new Logger()
-    this.sigusr2Listener = new Sigusr2Listener(this.logger)
+    this.sigusr2Listener = new Sigusr2Listener(this.emitter, this.logger)
   })
 
   afterEach(() => {
@@ -21,10 +23,9 @@ describe('sigusr2-listener', () => {
     var listenerStub = this.sandbox.stub()
 
     this.sigusr2Listener.listen(listenerStub)
-    process.emit('SIGUSR2')
+    this.emitter.emit('SIGUSR2')
 
     loggerWarnStub.calledOnce.should.be.equal(true)
     listenerStub.calledOnce.should.be.equal(true)
-    process.removeAllListeners('SIGUSR2')
   })
 })

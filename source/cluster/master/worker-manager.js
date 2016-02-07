@@ -1,16 +1,15 @@
 'use strict'
 
-const cluster = require('cluster')
-
 class WorkerManager {
-  constructor (logger) {
+  constructor (cluster, logger) {
+    this.cluster = cluster
     this.logger = logger
   }
 
   reloadAll () {
     this.logger.info('Reloading workers')
 
-    const workerKeys = Object.keys(cluster.workers)
+    const workerKeys = Object.keys(this.cluster.workers)
     const reloads = workerKeys.map(workerKey => this.reload(workerKey))
 
     return Promise.all(reloads)
@@ -24,12 +23,12 @@ class WorkerManager {
   }
 
   fork () {
-    return cluster.fork()
+    return this.cluster.fork()
   }
 
   reload (workerId) {
     return new Promise((resolve, reject) => {
-      const worker = cluster.workers[workerId]
+      const worker = this.cluster.workers[workerId]
 
       worker.disconnect()
 

@@ -13,10 +13,10 @@ class LauncherFactory extends Factory {
     const launcher = new Launcher(target)
 
     const processExitListeners = new ProcessExitListeners()
-      .add(new SigintListener(logger))
-      .add(new SigtermListener(logger))
-      .add(new UncaughtExceptionListener(logger))
-      .add(new UnhandledRejectionListener(logger))
+      .add(new SigintListener(process, logger))
+      .add(new SigtermListener(process, logger))
+      .add(new UncaughtExceptionListener(process, logger))
+      .add(new UnhandledRejectionListener(process, logger))
 
     processExitListeners.listenAll((failure) => launcher.exit(failure))
 

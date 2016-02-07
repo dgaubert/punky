@@ -3,13 +3,14 @@
 const Listener = require('../listener')
 
 class UnhandledRejectionListener extends Listener {
-  constructor (logger) {
+  constructor (emitter, logger) {
     super()
+    this.emitter = emitter
     this.logger = logger
   }
 
   listen () {
-    process.on('unhandledRejection', (reason, promise) => {
+    this.emitter.on('unhandledRejection', (reason, promise) => {
       promise
         .catch((err) => {
           this.logger.error('Unhandled promise rejection:', err.stack)
