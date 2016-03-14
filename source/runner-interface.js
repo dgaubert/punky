@@ -1,6 +1,6 @@
 'use strict'
 
-class Runner {
+class RunnerInterface {
   run () {
     throw new Error('Unimplemented method')
   }
@@ -10,4 +10,4 @@ class Runner {
   }
 }
 
-module.exports = Runner
+module.exports = RunnerInterface

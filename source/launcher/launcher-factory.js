@@ -11,7 +11,6 @@ const Launcher = require('./launcher')
 class LauncherFactory extends Factory {
   create (target, logger) {
     const launcher = new Launcher(target)
-
     const processExitListeners = new ProcessExitListeners()
       .add(new SigintListener(process, logger))
       .add(new SigtermListener(process, logger))

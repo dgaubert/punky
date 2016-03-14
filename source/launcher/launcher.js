@@ -1,8 +1,8 @@
 'use strict'
 
-const Runner = require('../runner')
+const RunnerInterface = require('../runner-interface')
 
-class Launcher extends Runner {
+class Launcher extends RunnerInterface {
   constructor (target) {
     super()
     this.target = target

@@ -1,9 +1,9 @@
 'use strict'
 
 const os = require('os')
-const Runner = require('../../runner')
+const RunnerInterface = require('../../runner-interface')
 
-class Master extends Runner {
+class Master extends RunnerInterface {
   constructor (workerManager, logger) {
     super()
     process.title = 'Master'
