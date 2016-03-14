@@ -1,8 +1,8 @@
 'use strict'
 
-const Listener = require('../../listener')
+const ListenerInterface = require('../../listener-interface')
 
-class Sigusr2Listener extends Listener {
+class Sigusr2Listener extends ListenerInterface {
   constructor (emitter, logger) {
     super()
     this.emitter = emitter

@@ -1,8 +1,8 @@
 'use strict'
 
-const Listener = require('../listener')
+const ListenerInterface = require('../listener-interface')
 
-class UnhandledRejectionListener extends Listener {
+class UnhandledRejectionListener extends ListenerInterface {
   constructor (emitter, logger) {
     super()
     this.emitter = emitter

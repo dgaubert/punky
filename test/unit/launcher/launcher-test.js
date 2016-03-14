@@ -2,7 +2,7 @@
 
 const sinon = require('sinon')
 const RunnerInterface = require(__source + 'runner-interface')
-const Listener = require(__source + 'listener')
+const ListenerInterface = require(__source + 'listener-interface')
 const Launcher = require(__source + 'launcher/launcher')
 
 describe('launcher', () => {
@@ -10,7 +10,7 @@ describe('launcher', () => {
     this.sandbox = sinon.sandbox.create()
 
     this.runner = new RunnerInterface()
-    this.listener = new Listener()
+    this.listener = new ListenerInterface()
     this.sandbox.stub(this.listener, 'listen')
 
     this.launcher = new Launcher(this.runner, this.listener)
