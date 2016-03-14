@@ -12,9 +12,9 @@
   "scripts": {
     "lint": "standard index.js source/**/*.js test/**/*.js script/**/*.js",
     "pretest": "npm run lint",
-    "test": "mocha -r should -r scripts/test-bootstrap test/**/*-test.js",
+    "test": "mocha -r test/bootstrap -r should test/**/*-test.js",
     "test:watch": "npm run test -- -w",
-    "coverage": "istanbul cover _mocha test/**/*-test.js -- -r scripts/test-bootstrap.js -r should",
+    "coverage": "istanbul cover _mocha test/**/*-test.js -- -r test/bootstrap -r should",
     "start": "node ."
   },
   "keywords": [],
