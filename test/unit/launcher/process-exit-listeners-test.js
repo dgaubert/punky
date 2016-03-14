@@ -1,14 +1,14 @@
 'use strict'
 
 const sinon = require('sinon')
-const Listener = require(__source + 'listener')
+const ListenerInterface = require(__source + 'listener-interface')
 const ProcessExitListeners = require(__source + 'launcher/process-exit-listeners')
 
 describe('process-exit-listeners', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
-    this.listener = new Listener()
+    this.listener = new ListenerInterface()
     this.processExitListeners = new ProcessExitListeners().add(this.listener)
   })
 

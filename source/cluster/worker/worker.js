@@ -1,8 +1,8 @@
 'use strict'
 
-const Runner = require('../../runner')
+const RunnerInterface = require('../../runner-interface')
 
-class Worker extends Runner {
+class Worker extends RunnerInterface {
   constructor (server, logger) {
     super()
     process.title = 'Worker'

@@ -3,7 +3,7 @@
 const sinon = require('sinon')
 const os = require('os')
 const cluster = require('cluster')
-const Logger = require(__source + 'logger')
+const LoggerInterface = require(__source + 'logger-interface')
 const WorkerManager = require(__source + 'cluster/master/worker-manager')
 const Master = require(__source + 'cluster/master/master')
 
@@ -11,7 +11,7 @@ describe('master', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
-    this.logger = new Logger()
+    this.logger = new LoggerInterface()
     this.workerManager = new WorkerManager(cluster, this.logger)
 
     this.master = new Master(this.workerManager, this.logger)

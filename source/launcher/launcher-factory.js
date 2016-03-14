@@ -1,6 +1,6 @@
 'use strict'
 
-const Factory = require('../factory')
+const FactoryInterface = require('../factory-interface')
 const ProcessExitListeners = require('./process-exit-listeners')
 const SigintListener = require('./sigint-listener')
 const SigtermListener = require('./sigterm-listener')
@@ -8,10 +8,9 @@ const UncaughtExceptionListener = require('./uncaught-exception-listener')
 const UnhandledRejectionListener = require('./unhandled-rejection-listener')
 const Launcher = require('./launcher')
 
-class LauncherFactory extends Factory {
+class LauncherFactory extends FactoryInterface {
   create (target, logger) {
     const launcher = new Launcher(target)
-
     const processExitListeners = new ProcessExitListeners()
       .add(new SigintListener(process, logger))
       .add(new SigtermListener(process, logger))

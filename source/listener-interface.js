@@ -1,9 +1,9 @@
 'use strict'
 
-class Listener {
+class ListenerInterface {
   listen () {
     throw new Error('Unimplemented method')
   }
 }
 
-module.exports = Listener
+module.exports = ListenerInterface

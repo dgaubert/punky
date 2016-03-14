@@ -2,7 +2,7 @@
 
 const sinon = require('sinon')
 const EventEmitter = require('events')
-const Logger = require(__source + 'logger')
+const LoggerInterface = require(__source + 'logger-interface')
 const Sigusr2Listener = require(__source + 'cluster/master/sigusr2-listener')
 
 describe('sigusr2-listener', () => {
@@ -10,7 +10,7 @@ describe('sigusr2-listener', () => {
     this.sandbox = sinon.sandbox.create()
 
     this.emitter = new EventEmitter()
-    this.logger = new Logger()
+    this.logger = new LoggerInterface()
     this.sigusr2Listener = new Sigusr2Listener(this.emitter, this.logger)
   })
 

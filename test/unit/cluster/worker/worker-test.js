@@ -1,8 +1,8 @@
 'use strict'
 
 const sinon = require('sinon')
-const Runner = require(__source + 'runner')
-const Logger = require(__source + 'logger')
+const RunnerInterface = require(__source + 'runner-interface')
+const LoggerInterface = require(__source + 'logger-interface')
 const Server = require(__source + 'cluster/worker/server')
 const Worker = require(__source + 'cluster/worker/worker')
 
@@ -11,7 +11,7 @@ describe('worker', function () {
     this.sandbox = sinon.sandbox.create()
 
     this.server = new Server()
-    this.logger = new Logger()
+    this.logger = new LoggerInterface()
     this.worker = new Worker(this.server, this.logger)
   })
 
@@ -20,7 +20,7 @@ describe('worker', function () {
   })
 
   it('should be a runner instance', () => {
-    this.worker.should.instanceof(Runner)
+    this.worker.should.instanceof(RunnerInterface)
   })
 
   it('.run() should run server successfully', () => {

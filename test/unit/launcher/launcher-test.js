@@ -1,16 +1,16 @@
 'use strict'
 
 const sinon = require('sinon')
-const Runner = require(__source + 'runner')
-const Listener = require(__source + 'listener')
+const RunnerInterface = require(__source + 'runner-interface')
+const ListenerInterface = require(__source + 'listener-interface')
 const Launcher = require(__source + 'launcher/launcher')
 
 describe('launcher', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
-    this.runner = new Runner()
-    this.listener = new Listener()
+    this.runner = new RunnerInterface()
+    this.listener = new ListenerInterface()
     this.sandbox.stub(this.listener, 'listen')
 
     this.launcher = new Launcher(this.runner, this.listener)
@@ -21,7 +21,7 @@ describe('launcher', () => {
   })
 
   it('should be a runner instance', () => {
-    this.launcher.should.instanceof(Runner)
+    this.launcher.should.instanceof(RunnerInterface)
   })
 
   it('.run() should launch worker successfully', () => {

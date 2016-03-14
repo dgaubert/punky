@@ -1,8 +1,8 @@
 'use strict'
 
-const Logger = require('../logger')
+const LoggerInterface = require('../logger-interface')
 
-class WinstonLogger extends Logger {
+class WinstonLogger extends LoggerInterface {
   constructor (logger) {
     super()
     this.logger = logger

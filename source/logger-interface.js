@@ -1,6 +1,6 @@
 'use strict'
 
-class Logger {
+class LoggerInterface {
   log () {
     throw new Error('Unimplemented method')
   }
@@ -18,4 +18,4 @@ class Logger {
   }
 }
 
-module.exports = Logger
+module.exports = LoggerInterface

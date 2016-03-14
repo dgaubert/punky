@@ -1,11 +1,11 @@
 'use strict'
 
-const Factory = require('./factory')
+const FactoryInterface = require('./factory-interface')
 const LoggerFactory = require('./logger/logger-factory')
 const ClusterFactory = require('./cluster/cluster-factory')
 const LauncherFactory = require('./launcher/launcher-factory')
 
-class ServiceFactory extends Factory {
+class ServiceFactory extends FactoryInterface {
   constructor () {
     super()
     this.loggerFactory = new LoggerFactory()

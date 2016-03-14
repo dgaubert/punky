@@ -2,7 +2,7 @@
 
 const sinon = require('sinon')
 const EventEmitter = require('events')
-const Logger = require(__source + 'logger')
+const LoggerInterface = require(__source + 'logger-interface')
 const WorkerManager = require(__source + 'cluster/master/worker-manager')
 
 describe('worker-manager', () => {
@@ -10,7 +10,7 @@ describe('worker-manager', () => {
     this.sandbox = sinon.sandbox.create()
 
     this.cluster = {}
-    this.logger = new Logger()
+    this.logger = new LoggerInterface()
     this.workerManager = new WorkerManager(this.cluster, this.logger)
   })
 

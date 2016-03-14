@@ -1,11 +1,11 @@
 'use strict'
 
-const Factory = require('../../factory')
+const FactoryInterface = require('../../factory-interface')
 const Worker = require('./worker')
 const Server = require('./server')
 const App = require('./app/app')
 
-class WorkerFactory extends Factory {
+class WorkerFactory extends FactoryInterface {
   constructor () {
     super()
   }
