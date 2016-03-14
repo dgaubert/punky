@@ -1,12 +1,12 @@
 'use strict'
 
-const Factory = require('../factory')
+const FactoryInterface = require('../factory-interface')
 const Winston = require('winston').Logger
 const WistonLogger = require('./winston-logger')
 const ConsoleOutput = require('./console-output')
 const FileOutput = require('./file-output')
 
-class LoggerFactory extends Factory {
+class LoggerFactory extends FactoryInterface {
   create () {
     const wiston = new Winston({
       transports: [

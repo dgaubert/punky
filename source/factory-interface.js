@@ -1,9 +1,9 @@
 'use strict'
 
-class Factory {
+class FactoryInterface {
   create () {
     throw new Error('Unimplemented method')
   }
 }
 
-module.exports = Factory
+module.exports = FactoryInterface

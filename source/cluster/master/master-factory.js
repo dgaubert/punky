@@ -1,13 +1,13 @@
 'use strict'
 
 const cluster = require('cluster')
-const Factory = require('../../factory')
+const FactoryInterface = require('../../factory-interface')
 const WorkerManager = require('./worker-manager')
 const Sigusr2Listener = require('./sigusr2-listener')
 const WorkerExitListener = require('./worker-exit-listener')
 const Master = require('./master')
 
-class MasterFactory extends Factory {
+class MasterFactory extends FactoryInterface {
   constructor () {
     super()
   }
