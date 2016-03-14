@@ -2,7 +2,7 @@
 
 const sinon = require('sinon')
 const EventEmitter = require('events')
-const Logger = require(__source + 'logger')
+const LoggerInterface = require(__source + 'logger-interface')
 const SigtermListener = require(__source + 'launcher/sigterm-listener')
 
 describe('sigterm-listener', () => {
@@ -10,7 +10,7 @@ describe('sigterm-listener', () => {
     this.sandbox = sinon.sandbox.create()
 
     this.emitter = new EventEmitter()
-    this.logger = new Logger()
+    this.logger = new LoggerInterface()
     this.sigtermListener = new SigtermListener(this.emitter, this.logger)
   })
 

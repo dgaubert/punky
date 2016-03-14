@@ -1,7 +1,7 @@
 'use strict'
 
 const sinon = require('sinon')
-const Logger = require(__source + 'logger')
+const LoggerInterface = require(__source + 'logger-interface')
 const EventEmitter = require('events')
 const WorkerExitListener = require(__source + 'cluster/master/worker-exit-listener')
 
@@ -10,7 +10,7 @@ describe('worker-exit-listener', () => {
     this.sandbox = sinon.sandbox.create()
 
     this.emitter = new EventEmitter()
-    this.logger = new Logger()
+    this.logger = new LoggerInterface()
     this.workerExitListener = new WorkerExitListener(this.emitter, this.logger)
   })
 

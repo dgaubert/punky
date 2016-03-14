@@ -2,7 +2,7 @@
 
 const sinon = require('sinon')
 const EventEmitter = require('events')
-const Logger = require(__source + 'logger')
+const LoggerInterface = require(__source + 'logger-interface')
 const UnhandledRejectionListener = require(__source + 'launcher/unhandled-rejection-listener')
 
 describe('unhandled-rejection-listener', () => {
@@ -10,7 +10,7 @@ describe('unhandled-rejection-listener', () => {
     this.sandbox = sinon.sandbox.create()
 
     this.emitter = new EventEmitter()
-    this.logger = new Logger()
+    this.logger = new LoggerInterface()
     this.unhandledRejectionListener = new UnhandledRejectionListener(this.emitter, this.logger)
   })
 

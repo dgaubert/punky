@@ -2,7 +2,7 @@
 
 const sinon = require('sinon')
 const EventEmitter = require('events')
-const Logger = require(__source + 'logger')
+const LoggerInterface = require(__source + 'logger-interface')
 const UncaughtExceptionListener = require(__source + 'launcher/uncaught-exception-listener')
 
 describe('uncaught-exception--listener', () => {
@@ -10,7 +10,7 @@ describe('uncaught-exception--listener', () => {
     this.sandbox = sinon.sandbox.create()
 
     this.emitter = new EventEmitter()
-    this.logger = new Logger()
+    this.logger = new LoggerInterface()
     this.uncaughtExceptionListener = new UncaughtExceptionListener(this.emitter, this.logger)
   })
 
