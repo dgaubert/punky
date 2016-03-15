@@ -11,7 +11,7 @@ var options = minimist(process.argv.slice(2), {
     v: 'version'
   },
   boolean: [ // options that are always boolean
-    'cluster',
+    'cluster'
   ],
   default: {
     port: 3000
