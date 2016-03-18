@@ -14,11 +14,12 @@ var options = minimist(process.argv.slice(2), {
     'cluster'
   ],
   default: {
+    cluster: false,
     port: 3000
   }
 })
 
 const serviceFactory = new ServiceFactory()
-const service = serviceFactory.create(options)
+const service = serviceFactory.create(options.cluster, options.port)
 
 service.run()
