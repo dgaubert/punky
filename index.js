@@ -4,7 +4,7 @@
 const ServiceFactory = require('./lib/service-factory')
 
 const serviceFactory = new ServiceFactory()
-const argv = process.argv.slice(2);
+const argv = process.argv.slice(2)
 const service = serviceFactory.create(argv)
 
 service.run()
