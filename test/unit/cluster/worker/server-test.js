@@ -60,4 +60,49 @@ describe('server', function () {
         appRunStub.calledOnce.should.be.equal(true)
       })
   })
+
+  it('.exit() should exit even though http-server is not listening', () => {
+    return this.server.exit()
+  })
+
+  it('.exit() should exit successfully when http-server is listening', () => {
+    var httpServer = new EventEmitter()
+    httpServer.close = () => {}
+    var httpServerStub = this.sandbox.stub(httpServer, 'close').returns(httpServer)
+    var appRunStub = this.sandbox.stub(this.app, 'listen').returns(httpServer)
+    var loggerInfoStub = this.sandbox.stub(this.logger, 'info')
+
+    setTimeout(() => httpServer.emit('listening'), 2)
+    return this.server.run()
+      .then(() => {
+        appRunStub.calledOnce.should.be.equal(true)
+        setTimeout(() => httpServer.emit('close'), 2)
+        return this.server.exit()
+      })
+      .then(() => {
+        httpServerStub.calledOnce.should.be.equal(true)
+        loggerInfoStub.calledTwice.should.be.equal(true)
+      })
+  })
+
+  it('.exit() should fail when http-server also fails', () => {
+    var httpServer = new EventEmitter()
+    httpServer.close = () => {}
+    var httpServerStub = this.sandbox.stub(httpServer, 'close').returns(httpServer)
+    var appRunStub = this.sandbox.stub(this.app, 'listen').returns(httpServer)
+    var loggerInfoStub = this.sandbox.stub(this.logger, 'info')
+
+    setTimeout(() => httpServer.emit('listening'), 2)
+    return this.server.run()
+      .then(() => {
+        appRunStub.calledOnce.should.be.equal(true)
+        setTimeout(() => httpServer.emit('error', new Error('irrelevant')), 2)
+        return this.server.exit()
+      })
+      .catch((err) => {
+        err.message.should.be.equal('irrelevant')
+        httpServerStub.calledOnce.should.be.equal(true)
+        loggerInfoStub.calledOnce.should.be.equal(true)
+      })
+  })
 })
