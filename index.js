@@ -2,7 +2,7 @@
 'use strict'
 
 const ServiceFactory = require('./lib/service-factory')
-const ArgumentParser = require('.lib//argv/argument-parser')
+const ArgumentParser = require('./lib/argv/argument-parser')
 
 const serviceFactory = new ServiceFactory()
 
