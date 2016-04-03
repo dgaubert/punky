@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Bootstrap your APIs taking advantage of Node.js, Express.js, ES6 and so on.",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dgaubert/node-api-bootstrap.git"
+  },
   "engines": {
     "node": "4.2.4"
   },
@@ -22,7 +26,7 @@
   "license": "MIT",
   "dependencies": {
     "express": "4.13.4",
-    "minimist": "1.2.0",
+    "meow": "3.7.0",
     "winston": "2.2.0"
   },
   "devDependencies": {
