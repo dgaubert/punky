@@ -1,14 +1,14 @@
 {
-  "name": "node-api-bootstrap",
-  "version": "1.0.0",
-  "description": "Bootstrap your APIs taking advantage of Node.js, Express.js, ES6 and so on.",
+  "name": "punky",
+  "version": "0.1.0",
+  "description": "Bootstrap your APIs taking advantage of the best community modules",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/dgaubert/node-api-bootstrap.git"
+    "url": "git://github.com/dgaubert/punky.git"
   },
   "engines": {
-    "node": "4.2.4"
+    "node": "6.0.0"
   },
   "directories": {
     "test": "test"
@@ -21,14 +21,18 @@
     "coverage": "istanbul cover _mocha test/**/*-test.js -- -r test/bootstrap -r should",
     "start": "node ."
   },
-  "keywords": [],
+  "keywords": [
+    "es6",
+    "express",
+    "bootstrap"
+  ],
   "author": "Daniel García Aubert <@dgaubert>",
   "license": "MIT",
   "dependencies": {
     "express": "4.13.4",
     "meow": "3.7.0",
-    "morgan": "^1.7.0",
-    "split": "^1.0.0",
+    "morgan": "1.7.0",
+    "split": "1.0.0",
     "winston": "2.2.0"
   },
   "devDependencies": {
