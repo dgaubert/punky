@@ -3,14 +3,13 @@
 const sinon = require('sinon')
 const RunnerInterface = require(__source + 'runner-interface')
 const LoggerInterface = require(__source + 'logger-interface')
-const Server = require(__source + 'cluster/worker/server')
 const Worker = require(__source + 'cluster/worker/worker')
 
 describe('worker', function () {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
-    this.server = new Server()
+    this.server = new RunnerInterface()
     this.logger = new LoggerInterface()
     this.worker = new Worker(this.server, this.logger)
   })
