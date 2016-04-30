@@ -27,6 +27,8 @@
   "dependencies": {
     "express": "4.13.4",
     "meow": "3.7.0",
+    "morgan": "^1.7.0",
+    "split": "^1.0.0",
     "winston": "2.2.0"
   },
   "devDependencies": {
