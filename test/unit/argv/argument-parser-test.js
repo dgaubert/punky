@@ -4,7 +4,7 @@ const ArgumentParser = require(__source + 'argv/argument-parser')
 
 describe('argument-parser', () => {
   beforeEach(() => {
-    this.argumentParser = new ArgumentParser()
+    this.argumentParser = ArgumentParser
   })
 
   it('.parse(argv) should parse cluster option', () => {

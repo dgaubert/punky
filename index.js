@@ -1,3 +1,3 @@
 'use strict'
 
-module.exports = require('./lib/service-factory')
+module.exports = require('./lib/punky')
