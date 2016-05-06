@@ -18,7 +18,7 @@ describe('worker-exit-listener', () => {
     this.sandbox.restore()
   })
 
-  it('listen() should attach listener to cluster event', () => {
+  it('.listen() should attach listener to cluster event', () => {
     var loggerWarnStub = this.sandbox.stub(this.logger, 'warn')
     var listenerStub = this.sandbox.stub()
 

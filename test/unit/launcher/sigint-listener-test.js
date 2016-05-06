@@ -18,7 +18,7 @@ describe('sigint-listener', () => {
     this.sandbox.restore()
   })
 
-  it('listen() should attach listener to SIGINT process event', () => {
+  it('.listen() should attach listener to SIGINT process event', () => {
     var loggerWarnStub = this.sandbox.stub(this.logger, 'warn')
     var listenerStub = this.sandbox.stub()
 

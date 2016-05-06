@@ -16,7 +16,7 @@ describe('process-exit-listeners', () => {
     this.sandbox.restore()
   })
 
-  it('listen() should attach the listener to all events added to the set', () => {
+  it('.listen() should attach the listener to all events added to the set', () => {
     var listenStub = this.sandbox.stub(this.listener, 'listen')
 
     this.processExitListeners.listenAll()

@@ -18,7 +18,7 @@ describe('sigterm-listener', () => {
     this.sandbox.restore()
   })
 
-  it('listen() should attach listener to SIGTERM process event', () => {
+  it('.listen() should attach listener to SIGTERM process event', () => {
     var loggerWarnStub = this.sandbox.stub(this.logger, 'warn')
     var listenerStub = this.sandbox.stub()
 

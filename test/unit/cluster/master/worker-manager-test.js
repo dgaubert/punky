@@ -27,7 +27,7 @@ describe('worker-manager', () => {
     forkStub.calledOnce.should.be.equal(true)
   })
 
-  it('refork() should create a new worker if the previous one crashed', () => {
+  it('.refork() should create a new worker if the previous one crashed', () => {
     var loggerInfoStub = this.sandbox.stub(this.logger, 'info')
     var workerManagerForkStub = this.sandbox.stub(this.workerManager, 'fork')
     var workerStub = {
@@ -43,7 +43,7 @@ describe('worker-manager', () => {
     workerManagerForkStub.calledOnce.should.be.equal(true)
   })
 
-  it('refork() should not create a new worker if the previous one made away with itself', () => {
+  it('.refork() should not create a new worker if the previous one made away with itself', () => {
     var loggerInfoStub = this.sandbox.stub(this.logger, 'info')
     var workerManagerForkStub = this.sandbox.stub(this.workerManager, 'fork')
     var workerStub = {
@@ -59,7 +59,7 @@ describe('worker-manager', () => {
     workerManagerForkStub.calledOnce.should.be.equal(false)
   })
 
-  it('refork() should not create a new worker if the previous one exited', () => {
+  it('.refork() should not create a new worker if the previous one exited', () => {
     var loggerInfoStub = this.sandbox.stub(this.logger, 'info')
     var workerManagerForkStub = this.sandbox.stub(this.workerManager, 'fork')
     var workerStub = {
@@ -75,7 +75,7 @@ describe('worker-manager', () => {
     workerManagerForkStub.calledOnce.should.be.equal(false)
   })
 
-  it('reloadAll() should restart all workers', () => {
+  it('.reloadAll() should restart all workers', () => {
     var loggerInfoStub = this.sandbox.stub(this.logger, 'info')
 
     this.cluster.workers = {
@@ -93,7 +93,7 @@ describe('worker-manager', () => {
       })
   })
 
-  it('reload() should restart one worker', () => {
+  it('.reload() should restart one worker', () => {
     var newWorkerFake = new EventEmitter()
     this.workerManager.fork = function () {
       return newWorkerFake
@@ -114,7 +114,7 @@ describe('worker-manager', () => {
     return this.workerManager.reload('1')
   })
 
-  it('reload() should fail due to worker did not fork successfully', () => {
+  it('.reload() should fail due to worker did not fork successfully', () => {
     var newWorkerFake = new EventEmitter()
     this.workerManager.fork = function () {
       return newWorkerFake
@@ -138,7 +138,7 @@ describe('worker-manager', () => {
       })
   })
 
-  it('reload() should fail due to worker did not make away with itself', () => {
+  it('.reload() should fail due to worker did not make away with itself', () => {
     var workerFake = new EventEmitter()
     workerFake.suicide = false
     workerFake.disconnect = function () {

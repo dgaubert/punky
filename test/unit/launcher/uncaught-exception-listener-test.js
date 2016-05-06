@@ -18,7 +18,7 @@ describe('uncaught-exception--listener', () => {
     this.sandbox.restore()
   })
 
-  it('listen() should attach listener to uncaughtException process event', () => {
+  it('.listen() should attach listener to uncaughtException process event', () => {
     var loggerErrorStub = this.sandbox.stub(this.logger, 'error')
     var listenerStub = this.sandbox.stub()
 

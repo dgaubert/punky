@@ -18,7 +18,7 @@ describe('sigusr2-listener', () => {
     this.sandbox.restore()
   })
 
-  it('listen() should attach listener to SIGUSR2 process event', () => {
+  it('.listen() should attach listener to SIGUSR2 process event', () => {
     var loggerWarnStub = this.sandbox.stub(this.logger, 'warn')
     var listenerStub = this.sandbox.stub()
 
