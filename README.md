@@ -10,19 +10,20 @@ Bootstrap your APIs taking advantage of the best community modules
 ```js
 const Punky = require('punky')
 
-const BatchRouter = require('./app/batch/batch-router')
-const BatchController = require('./app/batch/batch-controller')
+const Router = require('./router')
+const Controller = require('./controller')
 
 const punky = new Punky()
+const logger = punky.logger
 
-const batchController = new BatchController(punky.logger)
-const batchRouter = new BatchRouter(batchController, punky.logger)
+const controller = new Controller(logger)
+const router = new Router(controller, logger)
 
-const service = punky.use(batchRouter.route())
+const service = punky.use(router.route())
 
 service.run()
   .then(() => {
-    punky.logger.info('Go go go!')
+    logger.info('Go go go!')
   })
-  .catch(punky.logger.error)
+  .catch(logger.error)
 ```
