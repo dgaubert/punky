@@ -16,9 +16,9 @@
   "scripts": {
     "lint": "standard index.js source/**/*.js test/**/*.js",
     "pretest": "npm run lint",
-    "test": "mocha -r test/bootstrap -r should test/**/*-test.js",
+    "test": "mocha --recursive -r test/bootstrap -r should test/",
     "test:watch": "npm run test -- -w",
-    "coverage": "istanbul cover _mocha test/**/*-test.js -- -r test/bootstrap -r should",
+    "coverage": "istanbul cover _mocha test/ -- --recursive -r test/bootstrap -r should",
     "start": "node ."
   },
   "keywords": [
