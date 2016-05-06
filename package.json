@@ -14,11 +14,11 @@
     "test": "test"
   },
   "scripts": {
-    "lint": "standard index.js source/**/*.js test/**/*.js",
+    "lint": "standard index.js \"lib/**/*.js\" \"test/**/*.js\"",
     "pretest": "npm run lint",
-    "test": "mocha --recursive -r test/bootstrap -r should test/",
+    "test": "mocha --recursive -r test/setup -r should test/",
     "test:watch": "npm run test -- -w",
-    "coverage": "istanbul cover _mocha test/ -- --recursive -r test/bootstrap -r should",
+    "coverage": "istanbul cover _mocha test/ -- --recursive -r test/setup -r should",
     "start": "node ."
   },
   "keywords": [
