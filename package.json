@@ -14,7 +14,7 @@
     "test": "test"
   },
   "scripts": {
-    "lint": "standard index.js source/**/*.js test/**/*.js script/**/*.js",
+    "lint": "standard index.js source/**/*.js test/**/*.js",
     "pretest": "npm run lint",
     "test": "mocha -r test/bootstrap -r should test/**/*-test.js",
     "test:watch": "npm run test -- -w",
