@@ -18,7 +18,7 @@ describe('worker-manager', () => {
     this.sandbox.restore()
   })
 
-  it('fork() should create a new worker', () => {
+  it('.fork() should create a new worker', () => {
     var forkStub = this.sandbox.stub()
     this.cluster.fork = forkStub
 
