@@ -47,7 +47,7 @@ describe('worker', function () {
   })
 
   it('.exit() should stop server and exit successfully', () => {
-    var serverRunStub = this.sandbox.stub(this.server, 'exit').returns(Promise.resolve())
+    var serverRunStub = this.sandbox.stub(this.server, 'close').returns(Promise.resolve())
     var loggerWarnStub = this.sandbox.stub(this.logger, 'warn')
     var processExitStub = this.sandbox.stub(process, 'exit')
 
@@ -60,7 +60,7 @@ describe('worker', function () {
   })
 
   it('.exit(1) should stop server and exit succesfully with error', () => {
-    var serverRunStub = this.sandbox.stub(this.server, 'exit').returns(Promise.resolve())
+    var serverRunStub = this.sandbox.stub(this.server, 'close').returns(Promise.resolve())
     var loggerWarnStub = this.sandbox.stub(this.logger, 'warn')
     var processExitStub = this.sandbox.stub(process, 'exit')
 
@@ -73,7 +73,7 @@ describe('worker', function () {
   })
 
   it('.exit() should stop server and exit with error when server fails in stop', () => {
-    var serverRunStub = this.sandbox.stub(this.server, 'exit').returns(Promise.reject(new Error('irrelevant')))
+    var serverRunStub = this.sandbox.stub(this.server, 'close').returns(Promise.reject(new Error('irrelevant')))
     var loggerErrorStub = this.sandbox.stub(this.logger, 'error')
     var processExitStub = this.sandbox.stub(process, 'exit')
 
