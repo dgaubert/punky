@@ -13,6 +13,12 @@ describe('runner-interface', () => {
     }).should.throw('Unimplemented method')
   })
 
+  it('.close() should throw "Unimplemented method" error', () => {
+    (() => {
+      this.runnerInterface.close()
+    }).should.throw('Unimplemented method')
+  })
+
   it('.exit() should throw "Unimplemented method" error', () => {
     (() => {
       this.runnerInterface.exit()
