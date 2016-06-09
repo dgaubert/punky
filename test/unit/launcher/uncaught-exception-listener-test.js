@@ -5,7 +5,7 @@ const EventEmitter = require('events')
 const LoggerInterface = require(__source + 'logger-interface')
 const UncaughtExceptionListener = require(__source + 'launcher/uncaught-exception-listener')
 
-describe('uncaught-exception--listener', () => {
+describe('uncaught-exception-listener', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 

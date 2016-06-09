@@ -29,6 +29,7 @@
   "author": "Daniel García Aubert <@dgaubert>",
   "license": "MIT",
   "dependencies": {
+    "config": "1.21.0",
     "express": "4.13.4",
     "meow": "3.7.0",
     "morgan": "1.7.0",

@@ -13,7 +13,7 @@ describe('server', function () {
 
     this.app = new ListenerInterface()
     this.logger = new LoggerInterface()
-    this.server = new Server(this.app, 3000, this.logger)
+    this.server = new Server(this.app, this.logger)
   })
 
   afterEach(() => {
