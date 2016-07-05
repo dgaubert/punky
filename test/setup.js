@@ -5,6 +5,6 @@ process.env.NODE_ENV = 'test'
 process.env.SUPPRESS_NO_CONFIG_WARNING = 'y'
 
 const config = require('config')
-const defaults = require('../config/default')
+const defaults = require('../lib/config/default')
 
 config.util.setModuleDefaults('punky', defaults)
