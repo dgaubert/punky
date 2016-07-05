@@ -30,19 +30,19 @@
   "license": "MIT",
   "dependencies": {
     "config": "1.21.0",
-    "express": "4.13.4",
+    "express": "4.14.0",
     "meow": "3.7.0",
     "morgan": "1.7.0",
-    "read-pkg-up": "^1.0.1",
+    "read-pkg-up": "1.0.1",
     "split": "1.0.0",
     "winston": "2.2.0"
   },
   "devDependencies": {
-    "istanbul": "0.4.2",
-    "standard": "6.0.8",
-    "mocha": "2.4.5",
-    "should": "8.3.0",
-    "sinon": "1.17.3"
+    "istanbul": "0.4.4",
+    "standard": "7.1.2",
+    "mocha": "2.5.3",
+    "should": "9.0.2",
+    "sinon": "1.17.4"
   },
   "standard": {
     "globals": [
