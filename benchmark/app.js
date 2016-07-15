@@ -5,8 +5,7 @@ const Router = require('express').Router
 
 const punky = new Punky()
 const router = Router()
-
-var body = new Buffer('Hello World')
+const body = new Buffer('Hello World')
 
 router.get('/', (req, res, next) => {
   res.send(body)
