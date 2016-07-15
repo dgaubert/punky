@@ -12,7 +12,7 @@ Bootstrap your APIs taking advantage of the best community modules
 ```js
 'use strict'
 
-const Punky = require('../')
+const Punky = require('punky')
 const Router = require('express').Router
 
 const punky = new Punky()
