@@ -7,21 +7,16 @@ const Logger = require(__source + 'logger/logger')
 describe('logger', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
-
     this._logger = new LoggerInterface()
-    this._logger.rewriters = { push: () => {} }
-    this.rewritesrPushStub = this.sandbox.stub(this._logger.rewriters, 'push')
-
-    this.logger = new Logger(this._logger, 'wadus')
+    this.logger = new Logger(this._logger)
   })
 
   afterEach(() => {
-    this.rewritesrPushStub.calledOnce.should.equal(true)
     this.sandbox.restore()
   })
 
   it('.log() should log', () => {
-    const loggerLogStub = this.sandbox.stub(this._logger, 'log')
+    const loggerLogStub = this.sandbox.stub(this._logger, 'info')
     const args = [ 'info', 'wadus message' ]
 
     this.logger.log(...args)
