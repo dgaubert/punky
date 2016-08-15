@@ -15,6 +15,15 @@ describe('logger', () => {
     this.sandbox.restore()
   })
 
+  it('.debug() should log at debug level', () => {
+    const loggerLogStub = this.sandbox.stub(this._logger, 'debug')
+    const args = [ 'debug', 'wadus message' ]
+
+    this.logger.debug(...args)
+
+    loggerLogStub.calledWithExactly(...args).should.equal(true)
+  })
+
   it('.log() should log', () => {
     const loggerLogStub = this.sandbox.stub(this._logger, 'info')
     const args = [ 'info', 'wadus message' ]
