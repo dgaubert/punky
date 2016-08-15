@@ -31,7 +31,7 @@ describe('worker-manager', () => {
     var loggerInfoStub = this.sandbox.stub(this.logger, 'info')
     var workerManagerForkStub = this.sandbox.stub(this.workerManager, 'fork')
     var workerStub = {
-      suicide: false,
+      exitedAfterDisconnect: false,
       process: {
         pid: 1
       }
@@ -47,7 +47,7 @@ describe('worker-manager', () => {
     var loggerInfoStub = this.sandbox.stub(this.logger, 'info')
     var workerManagerForkStub = this.sandbox.stub(this.workerManager, 'fork')
     var workerStub = {
-      suicide: true,
+      exitedAfterDisconnect: true,
       process: {
         pid: 1
       }
@@ -63,7 +63,7 @@ describe('worker-manager', () => {
     var loggerInfoStub = this.sandbox.stub(this.logger, 'info')
     var workerManagerForkStub = this.sandbox.stub(this.workerManager, 'fork')
     var workerStub = {
-      suicide: true,
+      exitedAfterDisconnect: true,
       process: {
         pid: 1
       }
@@ -100,7 +100,7 @@ describe('worker-manager', () => {
     }
 
     var workerFake = new EventEmitter()
-    workerFake.suicide = true
+    workerFake.exitedAfterDisconnect = true
     workerFake.disconnect = function () {
       process.nextTick(() => {
         workerFake.emit('exit')
@@ -121,7 +121,7 @@ describe('worker-manager', () => {
     }
 
     var workerFake = new EventEmitter()
-    workerFake.suicide = true
+    workerFake.exitedAfterDisconnect = true
     workerFake.disconnect = function () {
       process.nextTick(() => {
         workerFake.emit('exit')
@@ -140,7 +140,7 @@ describe('worker-manager', () => {
 
   it('.reload() should fail due to worker did not make away with itself', () => {
     var workerFake = new EventEmitter()
-    workerFake.suicide = false
+    workerFake.exitedAfterDisconnect = false
     workerFake.disconnect = function () {
       process.nextTick(() => {
         workerFake.emit('exit')
