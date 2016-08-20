@@ -1,7 +1,7 @@
 'use strict'
 
 const sinon = require('sinon')
-const LoggerInterface = require(__source + 'logger-interface')
+const LoggerInterface = require(__source + 'logger/logger-interface')
 const Logger = require(__source + 'logger/logger')
 
 describe('logger', () => {

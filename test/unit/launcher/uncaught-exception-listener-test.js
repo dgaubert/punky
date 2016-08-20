@@ -2,7 +2,7 @@
 
 const sinon = require('sinon')
 const EventEmitter = require('events')
-const LoggerInterface = require(__source + 'logger-interface')
+const LoggerInterface = require(__source + 'logger/logger-interface')
 const UncaughtExceptionListener = require(__source + 'launcher/uncaught-exception-listener')
 
 describe('uncaught-exception-listener', () => {

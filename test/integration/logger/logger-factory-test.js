@@ -1,7 +1,7 @@
 'use strict'
 
 const defaultOptions = require(__source + 'config/default')
-const LoggerInterface = require(__source + 'logger-interface')
+const LoggerInterface = require(__source + 'logger/logger-interface')
 const LoggerFactory = require(__source + 'logger/logger-factory')
 
 describe('logger-factory', () => {

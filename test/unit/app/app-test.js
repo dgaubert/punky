@@ -1,7 +1,7 @@
 'use strict'
 
 const App = require(__source + 'app/app')
-const LoggerInterface = require(__source + 'logger-interface')
+const LoggerInterface = require(__source + 'logger/logger-interface')
 const Router = require('express').Router
 
 describe('app', () => {

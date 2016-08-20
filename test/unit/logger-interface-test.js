@@ -1,6 +1,6 @@
 'use strict'
 
-const LoggerInterface = require(__source + 'logger-interface')
+const LoggerInterface = require(__source + 'logger/logger-interface')
 
 describe('logger-interface', () => {
   beforeEach(() => {

@@ -3,7 +3,7 @@
 const sinon = require('sinon')
 const os = require('os')
 const cluster = require('cluster')
-const LoggerInterface = require(__source + 'logger-interface')
+const LoggerInterface = require(__source + 'logger/logger-interface')
 const WorkerManager = require(__source + 'cluster/master/worker-manager')
 const Master = require(__source + 'cluster/master/master')
 

@@ -3,7 +3,7 @@
 const sinon = require('sinon')
 const ListenerInterface = require(__source + 'listener-interface')
 const RunnerInterface = require(__source + 'runner-interface')
-const LoggerInterface = require(__source + 'logger-interface')
+const LoggerInterface = require(__source + 'logger/logger-interface')
 const Server = require(__source + 'cluster/worker/server')
 const EventEmitter = require('events')
 
