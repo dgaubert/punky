@@ -10,10 +10,10 @@ const EventEmitter = require('events')
 describe('server', function () {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
-
+    this.port = 9876
     this.app = new ListenerInterface()
     this.logger = new LoggerInterface()
-    this.server = new Server(this.app, this.logger)
+    this.server = new Server(this.app, this.port, this.logger)
   })
 
   afterEach(() => {
