@@ -6,14 +6,9 @@ const Router = require('express').Router
 const punky = new Punky()
 const router = Router()
 const body = new Buffer('Hello World')
-const logMessage = 'Request received, greeting..'
-
-router.use((req, res, next) => {
-  punky.logger.info(req, logMessage)
-  next()
-})
 
 router.get('/', (req, res, next) => {
+  res.set('Content-Type', 'text/html')
   res.send(body)
 })
 

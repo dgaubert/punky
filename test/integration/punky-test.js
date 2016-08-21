@@ -6,19 +6,18 @@ const Router = require('express').Router
 
 describe('punky', () => {
   beforeEach(() => {
+    this.router = Router()
     this.punky = new Punky()
   })
 
   it('.use() should return a Runner instance', () => {
-    const service = this.punky.use()
+    const service = this.punky.use(this.router)
 
     service.should.be.instanceOf(RunnerInterface)
   })
 
   it('service.run() should init the service', () => {
-    const router = Router()
-
-    const service = this.punky.use(router)
+    const service = this.punky.use(this.router)
 
     return service.run()
       .then(() => {
