@@ -36,8 +36,7 @@
     "node-uuid": "1.4.7",
     "on-headers": "1.0.1",
     "read-pkg-up": "1.0.1",
-    "response-time": "2.3.1",
-    "split": "1.0.0"
+    "response-time": "2.3.1"
   },
   "devDependencies": {
     "istanbul": "0.4.4",
