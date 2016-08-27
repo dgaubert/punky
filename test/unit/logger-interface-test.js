@@ -1,10 +1,16 @@
 'use strict'
 
-const LoggerInterface = require(__source + 'logger-interface')
+const LoggerInterface = require(__source + 'logger/logger-interface')
 
 describe('logger-interface', () => {
   beforeEach(() => {
     this.loggerInterface = new LoggerInterface()
+  })
+
+  it('.debug() should throw "Unimplemented method" error', () => {
+    (() => {
+      this.loggerInterface.debug()
+    }).should.throw('Unimplemented method')
   })
 
   it('.log() should throw "Unimplemented method" error', () => {

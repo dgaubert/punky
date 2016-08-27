@@ -2,7 +2,7 @@
 
 const sinon = require('sinon')
 const RunnerInterface = require(__source + 'runner-interface')
-const LoggerInterface = require(__source + 'logger-interface')
+const LoggerInterface = require(__source + 'logger/logger-interface')
 const Worker = require(__source + 'cluster/worker/worker')
 
 describe('worker', function () {

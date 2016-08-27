@@ -1,7 +1,7 @@
 'use strict'
 
 const sinon = require('sinon')
-const LoggerInterface = require(__source + 'logger-interface')
+const LoggerInterface = require(__source + 'logger/logger-interface')
 const EventEmitter = require('events')
 const WorkerExitListener = require(__source + 'cluster/master/worker-exit-listener')
 

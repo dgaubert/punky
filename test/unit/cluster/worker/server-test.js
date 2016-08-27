@@ -3,17 +3,17 @@
 const sinon = require('sinon')
 const ListenerInterface = require(__source + 'listener-interface')
 const RunnerInterface = require(__source + 'runner-interface')
-const LoggerInterface = require(__source + 'logger-interface')
+const LoggerInterface = require(__source + 'logger/logger-interface')
 const Server = require(__source + 'cluster/worker/server')
 const EventEmitter = require('events')
 
 describe('server', function () {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
-
+    this.port = 9876
     this.app = new ListenerInterface()
     this.logger = new LoggerInterface()
-    this.server = new Server(this.app, this.logger)
+    this.server = new Server(this.app, this.port, this.logger)
   })
 
   afterEach(() => {

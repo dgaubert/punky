@@ -1,25 +1,36 @@
 'use strict'
 
+const sinon = require('sinon')
 const App = require(__source + 'app/app')
-const LoggerInterface = require(__source + 'logger-interface')
-const Router = require('express').Router
 
 describe('app', () => {
   beforeEach(() => {
-    this.router = Router()
-    this.logger = new LoggerInterface()
-    this.logger.middleware = function () {
-      return function () {}
+    this.sandbox = sinon.sandbox.create()
+
+    this.provider = {
+      use: () => {},
+      listen: () => {},
+      disable: () => {}
     }
-    this.app = new App(this.router, this.logger)
+    this.middlewares = {
+      registAll: () => {}
+    }
   })
 
   afterEach(() => {
-    this.server.close()
+    this.sandbox.restore()
   })
 
-  it('.listen() should put itself listening on port 3000', () => {
+  it('.listen() should listen on port 3000', () => {
+    var appDisableStub = this.sandbox.stub(this.provider, 'disable')
+    var appListenStub = this.sandbox.stub(this.provider, 'listen')
+    var middlewaresRegistAllStub = this.sandbox.stub(this.middlewares, 'registAll')
+
+    this.app = new App(this.provider, this.middlewares)
     this.server = this.app.listen(3000)
-    this.server.should.be.ok()
+
+    appDisableStub.calledOnce.should.be.equal(true)
+    appListenStub.calledOnce.should.be.equal(true)
+    middlewaresRegistAllStub.calledOnce.should.be.equal(true)
   })
 })

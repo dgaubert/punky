@@ -8,6 +8,7 @@ const router = Router()
 const body = new Buffer('Hello World')
 
 router.get('/', (req, res, next) => {
+  res.set('Content-Type', 'text/html')
   res.send(body)
 })
 
