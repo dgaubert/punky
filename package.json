@@ -33,6 +33,7 @@
     "bole-console": "0.1.10",
     "express": "4.14.0",
     "meow": "3.7.0",
+    "node-statsd": "0.1.1",
     "node-uuid": "1.4.7",
     "on-headers": "1.0.1",
     "read-pkg-up": "1.0.1",
