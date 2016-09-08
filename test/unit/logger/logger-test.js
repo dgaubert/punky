@@ -7,8 +7,8 @@ const Logger = require(__source + 'logger/logger')
 describe('logger', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
-    this._logger = new LoggerInterface()
-    this.logger = new Logger(this._logger)
+    this.provider = new LoggerInterface()
+    this.logger = new Logger(this.provider)
   })
 
   afterEach(() => {
@@ -16,7 +16,7 @@ describe('logger', () => {
   })
 
   it('.debug() should log at debug level', () => {
-    const loggerLogStub = this.sandbox.stub(this._logger, 'debug')
+    const loggerLogStub = this.sandbox.stub(this.provider, 'debug')
     const args = [ 'debug', 'wadus message' ]
 
     this.logger.debug(...args)
@@ -25,7 +25,7 @@ describe('logger', () => {
   })
 
   it('.log() should log', () => {
-    const loggerLogStub = this.sandbox.stub(this._logger, 'info')
+    const loggerLogStub = this.sandbox.stub(this.provider, 'info')
     const args = [ 'info', 'wadus message' ]
 
     this.logger.log(...args)
@@ -34,7 +34,7 @@ describe('logger', () => {
   })
 
   it('.info() should log at info level', () => {
-    const loggerInfoStub = this.sandbox.stub(this._logger, 'info')
+    const loggerInfoStub = this.sandbox.stub(this.provider, 'info')
     const args = [ 'wadus message' ]
 
     this.logger.info(...args)
@@ -43,7 +43,7 @@ describe('logger', () => {
   })
 
   it('.warn() should log at warn level', () => {
-    const loggerWarnStub = this.sandbox.stub(this._logger, 'warn')
+    const loggerWarnStub = this.sandbox.stub(this.provider, 'warn')
     const args = [ 'wadus message' ]
 
     this.logger.warn(...args)
@@ -52,7 +52,7 @@ describe('logger', () => {
   })
 
   it('.error() should log at error level', () => {
-    const loggerErrorStub = this.sandbox.stub(this._logger, 'error')
+    const loggerErrorStub = this.sandbox.stub(this.provider, 'error')
     const args = [ 'wadus message' ]
 
     this.logger.error(...args)
