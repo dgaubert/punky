@@ -3,15 +3,18 @@
 const Punky = require('../')
 const Router = require('express').Router
 
-const punky = new Punky()
+const punky = new Punky(/* options */)
 const router = Router()
 const body = new Buffer('Hello World')
+const message = body.toString('utf8')
 
 router.get('/', (req, res, next) => {
+  req.log.info(message)
+  req.metrics.increment('home')
   res.set('Content-Type', 'text/html')
   res.send(body)
 })
 
-punky.use(router)
-  .run()
-  .catch(punky.logger.error)
+punky.app.use(router)
+
+punky.run().catch(punky.logger.error)

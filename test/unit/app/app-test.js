@@ -1,5 +1,6 @@
 'use strict'
 
+const assert = require('assert')
 const sinon = require('sinon')
 const App = require(__source + 'app/app')
 
@@ -29,8 +30,8 @@ describe('app', () => {
     this.app = new App(this.provider, this.middlewares)
     this.server = this.app.listen(3000)
 
-    appDisableStub.calledOnce.should.be.equal(true)
-    appListenStub.calledOnce.should.be.equal(true)
-    middlewaresRegistAllStub.calledOnce.should.be.equal(true)
+    assert.ok(appDisableStub.calledOnce)
+    assert.ok(appListenStub.calledOnce)
+    assert.ok(middlewaresRegistAllStub.calledOnce)
   })
 })

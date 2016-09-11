@@ -1,5 +1,6 @@
 'use strict'
 
+const assert = require('assert')
 const ParserInterface = require(__source + 'parser-interface')
 
 describe('parser-interface', () => {
@@ -8,8 +9,8 @@ describe('parser-interface', () => {
   })
 
   it('.parse() should throw "Unimplemented method" error', () => {
-    (() => {
+    assert.throws(() => {
       this.parserInterface.parse()
-    }).should.throw('Unimplemented method')
+    }, 'Unimplemented method')
   })
 })

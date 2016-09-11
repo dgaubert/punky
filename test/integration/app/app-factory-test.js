@@ -1,5 +1,6 @@
 'use strict'
 
+const assert = require('assert')
 const defaultOptions = require(__source + 'config/default')
 const ListenerInterface = require(__source + 'listener-interface')
 const AppFactory = require(__source + 'app/app-factory')
@@ -11,6 +12,7 @@ describe('app-factory', () => {
     const router = Router()
     const logger = LoggerFactory.create(defaultOptions)
     const app = AppFactory.create(router, logger)
-    app.should.be.instanceOf(ListenerInterface)
+
+    assert.ok(app instanceof ListenerInterface)
   })
 })

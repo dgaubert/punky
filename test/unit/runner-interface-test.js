@@ -1,5 +1,6 @@
 'use strict'
 
+const assert = require('assert')
 const RunnerInterface = require(__source + 'runner-interface')
 
 describe('runner-interface', () => {
@@ -8,20 +9,20 @@ describe('runner-interface', () => {
   })
 
   it('.run() should throw "Unimplemented method" error', () => {
-    (() => {
+    assert.throws(() => {
       this.runnerInterface.run()
-    }).should.throw('Unimplemented method')
+    }, 'Unimplemented method')
   })
 
   it('.close() should throw "Unimplemented method" error', () => {
-    (() => {
+    assert.throws(() => {
       this.runnerInterface.close()
-    }).should.throw('Unimplemented method')
+    }, 'Unimplemented method')
   })
 
   it('.exit() should throw "Unimplemented method" error', () => {
-    (() => {
+    assert.throws(() => {
       this.runnerInterface.exit()
-    }).should.throw('Unimplemented method')
+    }, 'Unimplemented method')
   })
 })

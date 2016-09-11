@@ -1,5 +1,6 @@
 'use strict'
 
+const assert = require('assert')
 const sinon = require('sinon')
 const EventEmitter = require('events')
 const LoggerInterface = require(__source + 'logger/logger-interface')
@@ -27,7 +28,7 @@ describe('unhandled-rejection-listener', () => {
     this.emitter.emit('unhandledRejection', error, rejectedPromise)
 
     process.nextTick(() => {
-      loggerErrorStub.calledOnce.should.be.equal(true)
+      assert.ok(loggerErrorStub.calledOnce)
       process.removeAllListeners('unhandledRejection')
       done()
     })
