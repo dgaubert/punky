@@ -1,5 +1,6 @@
 'use strict'
 
+const assert = require('assert')
 const defaultOptions = require(__source + 'config/default')
 const LoggerFactory = require(__source + 'logger/logger-factory')
 const MetricsFactory = require(__source + 'metrics/metrics-factory')
@@ -11,6 +12,7 @@ describe('cluster-factory', () => {
     const logger = LoggerFactory.create(defaultOptions)
     const metrics = MetricsFactory.create(logger, defaultOptions)
     const cluster = ClusterFactory.create(metrics, logger, defaultOptions)
-    cluster.should.be.instanceOf(RunnerInterface)
+
+    assert.ok(cluster instanceof RunnerInterface)
   })
 })

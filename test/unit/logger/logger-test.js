@@ -1,5 +1,6 @@
 'use strict'
 
+const assert = require('assert')
 const sinon = require('sinon')
 const LoggerInterface = require(__source + 'logger/logger-interface')
 const Logger = require(__source + 'logger/logger')
@@ -21,7 +22,7 @@ describe('logger', () => {
 
     this.logger.debug(...args)
 
-    loggerLogStub.calledWithExactly(...args).should.equal(true)
+    assert.ok(loggerLogStub.calledWithExactly(...args))
   })
 
   it('.log() should log', () => {
@@ -30,7 +31,7 @@ describe('logger', () => {
 
     this.logger.log(...args)
 
-    loggerLogStub.calledWithExactly(...args).should.equal(true)
+    assert.ok(loggerLogStub.calledWithExactly(...args))
   })
 
   it('.info() should log at info level', () => {
@@ -39,7 +40,7 @@ describe('logger', () => {
 
     this.logger.info(...args)
 
-    loggerInfoStub.calledWithExactly(...args).should.equal(true)
+    assert.ok(loggerInfoStub.calledWithExactly(...args))
   })
 
   it('.warn() should log at warn level', () => {
@@ -48,7 +49,7 @@ describe('logger', () => {
 
     this.logger.warn(...args)
 
-    loggerWarnStub.calledWithExactly(...args).should.equal(true)
+    assert.ok(loggerWarnStub.calledWithExactly(...args))
   })
 
   it('.error() should log at error level', () => {
@@ -57,6 +58,6 @@ describe('logger', () => {
 
     this.logger.error(...args)
 
-    loggerErrorStub.calledWithExactly(...args).should.equal(true)
+    assert.ok(loggerErrorStub.calledWithExactly(...args))
   })
 })

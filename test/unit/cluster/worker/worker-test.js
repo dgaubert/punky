@@ -1,5 +1,6 @@
 'use strict'
 
+const assert = require('assert')
 const sinon = require('sinon')
 const RunnerInterface = require(__source + 'runner-interface')
 const LoggerInterface = require(__source + 'logger/logger-interface')
@@ -19,7 +20,7 @@ describe('worker', function () {
   })
 
   it('should be a runner instance', () => {
-    this.worker.should.instanceof(RunnerInterface)
+    assert.ok(this.worker instanceof RunnerInterface)
   })
 
   it('.run() should run server successfully', () => {
@@ -28,8 +29,8 @@ describe('worker', function () {
 
     return this.worker.run()
       .then(() => {
-        serverRunStub.calledOnce.should.be.equal(true)
-        loggerInfoStub.calledOnce.should.be.equal(true)
+        assert.ok(serverRunStub.calledOnce)
+        assert.ok(loggerInfoStub.calledOnce)
       })
   })
 
@@ -40,9 +41,9 @@ describe('worker', function () {
 
     return this.worker.run()
       .then(() => {
-        serverRunStub.calledOnce.should.equal(true)
-        loggerErrorStub.calledOnce.should.equal(true)
-        workerExitStub.calledWithExactly(1).should.equal(true)
+        assert.ok(serverRunStub.calledOnce)
+        assert.ok(loggerErrorStub.calledOnce)
+        assert.ok(workerExitStub.calledWithExactly(1))
       })
   })
 
@@ -53,9 +54,9 @@ describe('worker', function () {
 
     return this.worker.exit()
       .then(() => {
-        loggerWarnStub.calledOnce.should.equal(true)
-        processExitStub.calledWithExactly(0).should.equal(true)
-        serverRunStub.calledOnce.should.equal(true)
+        assert.ok(loggerWarnStub.calledOnce)
+        assert.ok(processExitStub.calledWithExactly(0))
+        assert.ok(serverRunStub.calledOnce)
       })
   })
 
@@ -66,9 +67,9 @@ describe('worker', function () {
 
     return this.worker.exit(1)
       .then(() => {
-        loggerWarnStub.calledOnce.should.equal(true)
-        processExitStub.calledWithExactly(1).should.equal(true)
-        serverRunStub.calledOnce.should.equal(true)
+        assert.ok(loggerWarnStub.calledOnce)
+        assert.ok(processExitStub.calledWithExactly(1))
+        assert.ok(serverRunStub.calledOnce)
       })
   })
 
@@ -79,9 +80,9 @@ describe('worker', function () {
 
     return this.worker.exit()
       .then(() => {
-        loggerErrorStub.calledOnce.should.equal(true)
-        processExitStub.calledWithExactly(1).should.equal(true)
-        serverRunStub.calledOnce.should.equal(true)
+        assert.ok(loggerErrorStub.calledOnce)
+        assert.ok(processExitStub.calledWithExactly(1))
+        assert.ok(serverRunStub.calledOnce)
       })
   })
 })

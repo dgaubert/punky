@@ -1,5 +1,6 @@
 'use strict'
 
+const assert = require('assert')
 const sinon = require('sinon')
 const os = require('os')
 const cluster = require('cluster')
@@ -27,18 +28,18 @@ describe('master', () => {
 
     this.master.run()
 
-    loggerInfoStub.calledOnce.should.be.equal(true)
-    workerManagerForkStub.callCount.should.be.equal(os.cpus().length)
+    assert.ok(loggerInfoStub.calledOnce)
+    assert.equal(workerManagerForkStub.callCount, os.cpus().length)
   })
 
   it('.exit() should exit successfully', () => {
     var loggerInfoStub = this.sandbox.stub(this.logger, 'warn')
     var processExitStub = this.sandbox.stub(process, 'exit')
 
-    this.master.exit()
+    this.master.exit(0)
 
-    loggerInfoStub.calledOnce.should.be.equal(true)
-    processExitStub.calledWithExactly(0).should.equal(true)
+    assert.ok(loggerInfoStub.calledOnce)
+    assert.ok(processExitStub.calledWithExactly(0))
   })
 
   it('.exit(1) should stop server and exit succesfully with error', () => {
@@ -47,7 +48,7 @@ describe('master', () => {
 
     this.master.exit(1)
 
-    loggerInfoStub.calledOnce.should.be.equal(true)
-    processExitStub.calledWithExactly(1).should.equal(true)
+    assert.ok(loggerInfoStub.calledOnce)
+    assert.ok(processExitStub.calledWithExactly(1))
   })
 })

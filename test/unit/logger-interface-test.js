@@ -1,5 +1,6 @@
 'use strict'
 
+const assert = require('assert')
 const LoggerInterface = require(__source + 'logger/logger-interface')
 
 describe('logger-interface', () => {
@@ -8,32 +9,32 @@ describe('logger-interface', () => {
   })
 
   it('.debug() should throw "Unimplemented method" error', () => {
-    (() => {
+    assert.throws(() => {
       this.loggerInterface.debug()
-    }).should.throw('Unimplemented method')
+    }, 'Unimplemented method')
   })
 
   it('.log() should throw "Unimplemented method" error', () => {
-    (() => {
+    assert.throws(() => {
       this.loggerInterface.log()
-    }).should.throw('Unimplemented method')
+    }, 'Unimplemented method')
   })
 
   it('.info() should throw "Unimplemented method" error', () => {
-    (() => {
+    assert.throws(() => {
       this.loggerInterface.info()
-    }).should.throw('Unimplemented method')
+    }, 'Unimplemented method')
   })
 
   it('.warn() should throw "Unimplemented method" error', () => {
-    (() => {
+    assert.throws(() => {
       this.loggerInterface.warn()
-    }).should.throw('Unimplemented method')
+    }, 'Unimplemented method')
   })
 
   it('.error() should throw "Unimplemented method" error', () => {
-    (() => {
+    assert.throws(() => {
       this.loggerInterface.error()
-    }).should.throw('Unimplemented method')
+    }, 'Unimplemented method')
   })
 })

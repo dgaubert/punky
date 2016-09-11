@@ -1,5 +1,6 @@
 'use strict'
 
+const assert = require('assert')
 const sinon = require('sinon')
 const EventEmitter = require('events')
 const LoggerInterface = require(__source + 'logger/logger-interface')
@@ -25,8 +26,8 @@ describe('uncaught-exception-listener', () => {
     this.uncaughtExceptionListener.listen(listenerStub)
     this.emitter.emit('uncaughtException', new Error('Irrelevant error'))
 
-    loggerErrorStub.calledOnce.should.be.equal(true)
-    listenerStub.calledOnce.should.be.equal(true)
-    listenerStub.calledWithExactly(1).should.be.equal(true)
+    assert.ok(loggerErrorStub.calledOnce)
+    assert.ok(listenerStub.calledOnce)
+    assert.ok(listenerStub.calledWithExactly(1))
   })
 })

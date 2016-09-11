@@ -1,5 +1,6 @@
 'use strict'
 
+const assert = require('assert')
 const defaultOptions = require(__source + 'config/default')
 const LoggerFactory = require(__source + 'logger/logger-factory')
 const MetricsFactory = require(__source + 'metrics/metrics-factory')
@@ -14,6 +15,6 @@ describe('worker-factory', () => {
     const metrics = MetricsFactory.create(logger, defaultOptions)
     const worker = WorkerFactory.create(router, metrics, logger, defaultOptions)
 
-    worker.should.be.instanceOf(RunnerInterface)
+    assert.ok(worker instanceof RunnerInterface)
   })
 })

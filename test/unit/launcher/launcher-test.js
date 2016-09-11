@@ -1,5 +1,6 @@
 'use strict'
 
+const assert = require('assert')
 const sinon = require('sinon')
 const RunnerInterface = require(__source + 'runner-interface')
 const ListenerInterface = require(__source + 'listener-interface')
@@ -21,7 +22,7 @@ describe('launcher', () => {
   })
 
   it('should be a runner instance', () => {
-    this.launcher.should.instanceof(RunnerInterface)
+    assert.ok(this.launcher instanceof RunnerInterface)
   })
 
   it('.run() should launch worker successfully', () => {
@@ -29,7 +30,7 @@ describe('launcher', () => {
 
     return this.launcher.run()
       .then(() => {
-        targetRunStub.calledOnce.should.be.equal(true)
+        assert.ok(targetRunStub.calledOnce)
       })
   })
 
@@ -38,7 +39,7 @@ describe('launcher', () => {
 
     return this.launcher.exit()
       .then(() => {
-        targetExitStub.calledWithExactly(undefined).should.be.equal(true)
+        assert.ok(targetExitStub.calledWithExactly)
       })
   })
 
@@ -47,7 +48,7 @@ describe('launcher', () => {
 
     return this.launcher.exit(1)
       .then(() => {
-        targetExitStub.calledWithExactly(1).should.be.equal(true)
+        assert.ok(targetExitStub.calledWithExactly(1))
       })
   })
 })

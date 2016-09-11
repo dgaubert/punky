@@ -1,5 +1,6 @@
 'use strict'
 
+const assert = require('assert')
 const sinon = require('sinon')
 const ListenerInterface = require(__source + 'listener-interface')
 const RunnerInterface = require(__source + 'runner-interface')
@@ -21,7 +22,7 @@ describe('server', function () {
   })
 
   it('should be a runner instance', () => {
-    this.server.should.instanceof(RunnerInterface)
+    assert.ok(this.server instanceof RunnerInterface)
   })
 
   it('.run() should listen on specific port successfully', () => {
@@ -34,8 +35,8 @@ describe('server', function () {
     }, 10)
     return this.server.run()
       .then(() => {
-        appRunStub.calledOnce.should.be.equal(true)
-        loggerInfoStub.calledOnce.should.be.equal(true)
+        assert.ok(appRunStub.calledOnce)
+        assert.ok(loggerInfoStub.calledOnce)
       })
   })
 
@@ -48,7 +49,7 @@ describe('server', function () {
     }, 10)
     return this.server.run()
       .catch(() => {
-        appRunStub.calledOnce.should.be.equal(true)
+        assert.ok(appRunStub.calledOnce)
       })
   })
 
@@ -57,7 +58,7 @@ describe('server', function () {
 
     return this.server.run()
       .catch(() => {
-        appRunStub.calledOnce.should.be.equal(true)
+        assert.ok(appRunStub.calledOnce)
       })
   })
 
@@ -75,13 +76,13 @@ describe('server', function () {
     setTimeout(() => httpServer.emit('listening'), 2)
     return this.server.run()
       .then(() => {
-        appRunStub.calledOnce.should.be.equal(true)
+        assert.ok(appRunStub.calledOnce)
         setTimeout(() => httpServer.emit('close'), 2)
         return this.server.close()
       })
       .then(() => {
-        httpServerStub.calledOnce.should.be.equal(true)
-        loggerInfoStub.calledTwice.should.be.equal(true)
+        assert.ok(httpServerStub.calledOnce)
+        assert.ok(loggerInfoStub.calledTwice)
       })
   })
 
@@ -95,14 +96,14 @@ describe('server', function () {
     setTimeout(() => httpServer.emit('listening'), 2)
     return this.server.run()
       .then(() => {
-        appRunStub.calledOnce.should.be.equal(true)
+        assert.ok(appRunStub.calledOnce)
         setTimeout(() => httpServer.emit('error', new Error('irrelevant')), 2)
         return this.server.close()
       })
       .catch((err) => {
-        err.message.should.be.equal('irrelevant')
-        httpServerStub.calledOnce.should.be.equal(true)
-        loggerInfoStub.calledOnce.should.be.equal(true)
+        assert.equal(err.message, 'irrelevant')
+        assert.ok(httpServerStub.calledOnce)
+        assert.ok(loggerInfoStub.calledOnce)
       })
   })
 })

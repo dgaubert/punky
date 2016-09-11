@@ -1,5 +1,6 @@
 'use strict'
 
+const assert = require('assert')
 const sinon = require('sinon')
 const MetricsInterface = require(__source + 'metrics/metrics-interface')
 const LoggerInterface = require(__source + 'logger/logger-interface')
@@ -23,7 +24,7 @@ describe('metrics', () => {
 
     this.metrics.timing(...args)
 
-    metricsLogStub.calledWithExactly(...args).should.equal(true)
+    assert.ok(metricsLogStub.calledWithExactly(...args))
   })
 
   it('.gauge() should gauge a stat by a specified amount', () => {
@@ -32,6 +33,6 @@ describe('metrics', () => {
 
     this.metrics.gauge(...args)
 
-    metricsLogStub.calledWithExactly(...args).should.equal(true)
+    assert.ok(metricsLogStub.calledWithExactly(...args))
   })
 })

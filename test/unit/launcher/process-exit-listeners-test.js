@@ -1,5 +1,6 @@
 'use strict'
 
+const assert = require('assert')
 const sinon = require('sinon')
 const ListenerInterface = require(__source + 'listener-interface')
 const ProcessExitListeners = require(__source + 'launcher/process-exit-listeners')
@@ -21,6 +22,6 @@ describe('process-exit-listeners', () => {
 
     this.processExitListeners.listenAll()
 
-    listenStub.calledOnce.should.be.equal(true)
+    assert.ok(listenStub.calledOnce)
   })
 })

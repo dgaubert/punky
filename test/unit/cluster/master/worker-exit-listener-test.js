@@ -1,5 +1,6 @@
 'use strict'
 
+const assert = require('assert')
 const sinon = require('sinon')
 const LoggerInterface = require(__source + 'logger/logger-interface')
 const EventEmitter = require('events')
@@ -25,8 +26,8 @@ describe('worker-exit-listener', () => {
     this.workerExitListener.listen(listenerStub)
     this.emitter.emit('exit', 1, 1)
 
-    loggerWarnStub.calledOnce.should.be.equal(true)
-    listenerStub.calledOnce.should.be.equal(true)
-    listenerStub.calledWithExactly(1, 1).should.be.equal(true)
+    assert.ok(loggerWarnStub.calledOnce)
+    assert.ok(listenerStub.calledOnce)
+    assert.ok(listenerStub.calledWithExactly(1, 1))
   })
 })

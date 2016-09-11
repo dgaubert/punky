@@ -1,5 +1,6 @@
 'use strict'
 
+const assert = require('assert')
 const sinon = require('sinon')
 const EventEmitter = require('events')
 const LoggerInterface = require(__source + 'logger/logger-interface')
@@ -25,7 +26,7 @@ describe('sigterm-listener', () => {
     this.sigtermListener.listen(listenerStub)
     this.emitter.emit('SIGTERM')
 
-    loggerWarnStub.calledOnce.should.be.equal(true)
-    listenerStub.calledOnce.should.be.equal(true)
+    assert.ok(loggerWarnStub.calledOnce)
+    assert.ok(listenerStub.calledOnce)
   })
 })

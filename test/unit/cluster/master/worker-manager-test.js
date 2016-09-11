@@ -1,5 +1,6 @@
 'use strict'
 
+const assert = require('assert')
 const sinon = require('sinon')
 const EventEmitter = require('events')
 const LoggerInterface = require(__source + 'logger/logger-interface')
@@ -24,7 +25,7 @@ describe('worker-manager', () => {
 
     this.workerManager.fork()
 
-    forkStub.calledOnce.should.be.equal(true)
+    assert.ok(forkStub.calledOnce)
   })
 
   it('.refork() should create a new worker if the previous one crashed', () => {
@@ -39,8 +40,8 @@ describe('worker-manager', () => {
 
     this.workerManager.refork(workerStub, 1)
 
-    loggerInfoStub.calledOnce.should.be.equal(true)
-    workerManagerForkStub.calledOnce.should.be.equal(true)
+    assert.ok(loggerInfoStub.calledOnce)
+    assert.ok(workerManagerForkStub.calledOnce)
   })
 
   it('.refork() should not create a new worker if the previous one made away with itself', () => {
@@ -55,8 +56,8 @@ describe('worker-manager', () => {
 
     this.workerManager.refork(workerStub, 1)
 
-    loggerInfoStub.calledOnce.should.be.equal(false)
-    workerManagerForkStub.calledOnce.should.be.equal(false)
+    assert.ok(!loggerInfoStub.calledOnce)
+    assert.ok(!workerManagerForkStub.calledOnce)
   })
 
   it('.refork() should not create a new worker if the previous one exited', () => {
@@ -71,8 +72,8 @@ describe('worker-manager', () => {
 
     this.workerManager.refork(workerStub, 0)
 
-    loggerInfoStub.calledOnce.should.be.equal(false)
-    workerManagerForkStub.calledOnce.should.be.equal(false)
+    assert.ok(!loggerInfoStub.calledOnce)
+    assert.ok(!workerManagerForkStub.calledOnce)
   })
 
   it('.reloadAll() should restart all workers', () => {
@@ -88,8 +89,8 @@ describe('worker-manager', () => {
 
     return this.workerManager.reloadAll()
       .then(() => {
-        loggerInfoStub.calledOnce.should.be.equal(true)
-        workerManagerReloadStub.calledOnce.should.be.equal(false)
+        assert.ok(loggerInfoStub.calledOnce)
+        assert.ok(!workerManagerReloadStub.calledOnce)
       })
   })
 
@@ -134,7 +135,7 @@ describe('worker-manager', () => {
 
     return this.workerManager.reload('1')
       .catch((err) => {
-        err.message.should.be.equal('Irrelevant error')
+        assert.equal(err.message, 'Irrelevant error')
       })
   })
 
@@ -152,7 +153,7 @@ describe('worker-manager', () => {
 
     return this.workerManager.reload('1')
       .catch((err) => {
-        err.message.should.be.equal('Worker exited accidentaly')
+        assert.equal(err.message, 'Worker exited accidentaly')
       })
   })
 })
