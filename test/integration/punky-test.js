@@ -10,7 +10,7 @@ describe('punky', () => {
   })
 
   it('service.run() should init the service', () => {
-    this.punky.use(this.router)
+    this.punky.app.use(this.router)
 
     return this.punky.run()
       .then(() => {
