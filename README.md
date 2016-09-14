@@ -15,17 +15,24 @@ Bootstrap your APIs taking advantage of the best community modules
 const Punky = require('punky')
 const Router = require('express').Router
 
-const punky = new Punky()
-const router = Router()
-const body = new Buffer('Hello World')
+const punky = new Punky(/* options */)
 
-router.get('/', (req, res, next) => {
-  res.send(body)
-})
+if (!punky.isMaster()) {
+  const router = Router()
+  const body = new Buffer('Hello World')
+  const message = body.toString('utf8')
 
-punky.use(router)
-  .run()
-  .catch(punky.logger.error)
+  router.get('/', (req, res, next) => {
+    req.log.info(message)
+    req.metrics.increment('home')
+    res.set('Content-Type', 'text/html')
+    res.send(body)
+  })
+
+  punky.app.use(router)
+}
+
+punky.run().catch(punky.logger.error)
 ```
 
   - Run:
