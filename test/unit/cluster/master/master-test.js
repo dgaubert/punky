@@ -5,19 +5,22 @@ const sinon = require('sinon')
 const os = require('os')
 const cluster = require('cluster')
 const LoggerInterface = require(__source + 'logger/logger-interface')
+const RoleInterface = require(__source + 'cluster/role-interface')
 const WorkerManager = require(__source + 'cluster/master/worker-manager')
 const Master = require(__source + 'cluster/master/master')
 
+class Role extends RoleInterface {}
 class Logger extends LoggerInterface {}
 
 describe('master', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
+    this.role = new Role()
     this.logger = new Logger()
     this.workerManager = new WorkerManager(cluster, this.logger)
 
-    this.master = new Master(this.workerManager, this.logger)
+    this.master = new Master(this.role, this.workerManager, this.logger)
   })
 
   afterEach(() => {

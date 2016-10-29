@@ -3,10 +3,12 @@
 const assert = require('assert')
 const sinon = require('sinon')
 const RunnerInterface = require(__source + 'runner-interface')
+const RoleInterface = require(__source + 'cluster/role-interface')
 const LoggerInterface = require(__source + 'logger/logger-interface')
 const Worker = require(__source + 'cluster/worker/worker')
 
 class Runner extends RunnerInterface {}
+class Role extends RoleInterface {}
 class Logger extends LoggerInterface {}
 
 describe('worker', function () {
@@ -14,8 +16,9 @@ describe('worker', function () {
     this.sandbox = sinon.sandbox.create()
 
     this.server = new Runner()
+    this.role = new Role()
     this.logger = new Logger()
-    this.worker = new Worker(this.server, this.logger)
+    this.worker = new Worker(this.role, this.server, this.logger)
   })
 
   afterEach(() => {
