@@ -6,12 +6,14 @@ const EventEmitter = require('events')
 const LoggerInterface = require(__source + 'logger/logger-interface')
 const UncaughtExceptionListener = require(__source + 'launcher/uncaught-exception-listener')
 
+class Logger extends LoggerInterface {}
+
 describe('uncaught-exception-listener', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
     this.emitter = new EventEmitter()
-    this.logger = new LoggerInterface()
+    this.logger = new Logger()
     this.uncaughtExceptionListener = new UncaughtExceptionListener(this.emitter, this.logger)
   })
 

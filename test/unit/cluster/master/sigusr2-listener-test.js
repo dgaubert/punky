@@ -6,12 +6,14 @@ const EventEmitter = require('events')
 const LoggerInterface = require(__source + 'logger/logger-interface')
 const Sigusr2Listener = require(__source + 'cluster/master/sigusr2-listener')
 
+class Logger extends LoggerInterface {}
+
 describe('sigusr2-listener', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
     this.emitter = new EventEmitter()
-    this.logger = new LoggerInterface()
+    this.logger = new Logger()
     this.sigusr2Listener = new Sigusr2Listener(this.emitter, this.logger)
   })
 

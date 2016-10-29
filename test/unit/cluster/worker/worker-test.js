@@ -6,12 +6,15 @@ const RunnerInterface = require(__source + 'runner-interface')
 const LoggerInterface = require(__source + 'logger/logger-interface')
 const Worker = require(__source + 'cluster/worker/worker')
 
+class Runner extends RunnerInterface {}
+class Logger extends LoggerInterface {}
+
 describe('worker', function () {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
-    this.server = new RunnerInterface()
-    this.logger = new LoggerInterface()
+    this.server = new Runner()
+    this.logger = new Logger()
     this.worker = new Worker(this.server, this.logger)
   })
 

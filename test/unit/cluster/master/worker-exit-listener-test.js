@@ -6,12 +6,14 @@ const LoggerInterface = require(__source + 'logger/logger-interface')
 const EventEmitter = require('events')
 const WorkerExitListener = require(__source + 'cluster/master/worker-exit-listener')
 
+class Logger extends LoggerInterface {}
+
 describe('worker-exit-listener', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
     this.emitter = new EventEmitter()
-    this.logger = new LoggerInterface()
+    this.logger = new Logger()
     this.workerExitListener = new WorkerExitListener(this.emitter, this.logger)
   })
 

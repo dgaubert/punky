@@ -8,11 +8,13 @@ const LoggerInterface = require(__source + 'logger/logger-interface')
 const WorkerManager = require(__source + 'cluster/master/worker-manager')
 const Master = require(__source + 'cluster/master/master')
 
+class Logger extends LoggerInterface {}
+
 describe('master', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
-    this.logger = new LoggerInterface()
+    this.logger = new Logger()
     this.workerManager = new WorkerManager(cluster, this.logger)
 
     this.master = new Master(this.workerManager, this.logger)

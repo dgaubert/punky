@@ -6,11 +6,14 @@ const MetricsInterface = require(__source + 'metrics/metrics-interface')
 const LoggerInterface = require(__source + 'logger/logger-interface')
 const Metrics = require(__source + 'metrics/metrics')
 
+class MetricsProvider extends MetricsInterface {}
+class Logger extends LoggerInterface {}
+
 describe('metrics', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
-    this.provider = new MetricsInterface()
-    this.logger = new LoggerInterface()
+    this.provider = new MetricsProvider()
+    this.logger = new Logger()
     this.metrics = new Metrics(this.provider, this.logger)
   })
 

@@ -6,12 +6,15 @@ const RunnerInterface = require(__source + 'runner-interface')
 const ListenerInterface = require(__source + 'listener-interface')
 const Launcher = require(__source + 'launcher/launcher')
 
+class Runner extends RunnerInterface {}
+class Listener extends ListenerInterface {}
+
 describe('launcher', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
-    this.runner = new RunnerInterface()
-    this.listener = new ListenerInterface()
+    this.runner = new Runner()
+    this.listener = new Listener()
     this.sandbox.stub(this.listener, 'listen')
 
     this.launcher = new Launcher(this.runner, this.listener)

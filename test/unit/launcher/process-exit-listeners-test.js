@@ -5,11 +5,13 @@ const sinon = require('sinon')
 const ListenerInterface = require(__source + 'listener-interface')
 const ProcessExitListeners = require(__source + 'launcher/process-exit-listeners')
 
+class Listener extends ListenerInterface {}
+
 describe('process-exit-listeners', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
-    this.listener = new ListenerInterface()
+    this.listener = new Listener()
     this.processExitListeners = new ProcessExitListeners().add(this.listener)
   })
 

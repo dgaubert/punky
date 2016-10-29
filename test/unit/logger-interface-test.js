@@ -3,9 +3,11 @@
 const assert = require('assert')
 const LoggerInterface = require(__source + 'logger/logger-interface')
 
+class Logger extends LoggerInterface {}
+
 describe('logger-interface', () => {
   beforeEach(() => {
-    this.loggerInterface = new LoggerInterface()
+    this.loggerInterface = new Logger()
   })
 
   it('.debug() should throw "Unimplemented method" error', () => {

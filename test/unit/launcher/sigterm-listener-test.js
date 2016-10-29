@@ -6,12 +6,14 @@ const EventEmitter = require('events')
 const LoggerInterface = require(__source + 'logger/logger-interface')
 const SigtermListener = require(__source + 'launcher/sigterm-listener')
 
+class Logger extends LoggerInterface {}
+
 describe('sigterm-listener', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
     this.emitter = new EventEmitter()
-    this.logger = new LoggerInterface()
+    this.logger = new Logger()
     this.sigtermListener = new SigtermListener(this.emitter, this.logger)
   })
 

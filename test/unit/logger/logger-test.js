@@ -5,10 +5,12 @@ const sinon = require('sinon')
 const LoggerInterface = require(__source + 'logger/logger-interface')
 const Logger = require(__source + 'logger/logger')
 
+class LoggerProvider extends LoggerInterface {}
+
 describe('logger', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
-    this.provider = new LoggerInterface()
+    this.provider = new LoggerProvider()
     this.logger = new Logger(this.provider)
   })
 

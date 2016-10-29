@@ -3,9 +3,11 @@
 const assert = require('assert')
 const RunnerInterface = require(__source + 'runner-interface')
 
+class Runner extends RunnerInterface {}
+
 describe('runner-interface', () => {
   beforeEach(() => {
-    this.runnerInterface = new RunnerInterface()
+    this.runnerInterface = new Runner()
   })
 
   it('.run() should throw "Unimplemented method" error', () => {

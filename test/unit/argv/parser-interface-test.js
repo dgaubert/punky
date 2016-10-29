@@ -3,14 +3,16 @@
 const assert = require('assert')
 const ParserInterface = require(__source + 'argv/parser-interface')
 
+class Parser extends ParserInterface {}
+
 describe('parser-interface', () => {
   beforeEach(() => {
-    this.parserInterface = new ParserInterface()
+    this.parser = new Parser()
   })
 
   it('.parse() should throw "Unimplemented method" error', () => {
     assert.throws(() => {
-      this.parserInterface.parse()
+      this.parser.parse()
     }, 'Unimplemented method')
   })
 })

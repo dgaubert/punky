@@ -8,12 +8,15 @@ const LoggerInterface = require(__source + 'logger/logger-interface')
 const Server = require(__source + 'cluster/worker/server')
 const EventEmitter = require('events')
 
+class Listener extends ListenerInterface {}
+class Logger extends LoggerInterface {}
+
 describe('server', function () {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
     this.port = 9876
-    this.app = new ListenerInterface()
-    this.logger = new LoggerInterface()
+    this.app = new Listener()
+    this.logger = new Logger()
     this.server = new Server(this.app, this.port, this.logger)
   })
 

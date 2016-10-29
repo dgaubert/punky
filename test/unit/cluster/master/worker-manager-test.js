@@ -6,12 +6,14 @@ const EventEmitter = require('events')
 const LoggerInterface = require(__source + 'logger/logger-interface')
 const WorkerManager = require(__source + 'cluster/master/worker-manager')
 
+class Logger extends LoggerInterface {}
+
 describe('worker-manager', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
     this.cluster = {}
-    this.logger = new LoggerInterface()
+    this.logger = new Logger()
     this.workerManager = new WorkerManager(this.cluster, this.logger)
   })
 
