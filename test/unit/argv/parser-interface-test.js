@@ -1,7 +1,7 @@
 'use strict'
 
 const assert = require('assert')
-const ParserInterface = require(__source + 'parser-interface')
+const ParserInterface = require(__source + 'argv/parser-interface')
 
 describe('parser-interface', () => {
   beforeEach(() => {
