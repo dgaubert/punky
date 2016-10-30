@@ -4,17 +4,30 @@ const assert = require('assert')
 const sinon = require('sinon')
 const EventEmitter = require('events')
 const LoggerInterface = require(__source + 'logger/logger-interface')
+const ListenerInterface = require(__source + 'listener-interface')
 const WorkerManager = require(__source + 'cluster/master/worker-manager')
 
 class Logger extends LoggerInterface {}
+class Sigusr2Listener extends ListenerInterface {}
+class WorkerExitListener extends ListenerInterface {}
+class Cluster extends EventEmitter {
+  fork () {}
+}
 
 describe('worker-manager', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
-    this.cluster = {}
+    this.cluster = new Cluster()
     this.logger = new Logger()
-    this.workerManager = new WorkerManager(this.cluster, this.logger)
+
+    this.sigusr2Listener = new Sigusr2Listener()
+    this.sigusr2ListenerListenInfoStub = this.sandbox.stub(this.sigusr2Listener, 'listen')
+
+    this.workerExitListener = new WorkerExitListener()
+    this.workerExitListenerListenInfoStub = this.sandbox.stub(this.workerExitListener, 'listen')
+
+    this.workerManager = new WorkerManager(this.cluster, this.sigusr2Listener, this.workerExitListener, this.logger)
   })
 
   afterEach(() => {
@@ -22,16 +35,16 @@ describe('worker-manager', () => {
   })
 
   it('.fork() should create a new worker', () => {
-    var forkStub = this.sandbox.stub()
-    this.cluster.fork = forkStub
+    var loggerInfoStub = this.sandbox.stub(this.logger, 'info')
+    var forkStub = this.sandbox.stub(this.cluster, 'fork')
 
     this.workerManager.fork()
 
     assert.ok(forkStub.calledOnce)
+    assert.ok(loggerInfoStub.calledOnce)
   })
 
   it('.refork() should create a new worker if the previous one crashed', () => {
-    var loggerInfoStub = this.sandbox.stub(this.logger, 'info')
     var workerManagerForkStub = this.sandbox.stub(this.workerManager, 'fork')
     var workerStub = {
       exitedAfterDisconnect: false,
@@ -42,7 +55,6 @@ describe('worker-manager', () => {
 
     this.workerManager.refork(workerStub, 1)
 
-    assert.ok(loggerInfoStub.calledOnce)
     assert.ok(workerManagerForkStub.calledOnce)
   })
 

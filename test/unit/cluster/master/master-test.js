@@ -3,14 +3,20 @@
 const assert = require('assert')
 const sinon = require('sinon')
 const os = require('os')
-const cluster = require('cluster')
+const EventEmitter = require('events')
 const LoggerInterface = require(__source + 'logger/logger-interface')
+const ListenerInterface = require(__source + 'listener-interface')
 const RoleInterface = require(__source + 'cluster/role-interface')
 const WorkerManager = require(__source + 'cluster/master/worker-manager')
 const Master = require(__source + 'cluster/master/master')
 
 class Role extends RoleInterface {}
 class Logger extends LoggerInterface {}
+class Sigusr2Listener extends ListenerInterface {}
+class WorkerExitListener extends ListenerInterface {}
+class Cluster extends EventEmitter {
+  fork () {}
+}
 
 describe('master', () => {
   beforeEach(() => {
@@ -18,7 +24,16 @@ describe('master', () => {
 
     this.role = new Role()
     this.logger = new Logger()
-    this.workerManager = new WorkerManager(cluster, this.logger)
+
+    this.cluster = new Cluster()
+
+    this.sigusr2Listener = new Sigusr2Listener()
+    this.sigusr2ListenerListenInfoStub = this.sandbox.stub(this.sigusr2Listener, 'listen')
+
+    this.workerExitListener = new WorkerExitListener()
+    this.workerExitListenerListenInfoStub = this.sandbox.stub(this.workerExitListener, 'listen')
+
+    this.workerManager = new WorkerManager(this.cluster, this.sigusr2Listener, this.workerExitListener, this.logger)
 
     this.master = new Master(this.role, this.workerManager, this.logger)
   })
