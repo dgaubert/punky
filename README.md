@@ -17,7 +17,7 @@ const Router = require('express').Router
 
 const punky = new Punky(/* options */)
 
-if (!punky.isMaster()) {
+if (punky.app) {
   const router = Router()
   const body = new Buffer('Hello World')
   const message = body.toString('utf8')
