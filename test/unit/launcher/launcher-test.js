@@ -3,12 +3,11 @@
 const assert = require('assert')
 const sinon = require('sinon')
 const RunnerInterface = require(__source + 'runner-interface')
+const ListenerInterface = require(__source + 'listener-interface')
 const Launcher = require(__source + 'launcher/launcher')
 
 class Runner extends RunnerInterface {}
-class Listeners extends Set {
-  listenAll () {}
-}
+class Listeners extends ListenerInterface {}
 
 describe('launcher', () => {
   beforeEach(() => {
@@ -16,7 +15,7 @@ describe('launcher', () => {
 
     this.runner = new Runner()
     this.listeners = new Listeners()
-    this.sandbox.stub(this.listeners, 'listenAll')
+    this.sandbox.stub(this.listeners, 'listen')
 
     this.launcher = new Launcher(this.runner, this.listeners)
   })

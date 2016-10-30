@@ -2,7 +2,10 @@
 
 const assert = require('assert')
 const sinon = require('sinon')
+const MiddlewareInterface = require(__source + 'server/app/middleware/middleware-interface')
 const App = require(__source + 'server/app/app')
+
+class AppMiddlewares extends MiddlewareInterface {}
 
 describe('app', () => {
   beforeEach(() => {
@@ -13,9 +16,7 @@ describe('app', () => {
       listen: () => {},
       disable: () => {}
     }
-    this.middlewares = {
-      registAll: () => {}
-    }
+    this.middlewares = new AppMiddlewares()
   })
 
   afterEach(() => {
@@ -25,7 +26,7 @@ describe('app', () => {
   it('.listen() should listen on port 3000', () => {
     var appDisableStub = this.sandbox.stub(this.provider, 'disable')
     var appListenStub = this.sandbox.stub(this.provider, 'listen')
-    var middlewaresRegistAllStub = this.sandbox.stub(this.middlewares, 'registAll')
+    var middlewaresRegistAllStub = this.sandbox.stub(this.middlewares, 'regist')
 
     this.app = new App(this.provider, this.middlewares)
     this.server = this.app.listen(3000)
