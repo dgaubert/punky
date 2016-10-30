@@ -2,7 +2,7 @@
 
 const assert = require('assert')
 const sinon = require('sinon')
-const App = require(__source + 'app/app')
+const App = require(__source + 'server/app/app')
 
 describe('app', () => {
   beforeEach(() => {
