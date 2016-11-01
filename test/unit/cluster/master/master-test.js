@@ -6,11 +6,9 @@ const os = require('os')
 const EventEmitter = require('events')
 const LoggerInterface = require(__source + 'logger/logger-interface')
 const ListenerInterface = require(__source + 'listener-interface')
-const RoleInterface = require(__source + 'cluster/role-interface')
 const WorkerManager = require(__source + 'cluster/master/worker-manager')
 const Master = require(__source + 'cluster/master/master')
 
-class Role extends RoleInterface {}
 class Logger extends LoggerInterface {}
 class Sigusr2Listener extends ListenerInterface {}
 class WorkerExitListener extends ListenerInterface {}
@@ -22,7 +20,6 @@ describe('master', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
-    this.role = new Role()
     this.logger = new Logger()
 
     this.cluster = new Cluster()
@@ -35,7 +32,7 @@ describe('master', () => {
 
     this.workerManager = new WorkerManager(this.cluster, this.sigusr2Listener, this.workerExitListener, this.logger)
 
-    this.master = new Master(this.role, this.workerManager, this.logger)
+    this.master = new Master(this.workerManager, this.logger)
   })
 
   afterEach(() => {
