@@ -31,6 +31,8 @@ describe('worker-manager', () => {
   })
 
   afterEach(() => {
+    assert.ok(this.sigusr2ListenerListenInfoStub.calledOnce)
+    assert.ok(this.workerExitListenerListenInfoStub.calledOnce)
     this.sandbox.restore()
   })
 
