@@ -10,6 +10,7 @@ const WorkerManager = require(__source + 'cluster/master/worker-manager')
 class Logger extends LoggerInterface {}
 class Sigusr2Listener extends ListenerInterface {}
 class WorkerExitListener extends ListenerInterface {}
+class SighupListener extends ListenerInterface {}
 class Cluster extends EventEmitter {
   fork () {}
 }
@@ -27,10 +28,23 @@ describe('worker-manager', () => {
     this.workerExitListener = new WorkerExitListener()
     this.workerExitListenerListenInfoStub = this.sandbox.stub(this.workerExitListener, 'listen')
 
-    this.workerManager = new WorkerManager(this.cluster, this.sigusr2Listener, this.workerExitListener, this.logger)
+    this.sighupListener = new SighupListener()
+    this.sighupListenerListenInfoStub = this.sandbox.stub(this.sighupListener, 'listen')
+
+    this.workerManager = new WorkerManager(
+      this.cluster,
+      this.sigusr2Listener,
+      this.workerExitListener,
+      this.sighupListener,
+      this.logger
+    )
   })
 
   afterEach(() => {
+    assert.ok(this.sigusr2ListenerListenInfoStub.calledOnce)
+    assert.ok(this.workerExitListenerListenInfoStub.calledOnce)
+    assert.ok(this.sighupListenerListenInfoStub.calledOnce)
+
     this.sandbox.restore()
   })
 
@@ -98,7 +112,7 @@ describe('worker-manager', () => {
       '2': {}
     }
 
-    var workerManagerReloadStub = this.sandbox.stub(this.workerManager, 'reload')
+    var workerManagerReloadStub = this.sandbox.stub(this.workerManager, 'reloadWorker')
     workerManagerReloadStub.returns(Promise.resolve())
 
     return this.workerManager.reloadAllWorkers()
