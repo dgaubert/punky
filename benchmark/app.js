@@ -3,7 +3,7 @@
 const Punky = require('../')
 const Router = require('express').Router
 
-const punky = new Punky(/* options */)
+const punky = new Punky()
 
 if (punky.app) {
   const router = Router()
@@ -14,10 +14,16 @@ if (punky.app) {
     req.log.info(message)
     req.metrics.increment('home')
     res.set('Content-Type', 'text/html')
+    punky.logger.info('punky')
     res.send(body)
   })
 
   punky.app.use(router)
 }
 
-punky.run().catch(punky.logger.error)
+punky.run()
+  .then(() => {
+    punky.logger.info('Punky ready for benchmarking')
+    process.send({ ready: true })
+  })
+  .catch(punky.logger.error)
