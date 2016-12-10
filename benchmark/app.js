@@ -3,9 +3,11 @@
 const Punky = require('../')
 const Router = require('express').Router
 
-const punky = new Punky(/* options */)
+const punky = new Punky(/* { options } */)
+const logger = punky.logger
+const app = punky.app
 
-if (punky.app) {
+if (app) {
   const router = Router()
   const body = new Buffer('Hello World')
   const message = body.toString('utf8')
@@ -17,7 +19,14 @@ if (punky.app) {
     res.send(body)
   })
 
-  punky.app.use(router)
+  app.use(router)
 }
 
-punky.run().catch(punky.logger.error)
+punky.run()
+  // if process was spawned with IPC channel,
+  // then send "listening port" to the parent process
+  .then(server => typeof process.send === 'function'
+    ? process.send({ port: server.address().port })
+    : undefined
+  )
+  .catch(err => logger.error(err))

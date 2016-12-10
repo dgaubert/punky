@@ -14,12 +14,13 @@
     "test": "test"
   },
   "scripts": {
+    "benchmark": "node benchmark",
+    "coverage": "istanbul cover _mocha test/ -- --recursive -r test/setup",
     "lint": "standard index.js \"lib/**/*.js\" \"test/**/*.js\"",
     "pretest": "npm run lint",
+    "start": "node .",
     "test": "mocha --recursive -r test/setup test/",
-    "test:watch": "npm run test -- -w",
-    "coverage": "istanbul cover _mocha test/ -- --recursive -r test/setup",
-    "start": "node ."
+    "test:watch": "npm run test -- -w"
   },
   "keywords": [
     "es6",
@@ -39,9 +40,10 @@
   },
   "devDependencies": {
     "istanbul": "0.4.4",
-    "standard": "7.1.2",
     "mocha": "3.0.2",
-    "sinon": "1.17.5"
+    "prepend-file": "1.3.1",
+    "sinon": "1.17.5",
+    "standard": "7.1.2"
   },
   "standard": {
     "globals": [
