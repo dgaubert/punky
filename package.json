@@ -8,10 +8,11 @@
     "url": "git://github.com/dgaubert/punky.git"
   },
   "engines": {
-    "node": "6.0.0"
+    "node": ">=6.0.0"
   },
   "directories": {
-    "test": "test"
+    "test": "test",
+    "benchmark": "benchmark"
   },
   "scripts": {
     "benchmark": "node benchmark",
@@ -30,7 +31,7 @@
     "express",
     "bootstrap"
   ],
-  "author": "Daniel García Aubert <@dgaubert>",
+  "author": "Daniel García Aubert <danielgarciaaubert@gmail.com> (www.dgaubert.com)",
   "license": "BSD-3-Clause",
   "dependencies": {
     "bunyan": "1.8.4",
