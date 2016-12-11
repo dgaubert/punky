@@ -9,7 +9,7 @@ class WrkSpawner {
 
   run (port) {
     return new Promise((resolve, reject) => {
-      this.wrk = spawn('wrk', [ `${this.endpoint}:${port}`, '-d 10', '-c 50', '-t 8' ])
+      this.wrk = spawn('wrk', [ `${this.endpoint}:${port}`, '-d 5', '-c 50', '-t 8' ])
 
       this.wrk.stdout.on('data', (results) => {
         this.results = results
