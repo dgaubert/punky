@@ -22,7 +22,7 @@
     "test": "mocha --recursive -r test/setup test/",
     "test:watch": "npm run test -- -w",
     "preversion": "npm test",
-    "version": "npm run benchmark && git add -A benchmark",
+    "version": "npm run benchmark -- -r && git add -A benchmark",
     "postversion": "git push && git push --tags"
   },
   "keywords": [
