@@ -179,8 +179,6 @@ describe('worker-manager', () => {
     }
 
     return this.workerManager.reloadWorker('1')
-      .catch((err) => {
-        assert.equal(err.message, 'Worker exited accidentaly')
-      })
+      .catch(err => assert.equal(err.message, 'Worker exited accidentaly'))
   })
 })

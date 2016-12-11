@@ -11,32 +11,22 @@ describe('logger-interface', () => {
   })
 
   it('.debug() should throw "Unimplemented method" error', () => {
-    assert.throws(() => {
-      this.loggerInterface.debug()
-    }, 'Unimplemented method')
+    assert.throws(() => this.loggerInterface.debug(), 'Unimplemented method')
   })
 
   it('.log() should throw "Unimplemented method" error', () => {
-    assert.throws(() => {
-      this.loggerInterface.log()
-    }, 'Unimplemented method')
+    assert.throws(() => this.loggerInterface.log(), 'Unimplemented method')
   })
 
   it('.info() should throw "Unimplemented method" error', () => {
-    assert.throws(() => {
-      this.loggerInterface.info()
-    }, 'Unimplemented method')
+    assert.throws(() => this.loggerInterface.info(), 'Unimplemented method')
   })
 
   it('.warn() should throw "Unimplemented method" error', () => {
-    assert.throws(() => {
-      this.loggerInterface.warn()
-    }, 'Unimplemented method')
+    assert.throws(() => this.loggerInterface.warn(), 'Unimplemented method')
   })
 
   it('.error() should throw "Unimplemented method" error', () => {
-    assert.throws(() => {
-      this.loggerInterface.error()
-    }, 'Unimplemented method')
+    assert.throws(() => this.loggerInterface.error(), 'Unimplemented method')
   })
 })

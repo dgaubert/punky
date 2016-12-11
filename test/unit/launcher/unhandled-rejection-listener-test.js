@@ -21,7 +21,7 @@ describe('unhandled-rejection-listener', () => {
     this.sandbox.restore()
   })
 
-  it('.listen() should attach listener to uncaughtException process event', (done) => {
+  it('.listen() should attach listener to uncaughtException process event', done => {
     var loggerErrorStub = this.sandbox.stub(this.logger, 'error')
     var error = new Error('Irrelevant error')
     var rejectedPromise = Promise.reject(error)

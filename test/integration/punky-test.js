@@ -13,8 +13,6 @@ describe('punky', () => {
     this.punky.app.use(this.router)
 
     return this.punky.run()
-      .then(() => {
-        return this.punky.close()
-      })
+      .then(() => this.punky.close())
   })
 })

@@ -11,20 +11,14 @@ describe('runner-interface', () => {
   })
 
   it('.run() should throw "Unimplemented method" error', () => {
-    assert.throws(() => {
-      this.runnerInterface.run()
-    }, 'Unimplemented method')
+    assert.throws(() => this.runnerInterface.run(), 'Unimplemented method')
   })
 
   it('.close() should throw "Unimplemented method" error', () => {
-    assert.throws(() => {
-      this.runnerInterface.close()
-    }, 'Unimplemented method')
+    assert.throws(() => this.runnerInterface.close(), 'Unimplemented method')
   })
 
   it('.exit() should throw "Unimplemented method" error', () => {
-    assert.throws(() => {
-      this.runnerInterface.exit()
-    }, 'Unimplemented method')
+    assert.throws(() => this.runnerInterface.exit(), 'Unimplemented method')
   })
 })

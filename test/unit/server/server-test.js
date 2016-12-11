@@ -103,7 +103,7 @@ describe('server', function () {
         setTimeout(() => httpServer.emit('error', new Error('irrelevant')), 2)
         return this.server.close()
       })
-      .catch((err) => {
+      .catch(err => {
         assert.equal(err.message, 'irrelevant')
         assert.ok(httpServerStub.calledOnce)
         assert.ok(loggerInfoStub.calledOnce)

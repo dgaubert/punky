@@ -11,8 +11,6 @@ describe('parser-interface', () => {
   })
 
   it('.parse() should throw "Unimplemented method" error', () => {
-    assert.throws(() => {
-      this.parser.parse()
-    }, 'Unimplemented method')
+    assert.throws(() => this.parser.parse(), 'Unimplemented method')
   })
 })
