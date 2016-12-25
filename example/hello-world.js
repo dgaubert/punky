@@ -21,7 +21,7 @@ class HelloWorld {
 
     return (req, res, next) => {
       req.log.info(message)
-      req.metrics.increment('home')
+      req.metrics.increment('hello_world')
       res.set('Content-Type', 'text/html')
       res.send(body)
     }

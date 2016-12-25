@@ -6,15 +6,29 @@ const MetricsInterface = require(__source + 'metrics/metrics-interface')
 const LoggerInterface = require(__source + 'logger/logger-interface')
 const Metrics = require(__source + 'metrics/metrics')
 
-class MetricsProvider extends MetricsInterface {}
+const GAUGE_MEMORY_INTERVAL = 1000
+
+class MetricsProvider extends MetricsInterface {
+  constructor () {
+    super()
+    this.socket = {
+      on () {}
+    }
+  }
+}
+
 class Logger extends LoggerInterface {}
 
 describe('metrics', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
     this.provider = new MetricsProvider()
+    this.providerSocketMock = this.sandbox.mock(this.provider)
+
     this.logger = new Logger()
-    this.metrics = new Metrics(this.provider, this.logger)
+    this.metricsDebugStub = this.sandbox.stub(this.logger, 'debug')
+
+    this.metrics = new Metrics(this.provider, GAUGE_MEMORY_INTERVAL, this.logger)
   })
 
   afterEach(() => {
@@ -22,20 +36,20 @@ describe('metrics', () => {
   })
 
   it('.timing() should sends a timing command with the specified milliseconds', () => {
-    const metricsLogStub = this.sandbox.stub(this.provider, 'timing')
+    const metricsTimingStub = this.sandbox.stub(this.provider, 'timing')
     const args = [ 'response_time', 42 ]
 
     this.metrics.timing(...args)
 
-    assert.ok(metricsLogStub.calledWithExactly(...args))
+    assert.ok(metricsTimingStub.calledWithExactly(...args))
   })
 
   it('.gauge() should gauge a stat by a specified amount', () => {
-    const metricsLogStub = this.sandbox.stub(this.provider, 'gauge')
     const args = [ 'rss', 123.45 ]
+    const metricsGaugeStub = this.sandbox.stub(this.provider, 'gauge')
 
     this.metrics.gauge(...args)
 
-    assert.ok(metricsLogStub.calledWithExactly(...args))
+    assert.ok(metricsGaugeStub.calledWithExactly(...args))
   })
 })
