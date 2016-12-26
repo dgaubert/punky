@@ -2,8 +2,8 @@
 
 const assert = require('assert')
 const sinon = require('sinon')
-const MiddlewareInterface = require(__source + 'server/app/middleware/middleware-interface')
-const App = require(__source + 'server/app/app')
+const MiddlewareInterface = require(__source + 'http-server/app/middleware/middleware-interface')
+const App = require(__source + 'http-server/app/app')
 
 class AppMiddlewares extends MiddlewareInterface {}
 

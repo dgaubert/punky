@@ -5,7 +5,7 @@ const sinon = require('sinon')
 const ListenerInterface = require(__source + 'listener-interface')
 const RunnerInterface = require(__source + 'runner-interface')
 const LoggerInterface = require(__source + 'logger/logger-interface')
-const Server = require(__source + 'server/server')
+const HttpServer = require(__source + 'http-server/http-server')
 const EventEmitter = require('events')
 
 class Listener extends ListenerInterface {}
@@ -17,7 +17,7 @@ describe('server', function () {
     this.port = 9876
     this.app = new Listener()
     this.logger = new Logger()
-    this.server = new Server(this.app, this.port, this.logger)
+    this.httpServer = new HttpServer(this.app, this.port, this.logger)
   })
 
   afterEach(() => {
@@ -25,7 +25,7 @@ describe('server', function () {
   })
 
   it('should be a runner instance', () => {
-    assert.ok(this.server instanceof RunnerInterface)
+    assert.ok(this.httpServer instanceof RunnerInterface)
   })
 
   it('.run() should listen on specific port successfully', () => {
@@ -36,7 +36,7 @@ describe('server', function () {
     setTimeout(() => {
       httpServerStub.emit('listening')
     }, 10)
-    return this.server.run()
+    return this.httpServer.run()
       .then(() => {
         assert.ok(appRunStub.calledOnce)
         assert.ok(loggerInfoStub.calledOnce)
@@ -50,7 +50,7 @@ describe('server', function () {
     setTimeout(() => {
       httpServerStub.emit('error')
     }, 10)
-    return this.server.run()
+    return this.httpServer.run()
       .catch(() => {
         assert.ok(appRunStub.calledOnce)
       })
@@ -59,14 +59,14 @@ describe('server', function () {
   it('.run() should fail when app is not redy', () => {
     var appRunStub = this.sandbox.stub(this.app, 'listen').returns(null)
 
-    return this.server.run()
+    return this.httpServer.run()
       .catch(() => {
         assert.ok(appRunStub.calledOnce)
       })
   })
 
   it('.close() should stop even though http-server is not listening', () => {
-    return this.server.close()
+    return this.httpServer.close()
   })
 
   it('.close() should stop successfully when http-server is listening', () => {
@@ -77,11 +77,11 @@ describe('server', function () {
     var loggerInfoStub = this.sandbox.stub(this.logger, 'info')
 
     setTimeout(() => httpServer.emit('listening'), 2)
-    return this.server.run()
+    return this.httpServer.run()
       .then(() => {
         assert.ok(appRunStub.calledOnce)
         setTimeout(() => httpServer.emit('close'), 2)
-        return this.server.close()
+        return this.httpServer.close()
       })
       .then(() => {
         assert.ok(httpServerStub.calledOnce)
@@ -97,11 +97,11 @@ describe('server', function () {
     var loggerInfoStub = this.sandbox.stub(this.logger, 'info')
 
     setTimeout(() => httpServer.emit('listening'), 2)
-    return this.server.run()
+    return this.httpServer.run()
       .then(() => {
         assert.ok(appRunStub.calledOnce)
         setTimeout(() => httpServer.emit('error', new Error('irrelevant')), 2)
-        return this.server.close()
+        return this.httpServer.close()
       })
       .catch(err => {
         assert.equal(err.message, 'irrelevant')
