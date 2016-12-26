@@ -6,15 +6,15 @@ const LoggerFactory = require(__source + 'logger/logger-factory')
 const MetricsFactory = require(__source + 'metrics/metrics-factory')
 const Router = require('express').Router
 const RunnerInterface = require(__source + 'runner-interface')
-const WorkerFactory = require(__source + 'cluster/worker/worker-factory')
+const ServerFactory = require(__source + 'cluster/server/server-factory')
 
 describe('worker-factory', () => {
   it('.create() should return a Runner instance', () => {
     const router = Router()
     const logger = LoggerFactory.create(defaultOptions)
     const metrics = MetricsFactory.create(logger, defaultOptions)
-    const worker = WorkerFactory.create(router, metrics, logger, defaultOptions)
+    const server = ServerFactory.create(router, metrics, logger, defaultOptions)
 
-    assert.ok(worker instanceof RunnerInterface)
+    assert.ok(server instanceof RunnerInterface)
   })
 })

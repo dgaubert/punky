@@ -18,17 +18,17 @@ describe('role', () => {
     assert.equal(isMaster, true)
   })
 
-  it('.isWorker(!clusterOn) should return true', () => {
+  it('.isServer(!clusterOn) should return true', () => {
     const clusterOn = false
-    const isWorker = Role.isWorker(clusterOn)
+    const isServer = Role.isServer(clusterOn)
 
-    assert.equal(isWorker, true)
+    assert.equal(isServer, true)
   })
 
-  it('.isWorker(clusterOn) should return false', () => {
+  it('.isServer(clusterOn) should return false', () => {
     const clusterOn = true
-    const isWorker = Role.isWorker(clusterOn)
+    const isServer = Role.isServer(clusterOn)
 
-    assert.equal(isWorker, false)
+    assert.equal(isServer, false)
   })
 })
