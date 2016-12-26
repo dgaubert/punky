@@ -1,4 +1,6 @@
-global.__lib = process.cwd() + '/lib/'
-global.__example = process.cwd() + '/example/'
+const cwd = process.cwd()
+
+global.__lib = `${cwd}/lib/`
+global.__example = `${cwd}/example/`
 
 process.env.NODE_ENV = 'test'
