@@ -15,6 +15,7 @@
     "benchmark": "benchmark"
   },
   "scripts": {
+    "example": "node example",
     "benchmark": "node benchmark",
     "coverage": "istanbul cover _mocha test/ -- --recursive -r test/setup",
     "lint": "standard index.js \"lib/**/*.js\" \"test/**/*.js\"",
