@@ -50,6 +50,7 @@ describe('server', function () {
     setTimeout(() => {
       httpServerStub.emit('error')
     }, 10)
+
     return this.httpServer.run()
       .catch(() => {
         assert.ok(appRunStub.calledOnce)
@@ -77,6 +78,7 @@ describe('server', function () {
     var loggerInfoStub = this.sandbox.stub(this.logger, 'info')
 
     setTimeout(() => httpServer.emit('listening'), 2)
+
     return this.httpServer.run()
       .then(() => {
         assert.ok(appRunStub.calledOnce)
