@@ -2,9 +2,9 @@
 
 const assert = require('assert')
 const sinon = require('sinon')
-const LoggerInterface = require(__source + 'logger/logger-interface')
-const ListenerInterface = require(__source + 'listener-interface')
-const Logger = require(__source + 'logger/logger')
+const LoggerInterface = require(__lib + 'logger/logger-interface')
+const ListenerInterface = require(__lib + 'listener-interface')
+const Logger = require(__lib + 'logger/logger')
 
 class LoggerProvider extends LoggerInterface {}
 class SighupListener extends ListenerInterface {}

@@ -1,7 +1,7 @@
 'use strict'
 
 const assert = require('assert')
-const LoggerInterface = require(__source + 'logger/logger-interface')
+const LoggerInterface = require(__lib + 'logger/logger-interface')
 
 class Logger extends LoggerInterface {}
 

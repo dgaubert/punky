@@ -1,8 +1,8 @@
 'use strict'
 
 const assert = require('assert')
-const Punky = require(__source + 'punky')
-const Role = require(__source + 'cluster/role')
+const Punky = require(__lib + 'punky')
+const Role = require(__lib + 'cluster/role')
 
 describe('punky', () => {
   beforeEach(() => {

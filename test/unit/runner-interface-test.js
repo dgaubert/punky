@@ -1,7 +1,7 @@
 'use strict'
 
 const assert = require('assert')
-const RunnerInterface = require(__source + 'runner-interface')
+const RunnerInterface = require(__lib + 'runner-interface')
 
 class Runner extends RunnerInterface {}
 

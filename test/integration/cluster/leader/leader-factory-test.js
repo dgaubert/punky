@@ -1,11 +1,11 @@
 'use strict'
 
 const assert = require('assert')
-const defaultOptions = require(__source + 'config/default')
-const RunnerInterface = require(__source + 'runner-interface')
-const MetricsFactory = require(__source + 'metrics/metrics-factory')
-const LoggerFactory = require(__source + 'logger/logger-factory')
-const LeaderFactory = require(__source + 'cluster/leader/leader-factory')
+const defaultOptions = require(__lib + 'config/default')
+const RunnerInterface = require(__lib + 'runner-interface')
+const MetricsFactory = require(__lib + 'metrics/metrics-factory')
+const LoggerFactory = require(__lib + 'logger/logger-factory')
+const LeaderFactory = require(__lib + 'cluster/leader/leader-factory')
 
 describe('leader-factory', () => {
   it('.create() should return a Runner instance', () => {

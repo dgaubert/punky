@@ -3,8 +3,8 @@
 const assert = require('assert')
 const sinon = require('sinon')
 const EventEmitter = require('events')
-const LoggerInterface = require(__source + 'logger/logger-interface')
-const SigintListener = require(__source + 'launcher/sigint-listener')
+const LoggerInterface = require(__lib + 'logger/logger-interface')
+const SigintListener = require(__lib + 'launcher/sigint-listener')
 
 class Logger extends LoggerInterface {}
 

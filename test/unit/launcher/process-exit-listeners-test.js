@@ -2,8 +2,8 @@
 
 const assert = require('assert')
 const sinon = require('sinon')
-const ListenerInterface = require(__source + 'listener-interface')
-const ProcessExitListeners = require(__source + 'launcher/process-exit-listeners')
+const ListenerInterface = require(__lib + 'listener-interface')
+const ProcessExitListeners = require(__lib + 'launcher/process-exit-listeners')
 
 class Listener extends ListenerInterface {}
 

@@ -1,11 +1,11 @@
 'use strict'
 
 const assert = require('assert')
-const defaultOptions = require(__source + 'config/default')
-const RunnerInterface = require(__source + 'runner-interface')
-const HttpServerFactory = require(__source + 'http-server/http-server-factory')
-const LoggerFactory = require(__source + 'logger/logger-factory')
-const MetricsFactory = require(__source + 'metrics/metrics-factory')
+const defaultOptions = require(__lib + 'config/default')
+const RunnerInterface = require(__lib + 'runner-interface')
+const HttpServerFactory = require(__lib + 'http-server/http-server-factory')
+const LoggerFactory = require(__lib + 'logger/logger-factory')
+const MetricsFactory = require(__lib + 'metrics/metrics-factory')
 
 describe('server-factory', () => {
   it('.create() should return a Server instance', () => {

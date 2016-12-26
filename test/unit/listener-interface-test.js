@@ -1,7 +1,7 @@
 'use strict'
 
 const assert = require('assert')
-const ListenerInterface = require(__source + 'listener-interface')
+const ListenerInterface = require(__lib + 'listener-interface')
 
 class Listener extends ListenerInterface {}
 

@@ -2,9 +2,9 @@
 
 const assert = require('assert')
 const sinon = require('sinon')
-const LoggerInterface = require(__source + 'logger/logger-interface')
+const LoggerInterface = require(__lib + 'logger/logger-interface')
 const EventEmitter = require('events')
-const ServerExitListener = require(__source + 'cluster/leader/server-exit-listener')
+const ServerExitListener = require(__lib + 'cluster/leader/server-exit-listener')
 
 class Logger extends LoggerInterface {}
 

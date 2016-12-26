@@ -1,7 +1,7 @@
 'use strict'
 
 const assert = require('assert')
-const ParserInterface = require(__source + 'argv/parser-interface')
+const ParserInterface = require(__lib + 'argv/parser-interface')
 
 class Parser extends ParserInterface {}
 

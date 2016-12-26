@@ -4,10 +4,10 @@ const assert = require('assert')
 const sinon = require('sinon')
 const os = require('os')
 const EventEmitter = require('events')
-const LoggerInterface = require(__source + 'logger/logger-interface')
-const ListenerInterface = require(__source + 'listener-interface')
-const ServerManager = require(__source + 'cluster/leader/server-manager')
-const Leader = require(__source + 'cluster/leader/leader')
+const LoggerInterface = require(__lib + 'logger/logger-interface')
+const ListenerInterface = require(__lib + 'listener-interface')
+const ServerManager = require(__lib + 'cluster/leader/server-manager')
+const Leader = require(__lib + 'cluster/leader/leader')
 
 class Logger extends LoggerInterface {}
 class Sigusr2Listener extends ListenerInterface {}

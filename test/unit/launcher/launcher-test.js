@@ -2,9 +2,9 @@
 
 const assert = require('assert')
 const sinon = require('sinon')
-const RunnerInterface = require(__source + 'runner-interface')
-const ListenerInterface = require(__source + 'listener-interface')
-const Launcher = require(__source + 'launcher/launcher')
+const RunnerInterface = require(__lib + 'runner-interface')
+const ListenerInterface = require(__lib + 'listener-interface')
+const Launcher = require(__lib + 'launcher/launcher')
 
 class Runner extends RunnerInterface {}
 class Listeners extends ListenerInterface {}

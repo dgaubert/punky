@@ -2,9 +2,9 @@
 
 const assert = require('assert')
 const sinon = require('sinon')
-const RunnerInterface = require(__source + 'runner-interface')
-const LoggerInterface = require(__source + 'logger/logger-interface')
-const Server = require(__source + 'cluster/server/server')
+const RunnerInterface = require(__lib + 'runner-interface')
+const LoggerInterface = require(__lib + 'logger/logger-interface')
+const Server = require(__lib + 'cluster/server/server')
 
 class HttpServer extends RunnerInterface {}
 class Logger extends LoggerInterface {}

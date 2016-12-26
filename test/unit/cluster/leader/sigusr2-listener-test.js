@@ -3,8 +3,8 @@
 const assert = require('assert')
 const sinon = require('sinon')
 const EventEmitter = require('events')
-const LoggerInterface = require(__source + 'logger/logger-interface')
-const Sigusr2Listener = require(__source + 'cluster/leader/sigusr2-listener')
+const LoggerInterface = require(__lib + 'logger/logger-interface')
+const Sigusr2Listener = require(__lib + 'cluster/leader/sigusr2-listener')
 
 class Logger extends LoggerInterface {}
 

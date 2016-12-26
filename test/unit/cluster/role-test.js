@@ -1,7 +1,7 @@
 'use strict'
 
 const assert = require('assert')
-const Role = require(__source + 'cluster/role')
+const Role = require(__lib + 'cluster/role')
 
 describe('role', () => {
   it('.isLeader(!clusterOn) should return false', () => {

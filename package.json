@@ -52,7 +52,7 @@
   },
   "standard": {
     "globals": [
-      "__source",
+      "__lib",
       "__example",
       "describe",
       "it",

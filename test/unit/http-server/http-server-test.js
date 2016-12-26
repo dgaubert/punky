@@ -2,10 +2,10 @@
 
 const assert = require('assert')
 const sinon = require('sinon')
-const ListenerInterface = require(__source + 'listener-interface')
-const RunnerInterface = require(__source + 'runner-interface')
-const LoggerInterface = require(__source + 'logger/logger-interface')
-const HttpServer = require(__source + 'http-server/http-server')
+const ListenerInterface = require(__lib + 'listener-interface')
+const RunnerInterface = require(__lib + 'runner-interface')
+const LoggerInterface = require(__lib + 'logger/logger-interface')
+const HttpServer = require(__lib + 'http-server/http-server')
 const EventEmitter = require('events')
 
 class Listener extends ListenerInterface {}

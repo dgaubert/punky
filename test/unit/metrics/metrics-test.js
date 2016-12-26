@@ -2,9 +2,9 @@
 
 const assert = require('assert')
 const sinon = require('sinon')
-const MetricsInterface = require(__source + 'metrics/metrics-interface')
-const LoggerInterface = require(__source + 'logger/logger-interface')
-const Metrics = require(__source + 'metrics/metrics')
+const MetricsInterface = require(__lib + 'metrics/metrics-interface')
+const LoggerInterface = require(__lib + 'logger/logger-interface')
+const Metrics = require(__lib + 'metrics/metrics')
 
 const GAUGE_MEMORY_INTERVAL = 1000
 

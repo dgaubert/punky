@@ -1,7 +1,7 @@
 'use strict'
 
 const assert = require('assert')
-const FactoryInterface = require(__source + 'factory-interface')
+const FactoryInterface = require(__lib + 'factory-interface')
 
 describe('factory-interface', () => {
   it('.create() should throw "Unimplemented method" error', () => {
