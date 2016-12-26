@@ -4,18 +4,18 @@ const assert = require('assert')
 const Role = require(__source + 'cluster/role')
 
 describe('role', () => {
-  it('.isMaster(!clusterOn) should return false', () => {
+  it('.isLeader(!clusterOn) should return false', () => {
     const clusterOn = false
-    const isMaster = Role.isMaster(clusterOn)
+    const isLeader = Role.isLeader(clusterOn)
 
-    assert.equal(isMaster, false)
+    assert.equal(isLeader, false)
   })
 
-  it('.isMaster(clusterOn) should return true', () => {
+  it('.isLeader(clusterOn) should return true', () => {
     const clusterOn = true
-    const isMaster = Role.isMaster(clusterOn)
+    const isLeader = Role.isLeader(clusterOn)
 
-    assert.equal(isMaster, true)
+    assert.equal(isLeader, true)
   })
 
   it('.isServer(!clusterOn) should return true', () => {
