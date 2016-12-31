@@ -25,5 +25,5 @@ const exampleName = flags.name
 const Example = require(`./${exampleName}`)
 const example = new Example()
 
-example.punky.run()
+example.run()
   .catch(err => example.punky.logger.error(err))

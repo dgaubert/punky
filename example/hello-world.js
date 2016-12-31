@@ -26,6 +26,10 @@ class HelloWorld {
       res.send(body)
     }
   }
+
+  run () {
+    return this.punky.run()
+  }
 }
 
 module.exports = HelloWorld
