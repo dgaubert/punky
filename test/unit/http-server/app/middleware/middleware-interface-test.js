@@ -9,6 +9,7 @@ describe('metrics-interface', () => {
   beforeEach(() => {
     this.middleware = new Middleware()
   })
+
   it('create interface directly with "new" should throw error', () => {
     assert.throws(() => new MiddlewareInterface(), 'MiddlewareInterface cannot be directly constructed')
   })
