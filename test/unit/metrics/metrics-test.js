@@ -5,15 +5,14 @@ const sinon = require('sinon')
 const MetricsInterface = require(__lib + 'metrics/metrics-interface')
 const LoggerInterface = require(__lib + 'logger/logger-interface')
 const Metrics = require(__lib + 'metrics/metrics')
+const EventEmitter = require('events')
 
 const GAUGE_MEMORY_INTERVAL = 1000
 
 class MetricsProvider extends MetricsInterface {
   constructor () {
     super()
-    this.socket = {
-      on () {}
-    }
+    this.socket = new EventEmitter()
   }
 
   timing () {}
@@ -30,12 +29,13 @@ describe('metrics', () => {
     this.providerSocketMock = this.sandbox.mock(this.provider)
 
     this.logger = new Logger()
-    this.metricsDebugStub = this.sandbox.stub(this.logger, 'debug')
+    this.loggerDebugStub = this.sandbox.stub(this.logger, 'debug')
 
     this.metrics = new Metrics(this.provider, GAUGE_MEMORY_INTERVAL, this.logger)
   })
 
   afterEach(() => {
+    assert.ok(this.loggerDebugStub.called)
     this.sandbox.restore()
   })
 
@@ -46,6 +46,15 @@ describe('metrics', () => {
     this.metrics.timing(...args)
 
     assert.ok(metricsTimingStub.calledWithExactly(...args))
+  })
+
+  it('should log when socket emits error', () => {
+    const loggerErrorStub = this.sandbox.stub(this.logger, 'error')
+    const error = new Error('something went wrong')
+
+    this.metrics.provider.socket.emit('error', error)
+
+    assert.ok(loggerErrorStub.calledOnce)
   })
 
   it('.gauge() should gauge a stat by a specified amount', () => {
