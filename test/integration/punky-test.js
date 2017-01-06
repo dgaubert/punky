@@ -14,7 +14,24 @@ describe('punky', () => {
       .then(() => this.punky.close())
   })
 
+  it('.close() should close the service', () => {
+    return this.punky.close()
+  })
+
   it(`.role() should return ${Role.SERVER}`, () => {
     assert.equal(this.punky.role, Role.SERVER)
+  })
+
+  it('.logger should return a logger provider', () => {
+    assert.doesNotThrow(() => this.punky.logger.debug())
+    assert.doesNotThrow(() => this.punky.logger.info())
+    assert.doesNotThrow(() => this.punky.logger.warn())
+    assert.doesNotThrow(() => this.punky.logger.error())
+  })
+
+  it('.metrics should return a metrics instance', () => {
+    assert.doesNotThrow(() => this.punky.metrics.timing())
+    assert.doesNotThrow(() => this.punky.metrics.gauge())
+    assert.doesNotThrow(() => this.punky.metrics.increment())
   })
 })
