@@ -10,6 +10,10 @@ describe('logger-interface', () => {
     this.loggerInterface = new Logger()
   })
 
+  it('create interface directly with "new" should throw error', () => {
+    assert.throws(() => new LoggerInterface(), 'LoggerInterface cannot be directly constructed')
+  })
+
   it('.debug() should throw "Unimplemented method" error', () => {
     assert.throws(() => this.loggerInterface.debug(), 'Unimplemented method')
   })
