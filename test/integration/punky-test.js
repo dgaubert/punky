@@ -18,7 +18,7 @@ describe('punky', () => {
     return this.punky.close()
   })
 
-  it(`.role() should return ${Role.SERVER}`, () => {
+  it(`.role should return ${Role.SERVER}`, () => {
     assert.equal(this.punky.role, Role.SERVER)
   })
 

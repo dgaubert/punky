@@ -15,6 +15,10 @@ class MetricsProvider extends MetricsInterface {
       on () {}
     }
   }
+
+  timing () {}
+  gauge () {}
+  increment () {}
 }
 
 class Logger extends LoggerInterface {}
@@ -51,5 +55,14 @@ describe('metrics', () => {
     this.metrics.gauge(...args)
 
     assert.ok(metricsGaugeStub.calledWithExactly(...args))
+  })
+
+  it('.increment() should increment a stat given a key', () => {
+    const args = [ 'home' ]
+    const metricsIncremetStub = this.sandbox.stub(this.provider, 'increment')
+
+    this.metrics.increment(...args)
+
+    assert.ok(metricsIncremetStub.calledWithExactly(...args))
   })
 })

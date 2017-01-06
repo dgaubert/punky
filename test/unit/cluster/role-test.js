@@ -11,6 +11,10 @@ describe('role', () => {
     assert.equal(isLeader, false)
   })
 
+  it('create Role directly with "new" should throw error', () => {
+    assert.throws(() => new Role(), 'Role cannot be directly constructed')
+  })
+
   it('.isLeader(clusterOn) should return true', () => {
     const clusterOn = true
     const isLeader = Role.isLeader(clusterOn)
