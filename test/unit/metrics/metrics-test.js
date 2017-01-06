@@ -7,7 +7,7 @@ const LoggerInterface = require(__lib + 'logger/logger-interface')
 const Metrics = require(__lib + 'metrics/metrics')
 const EventEmitter = require('events')
 
-const GAUGE_MEMORY_INTERVAL = 1000
+const GAUGE_MEMORY_INTERVAL = 1
 
 class MetricsProvider extends MetricsInterface {
   constructor () {
@@ -73,5 +73,13 @@ describe('metrics', () => {
     this.metrics.increment(...args)
 
     assert.ok(metricsIncremetStub.calledWithExactly(...args))
+  })
+
+  it('.gaugeMemory() should be fired after 1 millisecond', (done) => {
+    const metricsGaugeStub = this.sandbox.stub(this.provider, 'gauge')
+    setTimeout(() => {
+      assert.ok(metricsGaugeStub.called)
+      done()
+    }, 2)
   })
 })
