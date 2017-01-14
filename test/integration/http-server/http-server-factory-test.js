@@ -7,8 +7,8 @@ const HttpServerFactory = require(__lib + 'http-server/http-server-factory')
 const LoggerFactory = require(__lib + 'logger/logger-factory')
 const MetricsFactory = require(__lib + 'metrics/metrics-factory')
 
-describe('server-factory', () => {
-  it('.create() should return a Server instance', () => {
+describe('http-server-factory', () => {
+  it('.create() should return a HttpServer instance', () => {
     const logger = LoggerFactory.create(options)
     const metrics = MetricsFactory.create(logger, options)
     const httpServer = HttpServerFactory.create(metrics, logger, options)
