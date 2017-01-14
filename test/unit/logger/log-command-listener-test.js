@@ -30,4 +30,13 @@ describe('log-command-listener', () => {
 
     assert.ok(reopenFileStreamsStub.calledOnce)
   })
+
+  it('.listen() should attach listener to message process event', () => {
+    var reopenFileStreamsStub = this.sandbox.stub()
+
+    this.logCommandListener.listen(reopenFileStreamsStub)
+    this.emitter.emit('message', 'logger:wadus-command')
+
+    assert.ok(!reopenFileStreamsStub.called)
+  })
 })
