@@ -11,19 +11,48 @@ describe('process-exit-listeners', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
-    this.listener = new Listener()
-    this.processExitListeners = new ProcessExitListeners().add(this.listener)
+    this.processExitListeners = new ProcessExitListeners()
   })
 
   afterEach(() => {
     this.sandbox.restore()
   })
 
-  it('.listen() should attach the listener to all events added to the set', () => {
-    var listenStub = this.sandbox.stub(this.listener, 'listen')
+  it('should be an instance of Set', () => {
+    assert.ok(this.processExitListeners instanceof Set)
+  })
+
+  it('.add() should add one listener', () => {
+    const listener = new Listener()
+
+    this.processExitListeners.add(listener)
+
+    assert.equal(this.processExitListeners.size, 1)
+  })
+
+  it('.add() twice the same listener should just add once', () => {
+    const listener = new Listener()
+
+    this.processExitListeners.add(listener)
+    this.processExitListeners.add(listener)
+
+    assert.equal(this.processExitListeners.size, 1)
+  })
+
+  it('.add() should throw error if element to add is not a middleware', () => {
+    const notListener = {}
+
+    assert.throws(() => this.processExitListeners.add(notListener), 'Listener must be a ListenerInterface instance')
+  })
+
+  it('.regist() should call .listen() of every listener', () => {
+    const listener = new Listener()
+    const listenerListenStub = this.sandbox.stub(listener, 'listen')
+
+    this.processExitListeners.add(listener)
 
     this.processExitListeners.listen()
 
-    assert.ok(listenStub.calledOnce)
+    assert.ok(listenerListenStub.calledOnce)
   })
 })
