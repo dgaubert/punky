@@ -25,3 +25,7 @@ build/Release
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
+
+# JavaScript code intelligence for atom with Tern. Adds support for ES5, ES6, ES7, Node.js, jQuery, Angular and more.
+# Extendable via plugins.
+.tern-project
