@@ -3,15 +3,15 @@
 const assert = require('assert')
 const sinon = require('sinon')
 const ListenerInterface = require(__lib + 'listener-interface')
-const ProcessExitListeners = require(__lib + 'launcher/process-exit-listeners')
+const Listeners = require(__lib + 'listeners')
 
 class Listener extends ListenerInterface {}
 
-describe('process-exit-listeners', () => {
+describe('listeners', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
-    this.processExitListeners = new ProcessExitListeners()
+    this.listeners = new Listeners()
   })
 
   afterEach(() => {
@@ -19,39 +19,39 @@ describe('process-exit-listeners', () => {
   })
 
   it('should be an instance of Set', () => {
-    assert.ok(this.processExitListeners instanceof Set)
+    assert.ok(this.listeners instanceof Set)
   })
 
   it('.add() should add one listener', () => {
     const listener = new Listener()
 
-    this.processExitListeners.add(listener)
+    this.listeners.add(listener)
 
-    assert.equal(this.processExitListeners.size, 1)
+    assert.equal(this.listeners.size, 1)
   })
 
   it('.add() twice the same listener should just add once', () => {
     const listener = new Listener()
 
-    this.processExitListeners.add(listener)
-    this.processExitListeners.add(listener)
+    this.listeners.add(listener)
+    this.listeners.add(listener)
 
-    assert.equal(this.processExitListeners.size, 1)
+    assert.equal(this.listeners.size, 1)
   })
 
-  it('.add() should throw error if element to add is not a middleware', () => {
+  it('.add() should throw error if element to add is not a listener', () => {
     const notListener = {}
 
-    assert.throws(() => this.processExitListeners.add(notListener), 'Listener must be a ListenerInterface instance')
+    assert.throws(() => this.listeners.add(notListener), 'Listener must be a ListenerInterface instance')
   })
 
   it('.regist() should call .listen() of every listener', () => {
     const listener = new Listener()
     const listenerListenStub = this.sandbox.stub(listener, 'listen')
 
-    this.processExitListeners.add(listener)
+    this.listeners.add(listener)
 
-    this.processExitListeners.listen()
+    this.listeners.listen()
 
     assert.ok(listenerListenStub.calledOnce)
   })
