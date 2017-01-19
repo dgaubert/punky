@@ -4,7 +4,7 @@ const assert = require('assert')
 const fetch = require('node-fetch')
 const HelloWorld = require(__example + 'hello-world')
 
-describe('punky', () => {
+describe('end-to-end app examples', () => {
   before(() => {
     this.sut = new HelloWorld({ port: 0 })
   })
