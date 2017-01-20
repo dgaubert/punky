@@ -38,7 +38,13 @@ describe('leader', () => {
     this.sighupListener.listen = this.sandbox.spy()
     this.sighupListener.remove = this.sandbox.spy()
 
-    this.serverManager = new ServerManager(this.cluster, this.sigusr2Listener, this.serverExitListener, this.sighupListener, this.logger)
+    this.serverManager = new ServerManager(
+      this.cluster,
+      this.sigusr2Listener,
+      this.serverExitListener,
+      this.sighupListener,
+      this.logger
+    )
 
     this.leader = new Leader(this.serverManager, this.logger)
   })

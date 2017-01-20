@@ -27,66 +27,63 @@ describe('worker', function () {
   })
 
   it('.run() should run server successfully', () => {
-    var httpServerRunStub = this.sandbox.stub(this.httpServer, 'run')
-      .returns(Promise.resolve())
-    var loggerInfoStub = this.sandbox.stub(this.logger, 'info')
+    const httpServerRunStub = this.sandbox.stub(this.httpServer, 'run').returns(Promise.resolve())
+    this.logger.info = this.sandbox.spy()
 
     return this.server.run()
       .then(() => {
         assert.ok(httpServerRunStub.calledOnce)
-        assert.ok(loggerInfoStub.calledOnce)
+        assert.ok(this.logger.info.calledOnce)
       })
   })
 
   it('.run() should exit with error when server fails on running', () => {
-    var workerExitStub = this.sandbox.stub(this.server, 'exit')
+    var serverExitStub = this.sandbox.stub(this.server, 'exit')
     var httpServerRunStub = this.sandbox.stub(this.httpServer, 'run').returns(Promise.reject(new Error('irrelevant')))
-    var loggerErrorStub = this.sandbox.stub(this.logger, 'error')
+    this.logger.error = this.sandbox.spy()
 
     return this.server.run()
       .then(() => {
         assert.ok(httpServerRunStub.calledOnce)
-        assert.ok(loggerErrorStub.calledOnce)
-        assert.ok(workerExitStub.calledWithExactly(1))
+        assert.ok(this.logger.error.calledOnce)
+        assert.ok(serverExitStub.calledWithExactly(1))
       })
   })
 
   it('.exit() should stop server and exit successfully', () => {
     var httpServerRunStub = this.sandbox.stub(this.httpServer, 'close').returns(Promise.resolve())
-    var loggerWarnStub = this.sandbox.stub(this.logger, 'warn')
+    this.logger.warn = this.sandbox.spy()
     var processExitStub = this.sandbox.stub(process, 'exit')
 
     return this.server.exit()
       .then(() => {
-        assert.ok(loggerWarnStub.calledOnce)
+        assert.ok(this.logger.warn.calledOnce)
         assert.ok(processExitStub.calledWithExactly(0))
         assert.ok(httpServerRunStub.calledOnce)
       })
   })
 
   it('.exit(1) should stop server and exit succesfully with error', () => {
-    var httpServerCloseStub = this.sandbox.stub(this.httpServer, 'close')
-      .returns(Promise.resolve())
-    var loggerWarnStub = this.sandbox.stub(this.logger, 'warn')
+    var httpServerCloseStub = this.sandbox.stub(this.httpServer, 'close').returns(Promise.resolve())
+    this.logger.warn = this.sandbox.spy()
     var processExitStub = this.sandbox.stub(process, 'exit')
 
     return this.server.exit(1)
       .then(() => {
-        assert.ok(loggerWarnStub.calledOnce)
+        assert.ok(this.logger.warn.calledOnce)
         assert.ok(processExitStub.calledWithExactly(1))
         assert.ok(httpServerCloseStub.calledOnce)
       })
   })
 
   it('.exit() should stop server and exit with error when server fails in stop', () => {
-    var httpServerCloseStub = this.sandbox.stub(this.httpServer, 'close')
-      .returns(Promise.reject(new Error('irrelevant')))
-    var loggerErrorStub = this.sandbox.stub(this.logger, 'error')
+    var httpServerCloseStub = this.sandbox.stub(this.httpServer, 'close').returns(Promise.reject(new Error('irrelevant')))
+    this.logger.error = this.sandbox.spy()
     var processExitStub = this.sandbox.stub(process, 'exit')
 
     return this.server.exit()
       .then(() => {
-        assert.ok(loggerErrorStub.calledOnce)
+        assert.ok(this.logger.error.calledOnce)
         assert.ok(processExitStub.calledWithExactly(1))
         assert.ok(httpServerCloseStub.calledOnce)
       })
