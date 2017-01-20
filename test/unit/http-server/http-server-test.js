@@ -31,7 +31,7 @@ describe('server', function () {
   it('.run() should listen on specific port successfully', () => {
     var httpServerStub = new EventEmitter()
     var appRunStub = this.sandbox.stub(this.app, 'listen').returns(httpServerStub)
-    var loggerInfoStub = this.sandbox.stub(this.logger, 'info')
+    this.logger.info = this.sandbox.spy()
 
     setTimeout(() => {
       httpServerStub.emit('listening')
@@ -39,7 +39,7 @@ describe('server', function () {
     return this.httpServer.run()
       .then(() => {
         assert.ok(appRunStub.calledOnce)
-        assert.ok(loggerInfoStub.calledOnce)
+        assert.ok(this.logger.info.calledOnce)
       })
   })
 
@@ -75,7 +75,7 @@ describe('server', function () {
     httpServer.close = () => {}
     var httpServerStub = this.sandbox.stub(httpServer, 'close').returns(httpServer)
     var appRunStub = this.sandbox.stub(this.app, 'listen').returns(httpServer)
-    var loggerInfoStub = this.sandbox.stub(this.logger, 'info')
+    this.logger.info = this.sandbox.spy()
 
     setTimeout(() => httpServer.emit('listening'), 2)
 
@@ -87,7 +87,7 @@ describe('server', function () {
       })
       .then(() => {
         assert.ok(httpServerStub.calledOnce)
-        assert.ok(loggerInfoStub.calledTwice)
+        assert.ok(this.logger.info.calledTwice)
       })
   })
 
@@ -96,7 +96,7 @@ describe('server', function () {
     httpServer.close = () => {}
     var httpServerStub = this.sandbox.stub(httpServer, 'close').returns(httpServer)
     var appRunStub = this.sandbox.stub(this.app, 'listen').returns(httpServer)
-    var loggerInfoStub = this.sandbox.stub(this.logger, 'info')
+    this.logger.info = this.sandbox.spy()
 
     setTimeout(() => httpServer.emit('listening'), 2)
     return this.httpServer.run()
@@ -108,7 +108,7 @@ describe('server', function () {
       .catch(err => {
         assert.equal(err.message, 'irrelevant')
         assert.ok(httpServerStub.calledOnce)
-        assert.ok(loggerInfoStub.calledOnce)
+        assert.ok(this.logger.info.calledOnce)
       })
   })
 })
