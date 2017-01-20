@@ -1,17 +1,11 @@
 'use strict'
 
 const assert = require('assert')
-const sinon = require('sinon')
 const DisabledLogger = require(__lib + 'logger/disabled-logger')
 
 describe('logger', () => {
   beforeEach(() => {
-    this.sandbox = sinon.sandbox.create()
     this.logger = new DisabledLogger()
-  })
-
-  afterEach(() => {
-    this.sandbox.restore()
   })
 
   it('.child() should do nothing', () => {
