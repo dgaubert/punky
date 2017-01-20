@@ -29,56 +29,56 @@ describe('metrics', () => {
     this.providerSocketMock = this.sandbox.mock(this.provider)
 
     this.logger = new Logger()
-    this.loggerDebugStub = this.sandbox.stub(this.logger, 'debug')
+    this.logger.debug = this.sandbox.spy()
 
     this.metrics = new Metrics(this.provider, GAUGE_MEMORY_INTERVAL, this.logger)
   })
 
   afterEach(() => {
-    assert.ok(this.loggerDebugStub.called)
+    assert.ok(this.logger.debug.called)
     this.sandbox.restore()
   })
 
   it('.timing() should sends a timing command with the specified milliseconds', () => {
-    const metricsTimingStub = this.sandbox.stub(this.provider, 'timing')
+    this.provider.timing = this.sandbox.spy()
     const args = [ 'response_time', 42 ]
 
     this.metrics.timing(...args)
 
-    assert.ok(metricsTimingStub.calledWithExactly(...args))
+    assert.ok(this.provider.timing.calledWithExactly(...args))
   })
 
   it('should log when socket emits error', () => {
-    const loggerErrorStub = this.sandbox.stub(this.logger, 'error')
+    this.logger.error = this.sandbox.spy()
     const error = new Error('something went wrong')
 
     this.metrics.provider.socket.emit('error', error)
 
-    assert.ok(loggerErrorStub.calledOnce)
+    assert.ok(this.logger.error.calledOnce)
   })
 
   it('.gauge() should gauge a stat by a specified amount', () => {
     const args = [ 'rss', 123.45 ]
-    const metricsGaugeStub = this.sandbox.stub(this.provider, 'gauge')
+    this.provider.gauge = this.sandbox.spy()
 
     this.metrics.gauge(...args)
 
-    assert.ok(metricsGaugeStub.calledWithExactly(...args))
+    assert.ok(this.provider.gauge.calledWithExactly(...args))
   })
 
   it('.increment() should increment a stat given a key', () => {
     const args = [ 'home' ]
-    const metricsIncremetStub = this.sandbox.stub(this.provider, 'increment')
+    this.provider.increment = this.sandbox.spy()
 
     this.metrics.increment(...args)
 
-    assert.ok(metricsIncremetStub.calledWithExactly(...args))
+    assert.ok(this.provider.increment.calledWithExactly(...args))
   })
 
   it('.gaugeMemory() should be fired after 1 millisecond', (done) => {
-    const metricsGaugeStub = this.sandbox.stub(this.provider, 'gauge')
+    this.provider.gauge = this.sandbox.stub()
     setTimeout(() => {
-      assert.ok(metricsGaugeStub.called)
+      assert.ok(this.provider.gauge.called)
       done()
     }, 2)
   })

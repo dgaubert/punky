@@ -47,12 +47,12 @@ describe('listeners', () => {
 
   it('.regist() should call .listen() of every listener', () => {
     const listener = new Listener()
-    const listenerListenStub = this.sandbox.stub(listener, 'listen')
+    listener.listen = this.sandbox.spy()
 
     this.listeners.add(listener)
 
     this.listeners.listen()
 
-    assert.ok(listenerListenStub.calledOnce)
+    assert.ok(listener.listen.calledOnce)
   })
 })

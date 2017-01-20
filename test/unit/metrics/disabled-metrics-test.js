@@ -1,17 +1,11 @@
 'use strict'
 
 const assert = require('assert')
-const sinon = require('sinon')
 const DisabledMetrics = require(__lib + 'metrics/disabled-metrics')
 
 describe('logger', () => {
   beforeEach(() => {
-    this.sandbox = sinon.sandbox.create()
     this.metrics = new DisabledMetrics()
-  })
-
-  afterEach(() => {
-    this.sandbox.restore()
   })
 
   it('.timing() should do nothing', () => {

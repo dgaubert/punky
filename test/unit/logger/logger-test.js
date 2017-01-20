@@ -24,47 +24,47 @@ describe('logger', () => {
   })
 
   it('.debug() should log at debug level', () => {
-    const loggerLogStub = this.sandbox.stub(this.provider, 'debug')
+    this.provider.debug = this.sandbox.spy()
     const args = [ 'debug', 'wadus message' ]
 
     this.logger.debug(...args)
 
-    assert.ok(loggerLogStub.calledWithExactly(...args))
+    assert.ok(this.provider.debug.calledWithExactly(...args))
   })
 
   it('.log() should log', () => {
-    const loggerLogStub = this.sandbox.stub(this.provider, 'info')
+    this.provider.info = this.sandbox.spy()
     const args = [ 'info', 'wadus message' ]
 
     this.logger.log(...args)
 
-    assert.ok(loggerLogStub.calledWithExactly(...args))
+    assert.ok(this.provider.info.calledWithExactly(...args))
   })
 
   it('.info() should log at info level', () => {
-    const loggerInfoStub = this.sandbox.stub(this.provider, 'info')
+    this.provider.info = this.sandbox.spy()
     const args = [ 'wadus message' ]
 
     this.logger.info(...args)
 
-    assert.ok(loggerInfoStub.calledWithExactly(...args))
+    assert.ok(this.provider.info.calledWithExactly(...args))
   })
 
   it('.warn() should log at warn level', () => {
-    const loggerWarnStub = this.sandbox.stub(this.provider, 'warn')
+    this.provider.warn = this.sandbox.spy()
     const args = [ 'wadus message' ]
 
     this.logger.warn(...args)
 
-    assert.ok(loggerWarnStub.calledWithExactly(...args))
+    assert.ok(this.provider.warn.calledWithExactly(...args))
   })
 
   it('.error() should log at error level', () => {
-    const loggerErrorStub = this.sandbox.stub(this.provider, 'error')
+    this.provider.error = this.sandbox.spy()
     const args = [ 'wadus message' ]
 
     this.logger.error(...args)
 
-    assert.ok(loggerErrorStub.calledWithExactly(...args))
+    assert.ok(this.provider.error.calledWithExactly(...args))
   })
 })
