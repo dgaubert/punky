@@ -48,12 +48,12 @@ describe('logger-outputs', () => {
 
   it('.regist() should call .regist() of every middleware', () => {
     const middleware = new Middleware()
-    const middlewareRegistStub = this.sandbox.stub(middleware, 'regist')
+    middleware.regist = this.sandbox.spy()
 
     this.appMiddlewares.add(middleware)
 
     this.appMiddlewares.regist()
 
-    assert.ok(middlewareRegistStub.calledOnce)
+    assert.ok(middleware.regist.calledOnce)
   })
 })
