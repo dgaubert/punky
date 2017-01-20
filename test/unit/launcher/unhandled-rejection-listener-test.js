@@ -22,7 +22,9 @@ describe('unhandled-rejection-listener', () => {
   })
 
   it('.listen() should attach listener to uncaughtException process event', done => {
-    var loggerErrorStub = this.sandbox.stub(this.logger, 'error')
+    this.logger.error = this.sandbox.spy()
+    this.logger.debug = this.sandbox.spy()
+
     var error = new Error('Irrelevant error')
     var rejectedPromise = Promise.reject(error)
 
@@ -30,7 +32,9 @@ describe('unhandled-rejection-listener', () => {
     this.emitter.emit('unhandledRejection', error, rejectedPromise)
 
     process.nextTick(() => {
-      assert.ok(loggerErrorStub.calledOnce)
+      assert.ok(this.logger.error.calledOnce)
+      assert.ok(this.logger.debug.calledOnce)
+
       process.removeAllListeners('unhandledRejection')
       done()
     })

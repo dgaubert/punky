@@ -22,13 +22,13 @@ describe('sigusr2-listener', () => {
   })
 
   it('.listen() should attach listener to SIGUSR2 process event', () => {
-    var loggerWarnStub = this.sandbox.stub(this.logger, 'warn')
+    this.logger.debug = this.sandbox.spy()
     var listenerStub = this.sandbox.stub().returns(Promise.resolve())
 
     this.sigusr2Listener.listen(listenerStub)
     this.emitter.emit('SIGUSR2')
 
-    assert.ok(loggerWarnStub.calledOnce)
+    assert.ok(this.logger.debug.called)
     assert.ok(listenerStub.calledOnce)
   })
 })

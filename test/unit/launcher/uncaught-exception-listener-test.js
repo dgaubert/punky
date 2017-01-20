@@ -22,14 +22,15 @@ describe('uncaught-exception-listener', () => {
   })
 
   it('.listen() should attach listener to uncaughtException process event', () => {
-    var loggerErrorStub = this.sandbox.stub(this.logger, 'error')
-    var listenerStub = this.sandbox.stub()
+    this.logger.debug = this.sandbox.spy()
+    this.logger.error = this.sandbox.spy()
+    const exitSpy = this.sandbox.spy()
 
-    this.uncaughtExceptionListener.listen(listenerStub)
+    this.uncaughtExceptionListener.listen(exitSpy)
     this.emitter.emit('uncaughtException', new Error('Irrelevant error'))
 
-    assert.ok(loggerErrorStub.calledOnce)
-    assert.ok(listenerStub.calledOnce)
-    assert.ok(listenerStub.calledWithExactly(1))
+    assert.ok(this.logger.debug.calledOnce)
+    assert.ok(this.logger.error.calledOnce)
+    assert.ok(exitSpy.withArgs(1).calledOnce)
   })
 })

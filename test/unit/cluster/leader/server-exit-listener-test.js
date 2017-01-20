@@ -22,14 +22,14 @@ describe('server-exit-listener', () => {
   })
 
   it('.listen() should attach listener to cluster event', () => {
-    var loggerWarnStub = this.sandbox.stub(this.logger, 'warn')
-    var listenerStub = this.sandbox.stub()
+    this.logger.debug = this.sandbox.spy()
+    var listenerSpy = this.sandbox.spy()
 
-    this.serverExitListener.listen(listenerStub)
+    this.serverExitListener.listen(listenerSpy)
     this.emitter.emit('exit', 1, 1)
 
-    assert.ok(loggerWarnStub.calledOnce)
-    assert.ok(listenerStub.calledOnce)
-    assert.ok(listenerStub.calledWithExactly(1, 1))
+    assert.ok(this.logger.debug.called)
+    assert.ok(listenerSpy.calledOnce)
+    assert.ok(listenerSpy.calledWithExactly(1, 1))
   })
 })

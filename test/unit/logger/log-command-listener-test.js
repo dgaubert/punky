@@ -4,14 +4,18 @@ const assert = require('assert')
 const sinon = require('sinon')
 const EventEmitter = require('events')
 const ListenerInterface = require(__lib + 'listener-interface')
+const LoggerInterface = require(__lib + 'logger/logger-interface')
 const LogCommandListener = require(__lib + 'logger/log-command-listener')
+
+class Logger extends LoggerInterface {}
 
 describe('log-command-listener', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
     this.emitter = new EventEmitter()
-    this.logCommandListener = new LogCommandListener(this.emitter)
+    this.logger = new Logger()
+    this.logCommandListener = new LogCommandListener(this.emitter, this.logger)
   })
 
   afterEach(() => {
@@ -23,20 +27,24 @@ describe('log-command-listener', () => {
   })
 
   it('.listen() should attach listener to message process event', () => {
-    var reopenFileStreamsStub = this.sandbox.stub()
+    this.logger.debug = this.sandbox.spy()
+    const reopenFileStreamsSpy = this.sandbox.spy()
 
-    this.logCommandListener.listen(reopenFileStreamsStub)
+    this.logCommandListener.listen(reopenFileStreamsSpy)
     this.emitter.emit('message', 'logger:reopen-file-streams')
 
-    assert.ok(reopenFileStreamsStub.calledOnce)
+    assert.ok(this.logger.debug.calledOnce)
+    assert.ok(reopenFileStreamsSpy.calledOnce)
   })
 
   it('.listen() should attach listener to message process event', () => {
-    var reopenFileStreamsStub = this.sandbox.stub()
+    this.logger.debug = this.sandbox.spy()
+    const reopenFileStreamsSpy = this.sandbox.spy()
 
-    this.logCommandListener.listen(reopenFileStreamsStub)
+    this.logCommandListener.listen(reopenFileStreamsSpy)
     this.emitter.emit('message', 'logger:wadus-command')
 
-    assert.ok(!reopenFileStreamsStub.called)
+    assert.ok(this.logger.debug.calledOnce)
+    assert.ok(!reopenFileStreamsSpy.called)
   })
 })

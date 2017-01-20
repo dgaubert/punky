@@ -15,7 +15,8 @@ describe('punky', () => {
   })
 
   it('.close() should close the service', () => {
-    return this.punky.close()
+    return this.punky.run()
+      .then(() => this.punky.close())
   })
 
   it(`.role should return ${Role.SERVER}`, () => {

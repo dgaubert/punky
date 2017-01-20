@@ -22,13 +22,13 @@ describe('sigterm-listener', () => {
   })
 
   it('.listen() should attach listener to SIGTERM process event', () => {
-    var loggerWarnStub = this.sandbox.stub(this.logger, 'warn')
-    var listenerStub = this.sandbox.stub()
+    this.logger.debug = this.sandbox.spy()
+    const listenerSpy = this.sandbox.spy()
 
-    this.sigtermListener.listen(listenerStub)
+    this.sigtermListener.listen(listenerSpy)
     this.emitter.emit('SIGTERM')
 
-    assert.ok(loggerWarnStub.calledOnce)
-    assert.ok(listenerStub.calledOnce)
+    assert.ok(this.logger.debug.called)
+    assert.ok(listenerSpy.calledOnce)
   })
 })

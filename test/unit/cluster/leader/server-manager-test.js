@@ -15,7 +15,7 @@ class Cluster extends EventEmitter {
   fork () {}
 }
 
-describe('worker-manager', () => {
+describe('server-manager', () => {
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create()
 
@@ -23,13 +23,13 @@ describe('worker-manager', () => {
     this.logger = new Logger()
 
     this.sigusr2Listener = new Sigusr2Listener()
-    this.sigusr2ListenerListenInfoStub = this.sandbox.stub(this.sigusr2Listener, 'listen')
+    this.sigusr2Listener.listen = this.sandbox.spy()
 
     this.serverExitListener = new ServerExitListener()
-    this.serverExitListenerListenInfoStub = this.sandbox.stub(this.serverExitListener, 'listen')
+    this.serverExitListener.listen = this.sandbox.spy()
 
     this.sighupListener = new SighupListener()
-    this.sighupListenerListenInfoStub = this.sandbox.stub(this.sighupListener, 'listen')
+    this.sighupListener.listen = this.sandbox.spy()
 
     this.serverManager = new ServerManager(
       this.cluster,
@@ -41,9 +41,6 @@ describe('worker-manager', () => {
   })
 
   afterEach(() => {
-    assert.ok(this.sigusr2ListenerListenInfoStub.calledOnce)
-    assert.ok(this.serverExitListenerListenInfoStub.calledOnce)
-    assert.ok(this.sighupListenerListenInfoStub.calledOnce)
     this.sandbox.restore()
   })
 
